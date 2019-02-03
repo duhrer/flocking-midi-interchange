@@ -4,9 +4,9 @@ This library is designed to assist in writing "MIDI interchanges", which consume
 
 ## Transforming MIDI Router
 
-A transforming MIDI router is a type of "interchange" that MIDI messages from an input, ["transforms" the data based on
-series of rules](https://docs.fluidproject.org/infusion/development/ModelTransformationAPI.html), and the outputs the
-results. This type of real time transforming router can do things like:
+A transforming MIDI router is a type of "interchange" that accepts MIDI messages from an input, ["transforms" the data
+based on a series of rules](https://docs.fluidproject.org/infusion/development/ModelTransformationAPI.html), and the
+outputs the results. This type of real time transforming router can do things like:
 
 1. Output MIDI messages to play chords instead of individual input notes.
 2. Remap inputs, for example to change the tuning of an input device.
