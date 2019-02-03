@@ -1,0 +1,2128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="407.3429"
+   height="391.42856"
+   viewBox="0 0 407.34289 391.42857"
+   id="launchpad-svg"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="launchpad.svg">
+  <metadata
+     id="metadata4722">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4720" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="943"
+     id="namedview4718"
+     showgrid="false"
+     inkscape:zoom="1.8487805"
+     inkscape:cx="128.19261"
+     inkscape:cy="237.25346"
+     inkscape:window-x="0"
+     inkscape:window-y="1"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="launchpad-svg"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0.2"
+     fit-margin-bottom="0" />
+  <g
+     class="launchpad-buffer-0"
+     style="display:none"
+     inkscape:label="#g4907"
+     transform="translate(-2.3841858e-7,-18.571486)">
+    <rect
+       ry="16.929501"
+       y="21.071486"
+       x="2.5000002"
+       height="386.42856"
+       width="402.14288"
+       class="launchpad-frame"
+       style="opacity:1;fill:#727272;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4909">
+      <title
+         id="title4911">Launchpad Frame</title>
+    </rect>
+    <path
+       class="launchpad-control launchpad-cc-104"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 40.142866,39.356258 c 9.378945,0 16.929503,7.550559 16.929503,16.929503 0,9.378944 -7.550558,16.929502 -16.929503,16.929502 -9.378944,0 -16.929502,-7.550558 -16.929502,-16.929502 0,-9.378944 7.550558,-16.929503 16.929502,-16.929503 z"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sssss"
+       id="path4913" />
+    <path
+       class="launchpad-control launchpad-cc-105"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 81.14279,39.356258 c 9.378944,0 16.929502,7.550559 16.929502,16.929503 0,9.378944 -7.550558,16.929502 -16.929502,16.929502 -9.378945,0 -16.929503,-7.550558 -16.929503,-16.929502 0,-9.378944 7.550558,-16.929503 16.929503,-16.929503 z"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sssss"
+       id="path4915" />
+    <path
+       class="launchpad-control launchpad-cc-106"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 122.14279,39.356258 c 9.37894,0 16.9295,7.550559 16.9295,16.929503 0,9.378944 -7.55056,16.929502 -16.9295,16.929502 -9.37894,0 -16.9295,-7.550558 -16.9295,-16.929502 0,-9.378944 7.55056,-16.929503 16.9295,-16.929503 z"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sssss"
+       id="path4917" />
+    <path
+       class="launchpad-control launchpad-cc-107"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 163.14273,39.356258 c 9.37894,0 16.9295,7.550559 16.9295,16.929503 0,9.378944 -7.55056,16.929502 -16.9295,16.929502 -9.37895,0 -16.9295,-7.550558 -16.9295,-16.929502 0,-9.378944 7.55055,-16.929503 16.9295,-16.929503 z"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sssss"
+       id="path4919" />
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-control launchpad-cc-108"
+       width="33.859005"
+       height="33.859005"
+       x="187.64552"
+       y="39.356258"
+       ry="16.929502"
+       id="rect4921">
+      <title
+         id="title4923">Launchpad CC 108</title>
+    </rect>
+    <rect
+       ry="16.929502"
+       y="39.356258"
+       x="228.64543"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-control launchpad-cc-109"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4925">
+      <title
+         id="title4927">Launchpad CC 109</title>
+    </rect>
+    <rect
+       ry="16.929502"
+       y="39.356258"
+       x="269.64545"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-control launchpad-cc-110"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4929">
+      <title
+         id="title4932">Launchpad CC 110</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-control launchpad-cc-111"
+       width="33.859005"
+       height="33.859005"
+       x="310.64539"
+       y="39.356258"
+       ry="16.929502"
+       id="rect4934">
+      <title
+         id="title4936">Launchpad CC 111</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-0"
+       width="33.859005"
+       height="33.859005"
+       x="23.213364"
+       y="79.356262"
+       ry="8.553854"
+       id="rect4938">
+      <title
+         id="title4941">Launchpad Note 0</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="79.356262"
+       x="64.213287"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-1"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4943">
+      <title
+         id="title4945">Launchpad Note 1</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="79.356262"
+       x="105.21329"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-2"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4947">
+      <title
+         id="title4950">Launchpad Note 2</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-3"
+       width="33.859005"
+       height="33.859005"
+       x="146.21323"
+       y="79.356262"
+       ry="8.553854"
+       id="rect4952">
+      <title
+         id="title4954">Launchpad Note 3</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="79.356262"
+       x="187.64552"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-4"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4956">
+      <title
+         id="title4959">Launchpad Note 4</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-5"
+       width="33.859005"
+       height="33.859005"
+       x="228.64543"
+       y="79.356262"
+       ry="8.553854"
+       id="rect4961">
+      <title
+         id="title4963">Launchpad Note 5</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-6"
+       width="33.859005"
+       height="33.859005"
+       x="269.64545"
+       y="79.356262"
+       ry="8.553854"
+       id="rect4965">
+      <title
+         id="title4968">Launchpad Note 6</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="79.356262"
+       x="310.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-7"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4970">
+      <title
+         id="title4972">Launchpad Note 7</title>
+    </rect>
+    <rect
+       rx="16.929502"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-8"
+       width="33.859005"
+       height="33.859005"
+       x="350.64539"
+       y="79.356262"
+       ry="16.929502"
+       id="rect4974">
+      <title
+         id="title4977">Launchpad Note 8</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="119.35626"
+       x="23.213364"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-16"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4979">
+      <title
+         id="title4981">Launchpad Note 16</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-17"
+       width="33.859005"
+       height="33.859005"
+       x="64.213287"
+       y="119.35626"
+       ry="8.553854"
+       id="rect4983">
+      <title
+         id="title4986">Launchpad Note 17</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-18"
+       width="33.859005"
+       height="33.859005"
+       x="105.21329"
+       y="119.35626"
+       ry="8.553854"
+       id="rect4988">
+      <title
+         id="title4990">Launchpad Note 18</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="119.35626"
+       x="146.21323"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-19"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4992">
+      <title
+         id="title4995">Launchpad Note 19</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-20"
+       width="33.859005"
+       height="33.859005"
+       x="187.64552"
+       y="119.35626"
+       ry="8.553854"
+       id="rect4997">
+      <title
+         id="title4999">Launchpad Note 20</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="119.35626"
+       x="228.64543"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-21"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5001">
+      <title
+         id="title5004">Launchpad Note 21</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="119.35626"
+       x="269.64545"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-22"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5006">
+      <title
+         id="title5008">Launchpad Note 22</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-23"
+       width="33.859005"
+       height="33.859005"
+       x="310.64539"
+       y="119.35626"
+       ry="8.553854"
+       id="rect5010">
+      <title
+         id="title5012">Launchpad Note 23</title>
+    </rect>
+    <rect
+       rx="16.929502"
+       ry="16.929502"
+       y="119.35626"
+       x="350.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-24"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5014">
+      <title
+         id="title5016">Launchpad Note 24</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="159.35626"
+       x="23.213364"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-32"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5018">
+      <title
+         id="title5021">Launchpad Note 32</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-33"
+       width="33.859005"
+       height="33.859005"
+       x="64.213287"
+       y="159.35626"
+       ry="8.553854"
+       id="rect5023">
+      <title
+         id="title5025">Launchpad Note 33</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-34"
+       width="33.859005"
+       height="33.859005"
+       x="105.21329"
+       y="159.35626"
+       ry="8.553854"
+       id="rect5027">
+      <title
+         id="title5030">Launchpad Note 34</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="159.35626"
+       x="146.21323"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-35"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5032">
+      <title
+         id="title5034">Launchpad Note 35</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-36"
+       width="33.859005"
+       height="33.859005"
+       x="187.64552"
+       y="159.35626"
+       ry="8.553854"
+       id="rect5036">
+      <title
+         id="title5038">Launchpad Note 36</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="159.35626"
+       x="228.64543"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-37"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5040">
+      <title
+         id="title5042">Launchpad Note 37</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="159.35626"
+       x="269.64545"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-38"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5044">
+      <title
+         id="title5046">Launchpad Note 38</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-39"
+       width="33.859005"
+       height="33.859005"
+       x="310.64539"
+       y="159.35626"
+       ry="8.553854"
+       id="rect5048">
+      <title
+         id="title5050">Launchpad Note 39</title>
+    </rect>
+    <rect
+       rx="16.929502"
+       ry="16.929502"
+       y="159.35626"
+       x="350.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-40"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5052">
+      <title
+         id="title5054">Launchpad Note 40</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-48"
+       width="33.859005"
+       height="33.859005"
+       x="23.213364"
+       y="199.35626"
+       ry="8.553854"
+       id="rect5056">
+      <title
+         id="title5058">Launchpad Note 48</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="199.35626"
+       x="64.213287"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-49"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5060">
+      <title
+         id="title5062">Launchpad Note 49</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="199.35626"
+       x="105.21329"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-50"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5064">
+      <title
+         id="title5066">Launchpad Note 50</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-51"
+       width="33.859005"
+       height="33.859005"
+       x="146.21323"
+       y="199.35626"
+       ry="8.553854"
+       id="rect5068">
+      <title
+         id="title5070">Launchpad Note 51</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="199.35626"
+       x="187.64552"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-52"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5072">
+      <title
+         id="title5074">Launchpad Note 52</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-53"
+       width="33.859005"
+       height="33.859005"
+       x="228.64543"
+       y="199.35626"
+       ry="8.553854"
+       id="rect5076">
+      <title
+         id="title5078">Launchpad Note 53</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-54"
+       width="33.859005"
+       height="33.859005"
+       x="269.64545"
+       y="199.35626"
+       ry="8.553854"
+       id="rect5080">
+      <title
+         id="title5082">Launchpad Note 54</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="199.35626"
+       x="310.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-55"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5084">
+      <title
+         id="title5086">Launchpad Note 55</title>
+    </rect>
+    <rect
+       rx="16.929502"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-56"
+       width="33.859005"
+       height="33.859005"
+       x="350.64539"
+       y="199.35626"
+       ry="16.929502"
+       id="rect5088">
+      <title
+         id="title5090">Launchpad Note 56</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="239.35626"
+       x="23.213364"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-64"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5092">
+      <title
+         id="title5094">Launchpad Note 64</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-65"
+       width="33.859005"
+       height="33.859005"
+       x="64.213287"
+       y="239.35626"
+       ry="8.553854"
+       id="rect5096">
+      <title
+         id="title5098">Launchpad Note 65</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-66"
+       width="33.859005"
+       height="33.859005"
+       x="105.21329"
+       y="239.35626"
+       ry="8.553854"
+       id="rect5100">
+      <title
+         id="title5102">Launchpad Note 66</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="239.35626"
+       x="146.21323"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-67"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5104">
+      <title
+         id="title5106">Launchpad Note 67</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-68"
+       width="33.859005"
+       height="33.859005"
+       x="187.64552"
+       y="239.35626"
+       ry="8.553854"
+       id="rect5108">
+      <title
+         id="title5110">Launchpad Note 68</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="239.35626"
+       x="228.64543"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-69"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5112">
+      <title
+         id="title5114">Launchpad Note 69</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="239.35626"
+       x="269.64545"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-70"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5116">
+      <title
+         id="title5118">Launchpad Note 70</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-71"
+       width="33.859005"
+       height="33.859005"
+       x="310.64539"
+       y="239.35626"
+       ry="8.553854"
+       id="rect5120">
+      <title
+         id="title5122">Launchpad Note 71</title>
+    </rect>
+    <rect
+       rx="16.929502"
+       ry="16.929502"
+       y="239.35626"
+       x="350.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-72"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5124">
+      <title
+         id="title5126">Launchpad Note 72</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-80"
+       width="33.859005"
+       height="33.859005"
+       x="23.213364"
+       y="279.35626"
+       ry="8.553854"
+       id="rect5128">
+      <title
+         id="title5130">Launchpad Note 80</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="279.35626"
+       x="64.213287"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-81"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5132">
+      <title
+         id="title5134">Launchpad Note 81</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="279.35626"
+       x="105.21329"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-82"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5136">
+      <title
+         id="title5138">Launchpad Note 82</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-83"
+       width="33.859005"
+       height="33.859005"
+       x="146.21323"
+       y="279.35626"
+       ry="8.553854"
+       id="rect5140">
+      <title
+         id="title5142">Launchpad Note 83</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="279.35626"
+       x="187.64552"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-84"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5144">
+      <title
+         id="title5146">Launchpad Note 84</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-85"
+       width="33.859005"
+       height="33.859005"
+       x="228.64543"
+       y="279.35626"
+       ry="8.553854"
+       id="rect5148">
+      <title
+         id="title5150">Launchpad Note 85</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-86"
+       width="33.859005"
+       height="33.859005"
+       x="269.64545"
+       y="279.35626"
+       ry="8.553854"
+       id="rect5152">
+      <title
+         id="title5154">Launchpad Note 86</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="279.35626"
+       x="310.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-87"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5156">
+      <title
+         id="title5158">Launchpad Note 87</title>
+    </rect>
+    <rect
+       rx="16.929502"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-88"
+       width="33.859005"
+       height="33.859005"
+       x="350.64539"
+       y="279.35626"
+       ry="16.929502"
+       id="rect5160">
+      <title
+         id="title5162">Launchpad Note 88</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-96"
+       width="33.859005"
+       height="33.859005"
+       x="23.213364"
+       y="319.35626"
+       ry="8.553854"
+       id="rect5164">
+      <title
+         id="title5166">Launchpad Note 96</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="319.35626"
+       x="64.213287"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-97"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5168">
+      <title
+         id="title5170">Launchpad Note 97</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="319.35626"
+       x="105.21329"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-98"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5172">
+      <title
+         id="title5174">Launchpad Note 98</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-99"
+       width="33.859005"
+       height="33.859005"
+       x="146.21323"
+       y="319.35626"
+       ry="8.553854"
+       id="rect5176">
+      <title
+         id="title5178">Launchpad Note 99</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="319.35626"
+       x="187.64552"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-100"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5180">
+      <title
+         id="title5182">Launchpad Note 100</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-101"
+       width="33.859005"
+       height="33.859005"
+       x="228.64543"
+       y="319.35626"
+       ry="8.553854"
+       id="rect5184">
+      <title
+         id="title5186">Launchpad Note 101</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-102"
+       width="33.859005"
+       height="33.859005"
+       x="269.64545"
+       y="319.35626"
+       ry="8.553854"
+       id="rect5188">
+      <title
+         id="title5190">Launchpad Note 102</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="319.35626"
+       x="310.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-103"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5192">
+      <title
+         id="title5194">Launchpad Note 103</title>
+    </rect>
+    <rect
+       rx="16.929502"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-104"
+       width="33.859005"
+       height="33.859005"
+       x="350.64539"
+       y="319.35626"
+       ry="16.929502"
+       id="rect5196">
+      <title
+         id="title5198">Launchpad Note 104</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="359.35626"
+       x="23.213364"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-112"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5200">
+      <title
+         id="title5202">Launchpad Note 112</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-113"
+       width="33.859005"
+       height="33.859005"
+       x="64.213287"
+       y="359.35626"
+       ry="8.553854"
+       id="rect5204">
+      <title
+         id="title5206">Launchpad Note 113</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-114"
+       width="33.859005"
+       height="33.859005"
+       x="105.21329"
+       y="359.35626"
+       ry="8.553854"
+       id="rect5208">
+      <title
+         id="title5210">Launchpad Note 114</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="359.35626"
+       x="146.21323"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-115"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5212">
+      <title
+         id="title5214">Launchpad Note 115</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-116"
+       width="33.859005"
+       height="33.859005"
+       x="187.64552"
+       y="359.35626"
+       ry="8.553854"
+       id="rect5216">
+      <title
+         id="title5218">Launchpad Note 116</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="359.35626"
+       x="228.64543"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-117"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5220">
+      <title
+         id="title5222">Launchpad Note 117</title>
+    </rect>
+    <rect
+       ry="8.553854"
+       y="359.35626"
+       x="269.64545"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-118"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5224">
+      <title
+         id="title5226">Launchpad Note 118</title>
+    </rect>
+    <rect
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-119"
+       width="33.859005"
+       height="33.859005"
+       x="310.64539"
+       y="359.35626"
+       ry="8.553854"
+       id="rect5228">
+      <title
+         id="title5230">Launchpad Note 119</title>
+    </rect>
+    <rect
+       rx="16.929502"
+       ry="16.929502"
+       y="359.35626"
+       x="350.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-120"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5232">
+      <title
+         id="title5234">Launchpad Note 120</title>
+    </rect>
+    <path
+       d="m 40.14287,50.867168 c -0.56907,0 -6.32799,9.974747 -6.04346,10.467569 0.28453,0.492821 11.80238,0.492821 12.08691,0 0.28453,-0.492822 -5.47439,-10.467569 -6.04345,-10.467569 z"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path5236"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ssss" />
+    <path
+       d="m 81.14279,61.704353 c -0.56906,0 -6.32799,-9.974747 -6.04346,-10.467569 0.28453,-0.492821 11.80238,-0.492821 12.08691,0 0.28453,0.492822 -5.47439,10.467569 -6.04345,10.467569 z"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path5238"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ssss" />
+    <path
+       d="m 116.7242,56.285763 c 0,0.569061 9.97475,6.327984 10.46757,6.043453 0.49282,-0.28453 0.49282,-11.802376 0,-12.086907 -0.49282,-0.284531 -10.46757,5.474393 -10.46757,6.043454 z"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path5240"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ssss" />
+    <path
+       d="m 168.56133,56.285763 c 0,0.569061 -9.97475,6.327984 -10.46757,6.043453 -0.49282,-0.28453 -0.49282,-11.802376 0,-12.086907 0.49282,-0.284531 10.46757,5.474393 10.46757,6.043454 z"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path5242"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ssss" />
+    <path
+       sodipodi:nodetypes="ssss"
+       inkscape:connector-curvature="0"
+       id="path5244"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 372.99348,96.28576 c 0,0.56906 -9.97475,6.32799 -10.46757,6.04346 -0.49282,-0.28453 -0.49282,-11.80238 0,-12.08691 0.49282,-0.28453 10.46757,5.47439 10.46757,6.04345 z" />
+    <path
+       d="m 372.99348,136.28576 c 0,0.56906 -9.97475,6.32799 -10.46757,6.04346 -0.49282,-0.28453 -0.49282,-11.80238 0,-12.08691 0.49282,-0.28453 10.46757,5.47439 10.46757,6.04345 z"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path5246"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ssss" />
+    <path
+       sodipodi:nodetypes="ssss"
+       inkscape:connector-curvature="0"
+       id="path5248"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 372.99348,176.28576 c 0,0.56906 -9.97475,6.32799 -10.46757,6.04346 -0.49282,-0.28453 -0.49282,-11.80238 0,-12.08691 0.49282,-0.28453 10.46757,5.47439 10.46757,6.04345 z" />
+    <path
+       d="m 372.99348,216.28576 c 0,0.56906 -9.97475,6.32799 -10.46757,6.04346 -0.49282,-0.28453 -0.49282,-11.80238 0,-12.08691 0.49282,-0.28453 10.46757,5.47439 10.46757,6.04345 z"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path5250"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ssss" />
+    <path
+       sodipodi:nodetypes="ssss"
+       inkscape:connector-curvature="0"
+       id="path5252"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 372.99348,256.28576 c 0,0.56906 -9.97475,6.32799 -10.46757,6.04346 -0.49282,-0.28453 -0.49282,-11.80238 0,-12.08691 0.49282,-0.28453 10.46757,5.47439 10.46757,6.04345 z" />
+    <path
+       d="m 372.99348,296.28576 c 0,0.56906 -9.97475,6.32799 -10.46757,6.04346 -0.49282,-0.28453 -0.49282,-11.80238 0,-12.08691 0.49282,-0.28453 10.46757,5.47439 10.46757,6.04345 z"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path5254"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ssss" />
+    <path
+       sodipodi:nodetypes="ssss"
+       inkscape:connector-curvature="0"
+       id="path5256"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 372.99348,336.28576 c 0,0.56906 -9.97475,6.32799 -10.46757,6.04346 -0.49282,-0.28453 -0.49282,-11.80238 0,-12.08691 0.49282,-0.28453 10.46757,5.47439 10.46757,6.04345 z" />
+    <path
+       d="m 372.99348,376.28576 c 0,0.56906 -9.97475,6.32799 -10.46757,6.04346 -0.49282,-0.28453 -0.49282,-11.80238 0,-12.08691 0.49282,-0.28453 10.46757,5.47439 10.46757,6.04345 z"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path5258"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ssss" />
+  </g>
+  <g
+     class="launchpad-buffer-1"
+     transform="translate(-2.3841858e-7,-18.571486)">
+    <rect
+       id="rect4484"
+       style="opacity:1;fill:#727272;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-frame"
+       width="402.14288"
+       height="386.42856"
+       x="2.5000002"
+       y="21.071486"
+       ry="16.929501">
+      <title
+         id="title4820">Launchpad Frame</title>
+    </rect>
+    <path
+       id="path4487"
+       sodipodi:nodetypes="sssss"
+       inkscape:connector-curvature="0"
+       d="m 40.142866,39.356258 c 9.378945,0 16.929503,7.550559 16.929503,16.929503 0,9.378944 -7.550558,16.929502 -16.929503,16.929502 -9.378944,0 -16.929502,-7.550558 -16.929502,-16.929502 0,-9.378944 7.550558,-16.929503 16.929502,-16.929503 z"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-control launchpad-cc-104" />
+    <path
+       id="path4489"
+       sodipodi:nodetypes="sssss"
+       inkscape:connector-curvature="0"
+       d="m 81.14279,39.356258 c 9.378944,0 16.929502,7.550559 16.929502,16.929503 0,9.378944 -7.550558,16.929502 -16.929502,16.929502 -9.378945,0 -16.929503,-7.550558 -16.929503,-16.929502 0,-9.378944 7.550558,-16.929503 16.929503,-16.929503 z"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-control launchpad-cc-105" />
+    <path
+       id="path4491"
+       sodipodi:nodetypes="sssss"
+       inkscape:connector-curvature="0"
+       d="m 122.14279,39.356258 c 9.37894,0 16.9295,7.550559 16.9295,16.929503 0,9.378944 -7.55056,16.929502 -16.9295,16.929502 -9.37894,0 -16.9295,-7.550558 -16.9295,-16.929502 0,-9.378944 7.55056,-16.929503 16.9295,-16.929503 z"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-control launchpad-cc-106" />
+    <path
+       id="path4493"
+       sodipodi:nodetypes="sssss"
+       inkscape:connector-curvature="0"
+       d="m 163.14273,39.356258 c 9.37894,0 16.9295,7.550559 16.9295,16.929503 0,9.378944 -7.55056,16.929502 -16.9295,16.929502 -9.37895,0 -16.9295,-7.550558 -16.9295,-16.929502 0,-9.378944 7.55055,-16.929503 16.9295,-16.929503 z"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-control launchpad-cc-107" />
+    <rect
+       id="rect4495"
+       ry="16.929502"
+       y="39.356258"
+       x="187.64552"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-control launchpad-cc-108"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4835">Launchpad CC 108</title>
+    </rect>
+    <rect
+       id="rect4498"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-control launchpad-cc-109"
+       width="33.859005"
+       height="33.859005"
+       x="228.64543"
+       y="39.356258"
+       ry="16.929502">
+      <title
+         id="title4838">Launchpad CC 109</title>
+    </rect>
+    <rect
+       id="rect4501"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-control launchpad-cc-110"
+       width="33.859005"
+       height="33.859005"
+       x="269.64545"
+       y="39.356258"
+       ry="16.929502">
+      <title
+         id="title4841">Launchpad CC 110</title>
+    </rect>
+    <rect
+       id="rect4504"
+       ry="16.929502"
+       y="39.356258"
+       x="310.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-control launchpad-cc-111"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4844">Launchpad CC 111</title>
+    </rect>
+    <rect
+       id="rect4507"
+       ry="8.553854"
+       y="79.356262"
+       x="23.213364"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-0"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4847">Launchpad Note 0</title>
+    </rect>
+    <rect
+       id="rect4510"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-1"
+       width="33.859005"
+       height="33.859005"
+       x="64.213287"
+       y="79.356262"
+       ry="8.553854">
+      <title
+         id="title4850">Launchpad Note 1</title>
+    </rect>
+    <rect
+       id="rect4513"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-2"
+       width="33.859005"
+       height="33.859005"
+       x="105.21329"
+       y="79.356262"
+       ry="8.553854">
+      <title
+         id="title4853">Launchpad Note 2</title>
+    </rect>
+    <rect
+       id="rect4516"
+       ry="8.553854"
+       y="79.356262"
+       x="146.21323"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-3"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4856">Launchpad Note 3</title>
+    </rect>
+    <rect
+       id="rect4519"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-4"
+       width="33.859005"
+       height="33.859005"
+       x="187.64552"
+       y="79.356262"
+       ry="8.553854">
+      <title
+         id="title4859">Launchpad Note 4</title>
+    </rect>
+    <rect
+       id="rect4522"
+       ry="8.553854"
+       y="79.356262"
+       x="228.64543"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-5"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4862">Launchpad Note 5</title>
+    </rect>
+    <rect
+       id="rect4525"
+       ry="8.553854"
+       y="79.356262"
+       x="269.64545"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-6"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4865">Launchpad Note 6</title>
+    </rect>
+    <rect
+       id="rect4528"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-7"
+       width="33.859005"
+       height="33.859005"
+       x="310.64539"
+       y="79.356262"
+       ry="8.553854">
+      <title
+         id="title4868">Launchpad Note 7</title>
+    </rect>
+    <rect
+       id="rect4531"
+       ry="16.929502"
+       y="79.356262"
+       x="350.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-8"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       rx="16.929502">
+      <title
+         id="title4871">Launchpad Note 8</title>
+    </rect>
+    <rect
+       id="rect4534"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-16"
+       width="33.859005"
+       height="33.859005"
+       x="23.213364"
+       y="119.35626"
+       ry="8.553854">
+      <title
+         id="title4874">Launchpad Note 16</title>
+    </rect>
+    <rect
+       id="rect4537"
+       ry="8.553854"
+       y="119.35626"
+       x="64.213287"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-17"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4877">Launchpad Note 17</title>
+    </rect>
+    <rect
+       id="rect4540"
+       ry="8.553854"
+       y="119.35626"
+       x="105.21329"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-18"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4880">Launchpad Note 18</title>
+    </rect>
+    <rect
+       id="rect4543"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-19"
+       width="33.859005"
+       height="33.859005"
+       x="146.21323"
+       y="119.35626"
+       ry="8.553854">
+      <title
+         id="title4883">Launchpad Note 19</title>
+    </rect>
+    <rect
+       id="rect4546"
+       ry="8.553854"
+       y="119.35626"
+       x="187.64552"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-20"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4886">Launchpad Note 20</title>
+    </rect>
+    <rect
+       id="rect4549"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-21"
+       width="33.859005"
+       height="33.859005"
+       x="228.64543"
+       y="119.35626"
+       ry="8.553854">
+      <title
+         id="title4889">Launchpad Note 21</title>
+    </rect>
+    <rect
+       id="rect4552"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-22"
+       width="33.859005"
+       height="33.859005"
+       x="269.64545"
+       y="119.35626"
+       ry="8.553854">
+      <title
+         id="title4892">Launchpad Note 22</title>
+    </rect>
+    <rect
+       id="rect4555"
+       ry="8.553854"
+       y="119.35626"
+       x="310.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-23"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4895">Launchpad Note 23</title>
+    </rect>
+    <rect
+       id="rect4558"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-24"
+       width="33.859005"
+       height="33.859005"
+       x="350.64539"
+       y="119.35626"
+       ry="16.929502"
+       rx="16.929502">
+      <title
+         id="title4898">Launchpad Note 24</title>
+    </rect>
+    <rect
+       id="rect4561"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-32"
+       width="33.859005"
+       height="33.859005"
+       x="23.213364"
+       y="159.35626"
+       ry="8.553854">
+      <title
+         id="title4901">Launchpad Note 32</title>
+    </rect>
+    <rect
+       id="rect4564"
+       ry="8.553854"
+       y="159.35626"
+       x="64.213287"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-33"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4904">Launchpad Note 33</title>
+    </rect>
+    <rect
+       id="rect4567"
+       ry="8.553854"
+       y="159.35626"
+       x="105.21329"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-34"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4907">Launchpad Note 34</title>
+    </rect>
+    <rect
+       id="rect4570"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-35"
+       width="33.859005"
+       height="33.859005"
+       x="146.21323"
+       y="159.35626"
+       ry="8.553854">
+      <title
+         id="title4910">Launchpad Note 35</title>
+    </rect>
+    <rect
+       id="rect4573"
+       ry="8.553854"
+       y="159.35626"
+       x="187.64552"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-36"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4913">Launchpad Note 36</title>
+    </rect>
+    <rect
+       id="rect4576"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-37"
+       width="33.859005"
+       height="33.859005"
+       x="228.64543"
+       y="159.35626"
+       ry="8.553854">
+      <title
+         id="title4916">Launchpad Note 37</title>
+    </rect>
+    <rect
+       id="rect4579"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-38"
+       width="33.859005"
+       height="33.859005"
+       x="269.64545"
+       y="159.35626"
+       ry="8.553854">
+      <title
+         id="title4919">Launchpad Note 38</title>
+    </rect>
+    <rect
+       id="rect4582"
+       ry="8.553854"
+       y="159.35626"
+       x="310.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-39"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4922">Launchpad Note 39</title>
+    </rect>
+    <rect
+       id="rect4585"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-40"
+       width="33.859005"
+       height="33.859005"
+       x="350.64539"
+       y="159.35626"
+       ry="16.929502"
+       rx="16.929502">
+      <title
+         id="title4925">Launchpad Note 40</title>
+    </rect>
+    <rect
+       id="rect4588"
+       ry="8.553854"
+       y="199.35626"
+       x="23.213364"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-48"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4928">Launchpad Note 48</title>
+    </rect>
+    <rect
+       id="rect4591"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-49"
+       width="33.859005"
+       height="33.859005"
+       x="64.213287"
+       y="199.35626"
+       ry="8.553854">
+      <title
+         id="title4931">Launchpad Note 49</title>
+    </rect>
+    <rect
+       id="rect4594"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-50"
+       width="33.859005"
+       height="33.859005"
+       x="105.21329"
+       y="199.35626"
+       ry="8.553854">
+      <title
+         id="title4934">Launchpad Note 50</title>
+    </rect>
+    <rect
+       id="rect4597"
+       ry="8.553854"
+       y="199.35626"
+       x="146.21323"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-51"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4937">Launchpad Note 51</title>
+    </rect>
+    <rect
+       id="rect4600"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-52"
+       width="33.859005"
+       height="33.859005"
+       x="187.64552"
+       y="199.35626"
+       ry="8.553854">
+      <title
+         id="title4940">Launchpad Note 52</title>
+    </rect>
+    <rect
+       id="rect4603"
+       ry="8.553854"
+       y="199.35626"
+       x="228.64543"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-53"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4943">Launchpad Note 53</title>
+    </rect>
+    <rect
+       id="rect4606"
+       ry="8.553854"
+       y="199.35626"
+       x="269.64545"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-54"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4946">Launchpad Note 54</title>
+    </rect>
+    <rect
+       id="rect4609"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-55"
+       width="33.859005"
+       height="33.859005"
+       x="310.64539"
+       y="199.35626"
+       ry="8.553854">
+      <title
+         id="title4949">Launchpad Note 55</title>
+    </rect>
+    <rect
+       id="rect4612"
+       ry="16.929502"
+       y="199.35626"
+       x="350.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-56"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       rx="16.929502">
+      <title
+         id="title4952">Launchpad Note 56</title>
+    </rect>
+    <rect
+       id="rect4615"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-64"
+       width="33.859005"
+       height="33.859005"
+       x="23.213364"
+       y="239.35626"
+       ry="8.553854">
+      <title
+         id="title4955">Launchpad Note 64</title>
+    </rect>
+    <rect
+       id="rect4618"
+       ry="8.553854"
+       y="239.35626"
+       x="64.213287"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-65"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4958">Launchpad Note 65</title>
+    </rect>
+    <rect
+       id="rect4621"
+       ry="8.553854"
+       y="239.35626"
+       x="105.21329"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-66"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4961">Launchpad Note 66</title>
+    </rect>
+    <rect
+       id="rect4624"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-67"
+       width="33.859005"
+       height="33.859005"
+       x="146.21323"
+       y="239.35626"
+       ry="8.553854">
+      <title
+         id="title4964">Launchpad Note 67</title>
+    </rect>
+    <rect
+       id="rect4627"
+       ry="8.553854"
+       y="239.35626"
+       x="187.64552"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-68"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4967">Launchpad Note 68</title>
+    </rect>
+    <rect
+       id="rect4630"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-69"
+       width="33.859005"
+       height="33.859005"
+       x="228.64543"
+       y="239.35626"
+       ry="8.553854">
+      <title
+         id="title4970">Launchpad Note 69</title>
+    </rect>
+    <rect
+       id="rect4633"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-70"
+       width="33.859005"
+       height="33.859005"
+       x="269.64545"
+       y="239.35626"
+       ry="8.553854">
+      <title
+         id="title4973">Launchpad Note 70</title>
+    </rect>
+    <rect
+       id="rect4636"
+       ry="8.553854"
+       y="239.35626"
+       x="310.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-71"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4976">Launchpad Note 71</title>
+    </rect>
+    <rect
+       id="rect4639"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-72"
+       width="33.859005"
+       height="33.859005"
+       x="350.64539"
+       y="239.35626"
+       ry="16.929502"
+       rx="16.929502">
+      <title
+         id="title4979">Launchpad Note 72</title>
+    </rect>
+    <rect
+       id="rect4642"
+       ry="8.553854"
+       y="279.35626"
+       x="23.213364"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-80"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4982">Launchpad Note 80</title>
+    </rect>
+    <rect
+       id="rect4645"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-81"
+       width="33.859005"
+       height="33.859005"
+       x="64.213287"
+       y="279.35626"
+       ry="8.553854">
+      <title
+         id="title4985">Launchpad Note 81</title>
+    </rect>
+    <rect
+       id="rect4648"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-82"
+       width="33.859005"
+       height="33.859005"
+       x="105.21329"
+       y="279.35626"
+       ry="8.553854">
+      <title
+         id="title4988">Launchpad Note 82</title>
+    </rect>
+    <rect
+       id="rect4651"
+       ry="8.553854"
+       y="279.35626"
+       x="146.21323"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-83"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4991">Launchpad Note 83</title>
+    </rect>
+    <rect
+       id="rect4654"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-84"
+       width="33.859005"
+       height="33.859005"
+       x="187.64552"
+       y="279.35626"
+       ry="8.553854">
+      <title
+         id="title4994">Launchpad Note 84</title>
+    </rect>
+    <rect
+       id="rect4657"
+       ry="8.553854"
+       y="279.35626"
+       x="228.64543"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-85"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4997">Launchpad Note 85</title>
+    </rect>
+    <rect
+       id="rect4660"
+       ry="8.553854"
+       y="279.35626"
+       x="269.64545"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-86"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title5000">Launchpad Note 86</title>
+    </rect>
+    <rect
+       id="rect4663"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-87"
+       width="33.859005"
+       height="33.859005"
+       x="310.64539"
+       y="279.35626"
+       ry="8.553854">
+      <title
+         id="title5003">Launchpad Note 87</title>
+    </rect>
+    <rect
+       id="rect4666"
+       ry="16.929502"
+       y="279.35626"
+       x="350.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-88"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       rx="16.929502">
+      <title
+         id="title5006">Launchpad Note 88</title>
+    </rect>
+    <rect
+       id="rect4669"
+       ry="8.553854"
+       y="319.35626"
+       x="23.213364"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-96"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4241">Launchpad Note 96</title>
+    </rect>
+    <rect
+       id="rect4672"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-97"
+       width="33.859005"
+       height="33.859005"
+       x="64.213287"
+       y="319.35626"
+       ry="8.553854">
+      <title
+         id="title5011">Launchpad Note 97</title>
+    </rect>
+    <rect
+       id="rect4675"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-98"
+       width="33.859005"
+       height="33.859005"
+       x="105.21329"
+       y="319.35626"
+       ry="8.553854">
+      <title
+         id="title5014">Launchpad Note 98</title>
+    </rect>
+    <rect
+       id="rect4678"
+       ry="8.553854"
+       y="319.35626"
+       x="146.21323"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-99"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title5017">Launchpad Note 99</title>
+    </rect>
+    <rect
+       id="rect4681"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-100"
+       width="33.859005"
+       height="33.859005"
+       x="187.64552"
+       y="319.35626"
+       ry="8.553854">
+      <title
+         id="title5020">Launchpad Note 100</title>
+    </rect>
+    <rect
+       id="rect4684"
+       ry="8.553854"
+       y="319.35626"
+       x="228.64543"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-101"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title5023">Launchpad Note 101</title>
+    </rect>
+    <rect
+       id="rect4687"
+       ry="8.553854"
+       y="319.35626"
+       x="269.64545"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-102"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title5026">Launchpad Note 102</title>
+    </rect>
+    <rect
+       id="rect4690"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-103"
+       width="33.859005"
+       height="33.859005"
+       x="310.64539"
+       y="319.35626"
+       ry="8.553854">
+      <title
+         id="title5029">Launchpad Note 103</title>
+    </rect>
+    <rect
+       id="rect4693"
+       ry="16.929502"
+       y="319.35626"
+       x="350.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-104"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       rx="16.929502">
+      <title
+         id="title5032">Launchpad Note 104</title>
+    </rect>
+    <rect
+       id="rect4696"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-112"
+       width="33.859005"
+       height="33.859005"
+       x="23.213364"
+       y="359.35626"
+       ry="8.553854">
+      <title
+         id="title4223">Launchpad Note 112</title>
+    </rect>
+    <rect
+       id="rect4699"
+       ry="8.553854"
+       y="359.35626"
+       x="64.213287"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-113"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4225">Launchpad Note 113</title>
+    </rect>
+    <rect
+       id="rect4702"
+       ry="8.553854"
+       y="359.35626"
+       x="105.21329"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-114"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4227">Launchpad Note 114</title>
+    </rect>
+    <rect
+       id="rect4705"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-115"
+       width="33.859005"
+       height="33.859005"
+       x="146.21323"
+       y="359.35626"
+       ry="8.553854">
+      <title
+         id="title4229">Launchpad Note 115</title>
+    </rect>
+    <rect
+       id="rect4708"
+       ry="8.553854"
+       y="359.35626"
+       x="187.64552"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-116"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4231">Launchpad Note 116</title>
+    </rect>
+    <rect
+       id="rect4711"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-117"
+       width="33.859005"
+       height="33.859005"
+       x="228.64543"
+       y="359.35626"
+       ry="8.553854">
+      <title
+         id="title4233">Launchpad Note 117</title>
+    </rect>
+    <rect
+       id="rect4714"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-118"
+       width="33.859005"
+       height="33.859005"
+       x="269.64545"
+       y="359.35626"
+       ry="8.553854">
+      <title
+         id="title4235">Launchpad Note 118</title>
+    </rect>
+    <rect
+       id="rect4717"
+       ry="8.553854"
+       y="359.35626"
+       x="310.64539"
+       height="33.859005"
+       width="33.859005"
+       class="launchpad-note launchpad-note-119"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <title
+         id="title4237">Launchpad Note 119</title>
+    </rect>
+    <rect
+       id="rect4720"
+       style="opacity:1;fill:#aeaeae;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       class="launchpad-note launchpad-note-120"
+       width="33.859005"
+       height="33.859005"
+       x="350.64539"
+       y="359.35626"
+       ry="16.929502"
+       rx="16.929502">
+      <title
+         id="title4239">Launchpad Note 120</title>
+    </rect>
+    <path
+       sodipodi:nodetypes="ssss"
+       inkscape:connector-curvature="0"
+       id="path4514"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 40.14287,50.867168 c -0.56907,0 -6.32799,9.974747 -6.04346,10.467569 0.28453,0.492821 11.80238,0.492821 12.08691,0 0.28453,-0.492822 -5.47439,-10.467569 -6.04345,-10.467569 z" />
+    <path
+       sodipodi:nodetypes="ssss"
+       inkscape:connector-curvature="0"
+       id="path4516"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 81.14279,61.704353 c -0.56906,0 -6.32799,-9.974747 -6.04346,-10.467569 0.28453,-0.492821 11.80238,-0.492821 12.08691,0 0.28453,0.492822 -5.47439,10.467569 -6.04345,10.467569 z" />
+    <path
+       sodipodi:nodetypes="ssss"
+       inkscape:connector-curvature="0"
+       id="path4518"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 116.7242,56.285763 c 0,0.569061 9.97475,6.327984 10.46757,6.043453 0.49282,-0.28453 0.49282,-11.802376 0,-12.086907 -0.49282,-0.284531 -10.46757,5.474393 -10.46757,6.043454 z" />
+    <path
+       sodipodi:nodetypes="ssss"
+       inkscape:connector-curvature="0"
+       id="path4520"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 168.56133,56.285763 c 0,0.569061 -9.97475,6.327984 -10.46757,6.043453 -0.49282,-0.28453 -0.49282,-11.802376 0,-12.086907 0.49282,-0.284531 10.46757,5.474393 10.46757,6.043454 z" />
+    <path
+       d="m 372.99348,96.28576 c 0,0.56906 -9.97475,6.32799 -10.46757,6.04346 -0.49282,-0.28453 -0.49282,-11.80238 0,-12.08691 0.49282,-0.28453 10.46757,5.47439 10.46757,6.04345 z"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path4522"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ssss" />
+    <path
+       sodipodi:nodetypes="ssss"
+       inkscape:connector-curvature="0"
+       id="path4524"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 372.99348,136.28576 c 0,0.56906 -9.97475,6.32799 -10.46757,6.04346 -0.49282,-0.28453 -0.49282,-11.80238 0,-12.08691 0.49282,-0.28453 10.46757,5.47439 10.46757,6.04345 z" />
+    <path
+       d="m 372.99348,176.28576 c 0,0.56906 -9.97475,6.32799 -10.46757,6.04346 -0.49282,-0.28453 -0.49282,-11.80238 0,-12.08691 0.49282,-0.28453 10.46757,5.47439 10.46757,6.04345 z"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ssss" />
+    <path
+       sodipodi:nodetypes="ssss"
+       inkscape:connector-curvature="0"
+       id="path4528"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 372.99348,216.28576 c 0,0.56906 -9.97475,6.32799 -10.46757,6.04346 -0.49282,-0.28453 -0.49282,-11.80238 0,-12.08691 0.49282,-0.28453 10.46757,5.47439 10.46757,6.04345 z" />
+    <path
+       d="m 372.99348,256.28576 c 0,0.56906 -9.97475,6.32799 -10.46757,6.04346 -0.49282,-0.28453 -0.49282,-11.80238 0,-12.08691 0.49282,-0.28453 10.46757,5.47439 10.46757,6.04345 z"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path4530"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ssss" />
+    <path
+       sodipodi:nodetypes="ssss"
+       inkscape:connector-curvature="0"
+       id="path4532"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 372.99348,296.28576 c 0,0.56906 -9.97475,6.32799 -10.46757,6.04346 -0.49282,-0.28453 -0.49282,-11.80238 0,-12.08691 0.49282,-0.28453 10.46757,5.47439 10.46757,6.04345 z" />
+    <path
+       d="m 372.99348,336.28576 c 0,0.56906 -9.97475,6.32799 -10.46757,6.04346 -0.49282,-0.28453 -0.49282,-11.80238 0,-12.08691 0.49282,-0.28453 10.46757,5.47439 10.46757,6.04345 z"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path4534"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ssss" />
+    <path
+       sodipodi:nodetypes="ssss"
+       inkscape:connector-curvature="0"
+       id="path4536"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.14099455;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 372.99348,376.28576 c 0,0.56906 -9.97475,6.32799 -10.46757,6.04346 -0.49282,-0.28453 -0.49282,-11.80238 0,-12.08691 0.49282,-0.28453 10.46757,5.47439 10.46757,6.04345 z" />
+  </g>
+</svg>
