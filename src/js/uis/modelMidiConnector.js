@@ -119,8 +119,7 @@
                 pathSegments: [
                     { literalValue: "channels" },
                     "channel",
-                    { literalValue: "channelAftertouch" },
-                    { literalValue: "channel" },
+                    { literalValue: "channelAftertouch" }
                 ],
                 changeValue: "pressure"
             },
@@ -158,18 +157,54 @@
 
     fluid.registerNamespace("flock.midi.interchange.connector.output");
 
-    flock.midi.interchange.connector.output.modelChangeToMidiMessage = function (that, changeValue) {
+    flock.midi.interchange.connector.output.modelChangeToMidiMessage = function (that, pathSegs, changeValue) {
         var connection = fluid.get(that, ["connection"]);
         if (connection) {
-            var parsedChange = flock.midi.interchange.parseChangeValue(changeValue);
-            fluid.each(parsedChange, function (singleChange) {
-                var changeType = fluid.get(singleChange.path, 1); // channels -> # -> type
-                var transformRules = fluid.get(that.options.rules, changeType);
-                if (transformRules) {
-                    var midiMessage = fluid.model.transformWithRules(singleChange, transformRules);
-                    connection.send(midiMessage);
-                }
-            });
+            var changeType = fluid.get(pathSegs, 2); // channels -> # -> type
+            var transformRules = fluid.get(that.options.rules, changeType);
+            if (transformRules) {
+                var midiMessage = fluid.model.transformWithRules({ pathSegs: pathSegs, value: changeValue }, transformRules);
+                connection.send(midiMessage);
+            }
+        }
+    };
+
+    /**
+     *
+     * Dynamically register model listeners for all supported types of change so that we can get full path information
+     * for each discrete change without defining thousands of listeners (16 channels x 128 values for notes alone).
+     *
+     * @param {Object} that - The interchange output component itself.
+     *
+     */
+    flock.midi.interchange.connector.output.addModelListeners = function (that) {
+        for (var channel = 0; channel < 16; channel++) {
+            for (var index = 0; index < 128; index++) {
+                // notes
+                var noteSegs = ["channels", channel, "notes", index];
+                var noteNamespace = noteSegs.join("-");
+                that.applier.modelChanged.addListener({ segs: noteSegs }, that.modelChangeToMidiMessage, noteNamespace);
+
+                // controls
+                var controlSegs = ["channels", channel, "controls", index];
+                var controlNamespace = controlSegs.join("-");
+                that.applier.modelChanged.addListener({ segs: controlSegs }, that.modelChangeToMidiMessage, controlNamespace);
+
+                // polyphonic aftertouch
+                var polyAftertouchSegs = ["channels", channel, "polyAftertouch", index];
+                var polyAftertouchNamespace = polyAftertouchSegs.join("-");
+                that.applier.modelChanged.addListener({ segs: polyAftertouchSegs }, that.modelChangeToMidiMessage, polyAftertouchNamespace);
+            }
+
+            // pitchbend
+            var pitchbendSegs = ["channels", channel, "pitchbend"];
+            var pitchbendNamespace = pitchbendSegs.join("-");
+            that.applier.modelChanged.addListener({ segs: pitchbendSegs }, that.modelChangeToMidiMessage, pitchbendNamespace);
+
+            // channel aftertouch
+            var channelAftertouchSegs = ["channels", channel, "channelAftertouch"];
+            var channelAftertouchNamespace = channelAftertouchSegs.join("-");
+            that.applier.modelChanged.addListener({ segs: channelAftertouchSegs }, that.modelChangeToMidiMessage, channelAftertouchNamespace);
         }
     };
 
@@ -182,14 +217,14 @@
                 channel: {
                     "transform": {
                         "type": "fluid.transforms.stringToNumber",
-                        "inputPath": "path.0"
+                        "inputPath": "pathSegs.1"
                     }
                 },
-                type:     { literalValue: "noteOn"},
+                type: { literalValue: "noteOn"},
                 note: {
                     "transform": {
                         "type": "fluid.transforms.stringToNumber",
-                        "inputPath": "path.2"
+                        "inputPath": "pathSegs.3"
                     }
                 },
                 velocity: "value"
@@ -198,14 +233,14 @@
                 channel: {
                     "transform": {
                         "type": "fluid.transforms.stringToNumber",
-                        "inputPath": "path.0"
+                        "inputPath": "pathSegs.1"
                     }
                 },
                 type:    { literalValue: "control"},
                 number:  {
                     "transform": {
                         "type": "fluid.transforms.stringToNumber",
-                        "inputPath": "path.2"
+                        "inputPath": "pathSegs.3"
                     }
                 },
                 value:   "value"
@@ -214,33 +249,35 @@
                 channel: {
                     "transform": {
                         "type": "fluid.transforms.stringToNumber",
-                        "inputPath": "path.0"
+                        "inputPath": "pathSegs.1"
                     }
                 },
                 type: { literalValue: "aftertouch" },
                 note: {
                     "transform": {
                         "type": "fluid.transforms.stringToNumber",
-                        "inputPath": "path.2"
+                        "inputPath": "pathSegs.3"
                     }
                 },
-                value:   "value"
+                // We have to cross-register the pressure as velocity because of this line:
+                // https://github.com/colinbdclark/Flocking/blob/master/src/web/midi.js#L613
+                velocity: "value"
             },
             channelAftertouch: {
                 channel: {
                     "transform": {
                         "type": "fluid.transforms.stringToNumber",
-                        "inputPath": "path.0"
+                        "inputPath": "pathSegs.1"
                     }
                 },
                 type:    { literalValue: "aftertouch"},
-                value:   "value"
+                pressure:   "value"
             },
             pitchbend: {
                 channel: {
                     "transform": {
                         "type": "fluid.transforms.stringToNumber",
-                        "inputPath": "path.0"
+                        "inputPath": "pathSegs.1"
                     }
                 },
                 type:    { literalValue: "pitchbend"},
@@ -250,11 +287,16 @@
         model: {
             channels: {}
         },
-        modelListeners: {
-            "channels": {
-                excludeSource: "init",
-                funcName:      "flock.midi.interchange.connector.output.modelChangeToMidiMessage",
-                args:          ["{that}", "{change}.value"]
+        invokers: {
+            "modelChangeToMidiMessage": {
+                funcName: "flock.midi.interchange.connector.output.modelChangeToMidiMessage",
+                args:     ["{that}", "{arguments}.2", "{arguments}.0"] // value, oldValue, pathSegs, changeRequest, transaction
+            }
+        },
+        listeners: {
+            "onCreate.addModelListeners": {
+                funcName: "flock.midi.interchange.connector.output.addModelListeners",
+                args:     ["{that}"]
             }
         }
     });
