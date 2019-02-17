@@ -25,12 +25,14 @@ Devices like the Novation Launchpad series, Ableton Push series, and Keith McMil
 (lights) that change based on received MIDI messages.  This package provides a "UI router", which is another type of
 "interchange", this time between desired UI updates and MIDI outputs.  Like the Transforming MIDI router, this type
 of router uses transformation rules to translate a desired UI update into the appropriate MIDI messages.  By writing
-alternate rules, a wide range of devices can be easily modeled.
+alternate rules, a wide range of devices can be easily modeled.  For more information, see the
+[ui router documentation](./docs/ui-router.md).
 
 ## Onscreen Device Analogues
 
 In addition to the above, this package provides onscreen equivalents of select devices, that can be used to operate an
-interface with a mouse and keyboard, either as a sole means of input, or in combination with a connected device.
+interface with a mouse and keyboard, either as a sole means of input, or in combination with a connected device. For
+more information, see the [onscreen device analogue documentation](./docs/onscreen-device-analogue.md).
 
 ## Try it out!
 

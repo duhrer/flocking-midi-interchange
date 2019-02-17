@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>"Duet" Demo</title>
+    <title>"Model Relay" Demo</title>
 
     <script src="../node_modules/infusion/dist/infusion-all.js"></script>
     <script src="../node_modules/flocking/dist/flocking-all.js"></script>
@@ -14,33 +14,20 @@
     <script src="../node_modules/flocking-midi-select-ng/src/js/auto-midi-port-selector.js"></script>
     <script src="../node_modules/flocking-midi-select-ng/src/js/auto-midi-connector.js"></script>
 
-    <script src="../src/js/router.js"></script>
+    <script src="../src/js/change-parser.js"></script>
 
-    <script src="../src/js/tunings/launchpad-to-common.js"></script>
-    <script src="../src/js/tunings/launchpad-pro-to-common.js"></script>
+    <script src="../src/js/uis/modelMidiConnector.js"></script>
 
-    <script src="./js/duet.js"></script>
+    <script src="./js/model-relay-loom.js"></script>
 </head>
 <body>
-    <div class="duet-harness">
-        <h2>Left Controller</h2>
-        <div class="midi-left-input"></div>
-        <div class="midi-left-output"></div>
-
-
-        <h2>Right Controller</h2>
-
-        <div class="midi-right-input"></div>
-        <div class="midi-right-output"></div>
-
-
-        <h2>Combined Output</h2>
-
-        <div class="midi-combined-output"></div>
+    <div class="model-relay-loom">
+        <div class="midi-input"></div>
+        <div class="midi-output"></div>
     </div>
 
     <script type="text/javascript">
-        var duet = flock.midi.interchange.demos.duet(".duet-harness");
+        var loom = flock.midi.interchange.demos.modelRelay(".model-relay-loom");
     </script>
 </body>
 </html>

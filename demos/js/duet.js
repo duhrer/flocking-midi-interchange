@@ -1,10 +1,10 @@
 /* globals fluid, flock */
 (function (fluid, flock) {
     "use strict";
-    fluid.registerNamespace("flock.midi.interchange.duet");
+    fluid.registerNamespace("flock.midi.interchange.demos.duet");
 
     // Inverse transform and send the note to our partner as visual feedback.
-    flock.midi.interchange.duet.sendPartnerUiNote = function (noteMessage, partnerRouter, outputComponent) {
+    flock.midi.interchange.demos.duet.sendPartnerUiNote = function (noteMessage, partnerRouter, outputComponent) {
         var outputConnection = fluid.get(outputComponent, "connection");
         var rules = fluid.get(partnerRouter, ["options", "rules", "note"]);
         if (outputConnection && rules) {
@@ -18,14 +18,14 @@
     // model listener.
 
     // Keep track of how many times each note is currently being held.
-    flock.midi.interchange.duet.updateModel = function (duetHarness, message) {
+    flock.midi.interchange.demos.duet.updateModel = function (duetHarness, message) {
         var increment = message.type === "noteOn" ? 1 : -1;
         var noteHeldCount = duetHarness.model.notes[message.note] + increment;
         duetHarness.applier.change(["notes", message.note], noteHeldCount);
     };
 
     // Play any notes that are held twice, stop, any that aren't.
-    flock.midi.interchange.duet.sendToCombinedOutput = function (duetHarness, combinedOutput, updatePath, updateValue) {
+    flock.midi.interchange.demos.duet.sendToCombinedOutput = function (duetHarness, combinedOutput, updatePath, updateValue) {
         var outputConnection = fluid.get(combinedOutput, "connection");
 
         if (outputConnection) {
@@ -40,7 +40,7 @@
         }
     };
 
-    fluid.defaults("flock.midi.interchange.duet", {
+    fluid.defaults("flock.midi.interchange.demos.duet", {
         gradeNames: ["fluid.viewComponent"],
         selectors: {
             leftInput:      ".midi-left-input",
@@ -75,12 +75,12 @@
                     },
                     listeners: {
                         "onTransformedMessage.sendMessage": {
-                            funcName: "flock.midi.interchange.duet.sendPartnerUiNote",
+                            funcName: "flock.midi.interchange.demos.duet.sendPartnerUiNote",
                             args: ["{arguments}.0", "{rightRouter}", "{rightOutput}"] // noteMessage, partnerRouter, outputComponent
                         },
                         // Add/remove notes to combined model
                         "onTransformedMessage.updateModel": {
-                            funcName: "flock.midi.interchange.duet.updateModel",
+                            funcName: "flock.midi.interchange.demos.duet.updateModel",
                             args: ["{duet}", "{arguments}.0"] // duetHarness, noteMessage
                         }
                     }
@@ -111,12 +111,12 @@
                     },
                     listeners: {
                         "onTransformedMessage.sendMessage": {
-                            funcName: "flock.midi.interchange.duet.sendPartnerUiNote",
+                            funcName: "flock.midi.interchange.demos.duet.sendPartnerUiNote",
                             args: ["{arguments}.0", "{leftRouter}", "{leftOutput}"] // noteMessage, partnerRouter, outputComponent
                         },
                         // Add/remove notes to combined model
                         "onTransformedMessage.updateModel": {
-                            funcName: "flock.midi.interchange.duet.updateModel",
+                            funcName: "flock.midi.interchange.demos.duet.updateModel",
                             args: ["{duet}", "{arguments}.0"] // duetHarness, noteMessage
                         }
                     }
@@ -140,7 +140,7 @@
         modelListeners: {
             "notes.*": {
                 excludeSource: "init",
-                funcName: "flock.midi.interchange.duet.sendToCombinedOutput",
+                funcName: "flock.midi.interchange.demos.duet.sendToCombinedOutput",
                 args: ["{duet}", "{combinedOutput}", "{change}.path", "{change}.value"] // duetHarness, combinedOutput, updatePath, updateValue
             }
         }

@@ -2,18 +2,22 @@
     "name": "flocking-midi-interchange",
     "version": "1.0.0",
     "description": "A library to assist in writing declarative \"MIDI interchanges\", like arpeggiators, transposers, and even UI generators.",
-    "main": "index.html",
+    "main": "index.js",
     "scripts": {
+        "postinstall": "node src/js/generate-namespaced-svg-js-files.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Tony Atkins <duhrer@gmail.com>",
     "license": "BSD-3-Clause",
     "dependencies": {
         "flocking": "2.0.0-dev.20190101T211732Z.efbf6e2",
-        "flocking-midi-select-ng": "1.0.0-dev.20190103T183852Z.f9304f6"
+        "flocking-midi-select-ng": "1.0.0-dev.20190103T183852Z.f9304f6",
+        "infusion": "3.0.0-dev.20190212T124747Z.23b4bc89d",
+        "mkdirp": "0.5.1"
     },
     "devDependencies": {
+        "gpii-grunt-lint-all": "1.0.0-dev.20180629T081932Z.8a1f7fe",
         "grunt": "1.0.1",
-        "gpii-grunt-lint-all": "1.0.0-dev.20180629T081932Z.8a1f7fe"
+        "node-jqunit": "1.1.8"
     }
 }

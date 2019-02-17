@@ -14,27 +14,47 @@
     <script src="../node_modules/flocking-midi-select-ng/src/js/auto-midi-port-selector.js"></script>
     <script src="../node_modules/flocking-midi-select-ng/src/js/auto-midi-connector.js"></script>
 
-    <script src="../src/js/router.js"></script>
-    <script src="../src/js/tunings/launchpad-pro-to-common.js"></script>
+    <!-- TODO: Make it so we don't have to include the "base" ODA SVG data. -->
+    <script src="../dist/svg-oda.js"></script>
+    <script src="../dist/svg-launchpadPro.js"></script>
+    <script src="../src/js/uis/colours.js"></script>
+    <script src="../src/js/uis/oda.js"></script>
+    <script src="../src/js/uis/oda-loom.js"></script>
+    <script src="../src/js/uis/launchpad-pro-oda.js"></script>
+    <script src="../src/js/uis/launchpad-pro-oda-loom.js"></script>
+
+    <!-- TODO: Fix -->
+    <!--<script src="../src/js/router.js"></script>-->
+    <!--<script src="../src/js/tunings/launchpad-pro-to-common.js"></script>-->
 </head>
 <body>
-    <div class="router-harness">
-        <div class="midi-input"></div>
-        <div class="midi-output"></div>
+    <div style="width:100%" align="center">
+        <h1>Launchpad Pro Demo</h1>
+
+        <div class="oda-container"></div>
+
+        <div class="midi-input-container"></div>
+
+        <div class="midi-output-container"></div>
     </div>
 
     <script type="text/javascript">
-        var harness = flock.midi.interchange.transformingRouterHarness(".router-harness", {
-            components: {
-                router: {
-                    options: {
-                        rules: {
-                            note: flock.midi.interchange.tunings.launchpadPro.common
-                        }
-                    }
-                }
-            }
-        });
+        var loom = flock.midi.interchange.oda.launchpadPro.loom("body");
+    </script>
+
+    <!-- TODO:  Integrate previous work -->
+    <script type="text/javascript">
+        //var harness = flock.midi.interchange.transformingRouterHarness(".router-harness", {
+        //    components: {
+        //        router: {
+        //            options: {
+        //                rules: {
+        //                    note: flock.midi.interchange.tunings.launchpadPro.common
+        //                }
+        //            }
+        //        }
+        //    }
+        //});
     </script>
 </body>
 </html>

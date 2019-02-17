@@ -1,0 +1,12 @@
+h1 {
+    font-size: 100pt;
+    color: #ffffff99;
+}
+body {
+    background: black;
+    color: white;
+}
+.oda-container {
+    margin-top: 5em;
+    margin-bottom: 15em;
+}
