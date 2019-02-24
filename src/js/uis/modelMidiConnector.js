@@ -290,7 +290,7 @@
         invokers: {
             "modelChangeToMidiMessage": {
                 funcName: "flock.midi.interchange.connector.output.modelChangeToMidiMessage",
-                args:     ["{that}", "{arguments}.2", "{arguments}.0"] // value, oldValue, pathSegs, changeRequest, transaction
+                args:     ["{that}", "{arguments}.2", "{arguments}.0"] // `
             }
         },
         listeners: {

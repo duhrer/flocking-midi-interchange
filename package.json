@@ -11,7 +11,7 @@
     "license": "BSD-3-Clause",
     "dependencies": {
         "flocking": "2.0.0-dev.20190101T211732Z.efbf6e2",
-        "flocking-midi-select-ng": "1.0.0-dev.20190103T183852Z.f9304f6",
+        "flocking-midi-select-ng": "1.0.0-dev.20190219T121520Z.893914c",
         "infusion": "3.0.0-dev.20190212T124747Z.23b4bc89d",
         "mkdirp": "0.5.1"
     },

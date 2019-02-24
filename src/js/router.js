@@ -165,7 +165,6 @@
                 container: "{that}.dom.input",
                 options: {
                     portType: "input"
-
                 }
             },
             output: {

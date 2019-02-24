@@ -10,10 +10,6 @@
 
     fluid.registerNamespace("flock.midi.interchange.oda");
 
-    // TODO: Initial "paint" of UI.
-
-    // TODO: Generic routing of velocities to onscreen elements
-
     // Parse an ID like #device-note-001 and return an object with properties.
     flock.midi.interchange.oda.parseId = function (element) {
         var idString  = element.getAttribute("id");

@@ -60,8 +60,8 @@
                 type: "flock.auto.ui.midiConnector",
                 container: "{that}.dom.leftInput",
                 options: {
-                    portType: "input"
-
+                    portType: "input",
+                    preferredDevice: "Launchpad"
                 }
             },
             leftRouter: {
@@ -90,14 +90,16 @@
                 type: "flock.auto.ui.midiConnector",
                 container: "{that}.dom.leftOutput",
                 options: {
-                    portType: "output"
+                    portType: "output",
+                    preferredDevice: "Launchpad"
                 }
             },
             rightInput: {
                 type: "flock.auto.ui.midiConnector",
                 container: "{that}.dom.rightInput",
                 options: {
-                    portType: "input"
+                    portType: "input",
+                    preferredDevice: "Launchpad Pro Standalone Port"
                 }
             },
             rightRouter: {
@@ -126,7 +128,8 @@
                 type: "flock.auto.ui.midiConnector",
                 container: "{that}.dom.rightOutput",
                 options: {
-                    portType: "output"
+                    portType: "output",
+                    preferredDevice: "Launchpad Pro Standalone Port"
                 }
             },
             combinedOutput: {
