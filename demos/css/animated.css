@@ -1,0 +1,52 @@
+.upwardlyMobile {
+    animation-name: moveUp;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+}
+
+.downwardlyMobile {
+    animation-name: moveDown;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    top: 108px;
+}
+
+@keyframes moveUp {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(-800px);
+    }
+}
+
+@keyframes moveDown {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(800px);
+    }
+}
+
+
+.fading {
+    animation-name: fading;
+    animation-duration: 10s;
+}
+
+@keyframes fading {
+    from {
+        background-color: inherit
+    }
+    to {
+        background-color: black;
+    }
+}
+
+.oda-container {
+    width: 100%;
+    height: 16px;
+    position:absolute;
+    top: 100px;
+}
