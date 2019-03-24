@@ -58,8 +58,12 @@
     };
 
     flock.midi.interchange.oda.paintFromMessage = function (that, message) {
-        var paintPayload = fluid.model.transformWithRules(message, that.options.transforms[message.type]);
-        that.paintFromObject(paintPayload);
+        var transform = that.options.transforms[message.type];
+        // Ignore any kind of message we don't know how to handle.
+        if (transform) {
+            var paintPayload = fluid.model.transformWithRules(message, transform);
+            that.paintFromObject(paintPayload);
+        }
     };
 
     flock.midi.interchange.oda.paintFromObject = function (that, paintObject) {
@@ -73,6 +77,7 @@
         }
     };
 
+    // TODO: Make this reusable from a single common include.
     flock.midi.interchange.oda.zeroPadNumber = function (number) {
         return (number + 1000).toString().slice(1);
     };
