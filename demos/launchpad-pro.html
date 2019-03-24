@@ -25,10 +25,6 @@
     <script src="../src/js/tunings/launchpad-pro-to-guitar.js"></script>
     <script src="../src/js/uis/launchpad-pro-oda.js"></script>
     <script src="../src/js/uis/launchpad-pro-oda-loom.js"></script>
-
-    <!-- TODO: Fix -->
-    <!--<script src="../src/js/router.js"></script>-->
-    <!--<script src="../src/js/tunings/launchpad-pro-to-common.js"></script>-->
 </head>
 <body>
     <div style="width:100%" align="center">
@@ -36,30 +32,13 @@
 
         <div class="oda-container"></div>
 
-        <div class="device-input-container"></div>
-
-        <div class="device-output-container"></div>
-
-        <div class="midi-output-container"></div>
+        <div class="note-input"></div>
+        <div class="ui-output"></div>
+        <div class="note-output"></div>
     </div>
 
     <script type="text/javascript">
         var loom = flock.midi.interchange.oda.launchpadPro.loom("body");
-    </script>
-
-    <!-- TODO:  Integrate previous work -->
-    <script type="text/javascript">
-        //var harness = flock.midi.interchange.transformingRouterHarness(".router-harness", {
-        //    components: {
-        //        router: {
-        //            options: {
-        //                rules: {
-        //                    note: flock.midi.interchange.tunings.launchpadPro.common
-        //                }
-        //            }
-        //        }
-        //    }
-        //});
     </script>
 </body>
 </html>

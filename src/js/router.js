@@ -135,9 +135,20 @@
     fluid.defaults("flock.midi.interchange.transformingRouterHarness", {
         gradeNames: ["fluid.viewComponent"],
         selectors: {
-            input:  ".midi-input",
-            output: ".midi-output"
+            noteInput:  ".note-input",
+            noteOutput: ".note-output"
         },
+        sysex: true,
+        distributeOptions: [
+            {
+                source: "{that}.options.sysex",
+                target: "{that flock.auto.midi.system}.options.sysex"
+            },
+            {
+                source: "{that}.options.sysex",
+                target: "{that flock.midi.connection}.options.sysex"
+            }
+        ],
         components: {
             enviro: {
                 type: "flock.enviro"
@@ -146,31 +157,33 @@
                 type: "flock.midi.interchange.transformingRouter",
                 options: {
                     events: {
-                        note: "{input}.events.note",
-                        control: "{input}.events.control",
-                        program: "{input}.events.program",
-                        aftertouch: "{input}.events.aftertouch",
-                        pitchbend: "{input}.events.pitchbend"
+                        note:       "{noteInput}.events.note",
+                        control:    "{noteInput}.events.control",
+                        program:    "{noteInput}.events.program",
+                        aftertouch: "{noteInput}.events.aftertouch",
+                        pitchbend:  "{noteInput}.events.pitchbend"
                     },
                     listeners: {
                         "onTransformedMessage.sendMessage": {
                             funcName: "flock.midi.interchange.transformingRouterHarness.sendTransformedMessage",
-                            args: ["{output}", "{arguments}.0"] // outputComponent, transformedMessage
+                            args:     ["{noteOutput}", "{arguments}.0"] // outputComponent, transformedMessage
                         }
                     }
                 }
             },
-            input: {
+            noteInput: {
                 type: "flock.auto.ui.midiConnector",
-                container: "{that}.dom.input",
+                container: "{that}.dom.noteInput",
                 options: {
+                    preferredDevice: "{transformingRouterHarness}.options.preferredInputDevice",
                     portType: "input"
                 }
             },
-            output: {
+            noteOutput: {
                 type: "flock.auto.ui.midiConnector",
-                container: "{that}.dom.output",
+                container: "{that}.dom.noteOutput",
                 options: {
+                    preferredDevice: "{transformingRouterHarness}.options.preferredOutputDevice",
                     portType: "output"
                 }
             }

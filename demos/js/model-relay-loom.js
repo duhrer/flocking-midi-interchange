@@ -6,22 +6,22 @@
             channels: {}
         },
         selectors: {
-            input: ".midi-input",
-            output: ".midi-output"
+            noteInput:  ".note-input",
+            noteOutput: ".note-output"
         },
         components: {
-            input: {
+            noteInput: {
                 type: "flock.midi.interchange.connector.input",
-                container: "{modelRelay}.dom.input",
+                container: "{modelRelay}.dom.noteInput",
                 options: {
                     model: {
                         channels: "{modelRelay}.model.channels"
                     }
                 }
             },
-            output: {
+            noteOutput: {
                 type: "flock.midi.interchange.connector.output",
-                container: "{modelRelay}.dom.output",
+                container: "{modelRelay}.dom.noteOutput",
                 options: {
                     model: {
                         channels: "{modelRelay}.model.channels"
