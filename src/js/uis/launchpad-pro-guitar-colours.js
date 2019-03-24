@@ -2,6 +2,15 @@
     "use strict";
     fluid.registerNamespace("flock.midi.interchange.oda.launchpadPro.uis");
     flock.midi.interchange.oda.launchpadPro.uis.guitarColours = [
+        // Boilerplate sysex to set mode and layout, see:
+        // https://customer.novationmusic.com/sites/customer/files/novation/downloads/10598/launchpad-pro-programmers-reference-guide_0.pdf
+        // All sysex messages for the launchpad pro have the same header (framing byte removed)
+        // 00h 20h 29h 02h 10h
+        // Select "standalone" mode.
+        { type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 33, 1] },
+        // Select "programmer" layout
+        { type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 44, 3]},
+
         // Low "E"
         { type: "control", channel: 0, number: 10, value:    5 },
         { type: "noteOn",  channel: 0, note:   11, velocity: 5 },
