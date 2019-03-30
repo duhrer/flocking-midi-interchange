@@ -40,6 +40,27 @@
         }
     };
 
+    flock.midi.interchange.demos.duet.paintLaunchPadPro = function (output) {
+        var connection = fluid.get(output, "connection");
+        if (connection) {
+            fluid.each(
+                // TODO: Figure out how to reuse this more cleanly.
+                // Boilerplate sysex to set mode and layout, see:
+                // https://customer.novationmusic.com/sites/customer/files/novation/downloads/10598/launchpad-pro-programmers-reference-guide_0.pdf
+                // All sysex messages for the launchpad pro have the same header (framing byte removed)
+                // 00h 20h 29h 02h 10h
+                [
+                    // Select "standalone" mode.
+                    { type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 33, 1] },
+                    // Select "programmer" layout
+                    { type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 44, 3]},
+
+                ],
+                connection.send
+            );
+        }
+    };
+
     fluid.defaults("flock.midi.interchange.demos.duet", {
         gradeNames: ["fluid.viewComponent"],
         selectors: {
@@ -52,6 +73,17 @@
         model: {
             notes: "@expand:fluid.generate(128,0)"
         },
+        sysex: true,
+        distributeOptions: [
+            {
+                source: "{that}.options.sysex",
+                target: "{that flock.auto.midi.system}.options.sysex"
+            },
+            {
+                source: "{that}.options.sysex",
+                target: "{that flock.midi.connection}.options.sysex"
+            }
+        ],
         components: {
             enviro: {
                 type: "flock.enviro"
@@ -129,7 +161,19 @@
                 container: "{that}.dom.rightOutput",
                 options: {
                     portType: "output",
-                    preferredDevice: "Launchpad Pro Standalone Port"
+                    preferredDevice: "Launchpad Pro Standalone Port",
+                    components: {
+                        connection: {
+                            options: {
+                                listeners: {
+                                    "onReady.paintLaunchPadPro": {
+                                        funcName: "flock.midi.interchange.demos.duet.paintLaunchPadPro",
+                                        args:     ["{rightOutput}"] // output
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             },
             combinedOutput: {
