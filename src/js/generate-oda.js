@@ -138,13 +138,13 @@ flock.midi.interchange.svgGen.singleRow.getXmlAsJson = function (that) {
 
     for (var a = 0; a < 125; a++) {
         var x = ((that.options.strokeWidth / 2) * (a + 1)) + (that.options.cellWidth * a) + (that.options.marginWidth * a);
-        var y = that.options.strokeWidth / 2;
+        var y = that.options.cellHeight / 2;
         var thisRect = {
             ry: "0",
             rx: "0",
             y: y,
             x: x ,
-            height: that.options.cellWidth,
+            height: that.options.cellHeight,
             width: that.options.cellWidth,
             class: "device-note",
             id: "device-note-" + flock.midi.interchange.svgGen.zeroPadNumber(a),
@@ -160,6 +160,7 @@ fluid.defaults("flock.midi.interchange.svgGen.singleRow", {
     gradeNames: ["flock.midi.interchange.svgGen"],
     outputPath: "%flocking-midi-interchange/dist/singleRow.svg",
     cellWidth:   8,
+    cellHeight:  8,
     strokeWidth: 0,
     marginWidth: 0,
     invokers: {
@@ -170,4 +171,11 @@ fluid.defaults("flock.midi.interchange.svgGen.singleRow", {
     }
 });
 
+// Row of 128 squares.
 flock.midi.interchange.svgGen.singleRow();
+
+// Second 1-pixel version
+flock.midi.interchange.svgGen.singleRow({
+    outputPath: "%flocking-midi-interchange/dist/singleRowPixelHigh.svg",
+    cellHeight:  1
+});

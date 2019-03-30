@@ -1,26 +1,18 @@
-.upwardlyMobile {
-    animation-name: moveUp;
-    animation-duration: 10s;
+.svg-container {
+    width: 100%;
+    height: 800px;
+    border: 1px red solid;
+    position:absolute;
+    top: 100px;
+}
+
+.moving {
+    animation: moving 10s forwards;
     animation-timing-function: linear;
+    top: 101px;
 }
 
-.downwardlyMobile {
-    animation-name: moveDown;
-    animation-duration: 10s;
-    animation-timing-function: linear;
-    top: 108px;
-}
-
-@keyframes moveUp {
-    from {
-        transform: translateY(0px);
-    }
-    to {
-        transform: translateY(-800px);
-    }
-}
-
-@keyframes moveDown {
+@keyframes moving {
     from {
         transform: translateY(0px);
     }
@@ -29,24 +21,17 @@
     }
 }
 
-
-.fading {
-    animation-name: fading;
-    animation-duration: 10s;
+.growing {
+    animation: growing 10s forwards;
+    animation-timing-function: linear;
 }
 
-@keyframes fading {
+@keyframes growing {
     from {
-        background-color: inherit
+        height: 1px;
     }
     to {
-        background-color: black;
+        height: 800px;
     }
 }
 
-.oda-container {
-    width: 100%;
-    height: 16px;
-    position:absolute;
-    top: 100px;
-}

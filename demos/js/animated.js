@@ -3,61 +3,97 @@
     "use strict";
 
     fluid.registerNamespace("flock.midi.interchange.demos.animated");
-    // TODO: Do this repeatedly using setInterval
 
-    flock.midi.interchange.demos.animated.startAnimation = function (that) {
-        that.interval = setInterval(that.clone, 100);
-    };
+    // Respond to each noteOn and:
+    //
+    //   1. Clone the associated pitch from the template.
+    //   2. Fill that with the colour associated with the pitch.
+    //   3. Add the "growing" class to the clone.
+    flock.midi.interchange.demos.animated.handleNoteOn = function (that, noteMessage) {
+        if (noteMessage.velocity === 0) {
+            flock.midi.interchange.demos.animated.handleNoteOff(that, noteMessage);
+        }
+        else {
+            var selector = "#device-note-" + flock.midi.interchange.oda.zeroPadNumber(noteMessage.note);
+            var elementToClone = $(that.container).find(selector);
+            if (elementToClone) {
+                var clonedNode = elementToClone.clone();
+                clonedNode.removeAttr("id");
+                var htmlColour = that.options.htmlColourByVelocity[noteMessage.velocity];
+                clonedNode.css("fill", htmlColour);
 
-    flock.midi.interchange.demos.animated.stopAnimation = function (that) {
-        if (that.interval) {
-            clearInterval(that.interval);
+                clonedNode.addClass(selector.substring(1));
+                clonedNode.addClass("growing");
+                elementToClone.before(clonedNode);
+            }
         }
     };
 
-    // TODO: Convert to using Bergson
-    flock.midi.interchange.demos.animated.clone = function (that) {
-        var odaNode = that.locate("originalOda");
-        var clonedNode = odaNode.clone();
-        // There can be only one.
-        clonedNode.removeAttr("id");
-        clonedNode.addClass("downwardlyMobile");
-        //clonedNode.addClass("fading"); // TODO: Fix
-        odaNode.before(clonedNode);
-        // "cull" older frames after 5s.
-        setTimeout(clonedNode.remove, 5000);
+    // Respond to each noteOff and:
+    //
+    //   1. Find the "growing" note for this pitch.
+    //   2. Remove the "growing" class.
+    //   3. Add the "moving" class.
+    //   4. Add an individual timeout to cull the note once it's moved far enough.
+    flock.midi.interchange.demos.animated.handleNoteOff = function (that, noteMessage) {
+        var selector = ".growing.device-note-" + flock.midi.interchange.oda.zeroPadNumber(noteMessage.note);
+        var cloneToChange = $(that.container).find(selector);
+        if (cloneToChange) {
+            // "pin" the height before stopping the "growing" animation.
+            var currentHeight = cloneToChange.height();
+            cloneToChange.css("height", currentHeight);
+            cloneToChange.removeClass("growing");
+            cloneToChange.addClass("moving");
+            setTimeout(cloneToChange.remove, 5000);
+        }
     };
 
-    fluid.defaults("flock.midi.interchange.demos.animated.oda", {
-        gradeNames: ["flock.midi.interchange.oda"],
-        svgData: flock.midi.interchange.svg.singleRow
-    });
+    flock.midi.interchange.demos.animated.renderSvg = function (that) {
+        var svgContainer = that.locate("svgContainer");
+        if (svgContainer) {
+            svgContainer.html(that.options.svgData);
+        }
+    };
 
     fluid.defaults("flock.midi.interchange.demos.animated.loom", {
-        gradeNames: ["flock.midi.interchange.oda.loom"],
-        members: {
-            interval: false
-        },
-        invokers: {
-            clone: {
-                funcName: "flock.midi.interchange.demos.animated.clone",
-                args:     ["{that}"]
-            },
-            startAnimation: {
-                funcName: "flock.midi.interchange.demos.animated.startAnimation",
-                args:     ["{that}"]
-            },
-            stopAnimation: {
-                funcName: "flock.midi.interchange.demos.animated.stopAnimation",
-                args:     ["{that}"]
-            }
+        gradeNames: ["fluid.viewComponent"],
+        svgData: flock.midi.interchange.svg.singleRowPixelHigh,
+        htmlColourByVelocity: flock.midi.interchange.colours.htmlColourByVelocity.redshift,
+        events: {
+            noteOn:  "{noteInput}.events.noteOn",
+            noteOff: "{noteInput}.events.noteOff"
         },
         selectors: {
-            originalOda: "#oda-prime"
+            noteInput:    ".note-input",
+            svgContainer: ".svg-container",
+            growing:      ".growing",
+            moving:       ".moving"
+        },
+        listeners: {
+            noteOn: {
+                funcName: "flock.midi.interchange.demos.animated.handleNoteOn",
+                args:     ["{that}", "{arguments}.0"] // noteMessage
+            },
+            noteOff: {
+                funcName: "flock.midi.interchange.demos.animated.handleNoteOff",
+                args:     ["{that}", "{arguments}.0"] // noteMessage
+            },
+            "onCreate.renderSvg": {
+                funcName: "flock.midi.interchange.demos.animated.renderSvg",
+                args: ["{that}"]
+            }
         },
         components: {
-            oda: {
-                type: "flock.midi.interchange.demos.animated.oda"
+            enviro: {
+                type: "flock.enviro"
+            },
+            noteInput: {
+                type: "flock.auto.ui.midiConnector",
+                container: "{that}.dom.noteInput",
+                options: {
+                    preferredDevice: "{loom}.options.preferredInputDevice",
+                    portType: "input"
+                }
             }
         }
     });
