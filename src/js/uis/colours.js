@@ -1,4 +1,5 @@
 (function (flock, fluid) {
+    // TODO: Transition all traditional "map" approaches to use transforms instead.
     "use strict";
 
     fluid.registerNamespace("flock.midi.interchange.colours.htmlColourByVelocity");

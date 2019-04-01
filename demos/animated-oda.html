@@ -17,16 +17,21 @@
     <script src="../dist/svg-singleRowPixelHigh.js"></script>
     <script src="../src/js/uis/colours.js"></script>
     <script src="../src/js/uis/oda.js"></script>
+    <script src="../src/js/uis/colour-transforms.js"></script>
 
     <script src="./js/animated.js"></script>
 
     <link rel="stylesheet" href="./css/animated.css">
 </head>
 <body>
+    <div style="width:100%" class="note-input" align="right"></div>
+
     <div style="width:100%" align="center">
-        <div class="note-input"></div>
         <div class="svg-container"></div>
+        <div class="gradient-overlay"></div>
     </div>
+
+
 
     <script type="text/javascript">
         var loom = flock.midi.interchange.demos.animated.loom("body");

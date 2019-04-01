@@ -1,6 +1,7 @@
 (function (fluid, flock) {
     "use strict";
     fluid.registerNamespace("flock.midi.interchange.oda.launchpadPro.uis");
+    // TODO: Transition all traditional "map" approaches to use transforms instead.
     flock.midi.interchange.oda.launchpadPro.uis.highColours = [
         // TODO: Figure out how to reuse this more cleanly.
         // Boilerplate sysex to set mode and layout, see:

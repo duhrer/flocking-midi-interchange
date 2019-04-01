@@ -19,7 +19,7 @@
             if (elementToClone) {
                 var clonedNode = elementToClone.clone();
                 clonedNode.removeAttr("id");
-                var htmlColour = that.options.htmlColourByVelocity[noteMessage.velocity];
+                var htmlColour = fluid.model.transformWithRules(noteMessage.velocity, that.options.rules.colourByVelocity);
                 clonedNode.css("fill", htmlColour);
 
                 clonedNode.addClass(selector.substring(1));
@@ -44,7 +44,9 @@
             cloneToChange.css("height", currentHeight);
             cloneToChange.removeClass("growing");
             cloneToChange.addClass("moving");
-            setTimeout(cloneToChange.remove, 5000);
+            setTimeout(function () {
+                cloneToChange.remove();
+            }, that.options.removeTimeout);
         }
     };
 
@@ -58,7 +60,10 @@
     fluid.defaults("flock.midi.interchange.demos.animated.loom", {
         gradeNames: ["fluid.viewComponent"],
         svgData: flock.midi.interchange.svg.singleRowPixelHigh,
-        htmlColourByVelocity: flock.midi.interchange.colours.htmlColourByVelocity.redshift,
+        rules: {
+            colourByVelocity: flock.midi.interchange.colourTransforms.sixteenBlues
+        },
+        removeTimeout: 5000,
         events: {
             noteOn:  "{noteInput}.events.noteOn",
             noteOff: "{noteInput}.events.noteOff"

@@ -90,7 +90,9 @@
             onSvgRendered: null,
             outputMessage: null
         },
+        // TODO: Transition all traditional "map" approaches to use transforms instead.
         htmlColourByVelocity: flock.midi.interchange.colours.htmlColourByVelocity.redshift,
+        // TODO: Update the code that relies on this to use an inverse transform.
         velocityByHtmlColour: "@expand:flock.midi.interchange.colours.invertMap({that}.options.htmlColourByVelocity)",
         transforms: {
             noteOn: {
