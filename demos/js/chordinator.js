@@ -12,7 +12,7 @@
 
     Note that because of "deoctavising", you are always allowed to play any "held" note in another octave.
 
-    Each chord can be shifted up to 4 places higher, and notes "wrap" between octaves.  As an example, here are the
+    Each chord can be shifted up to 11 places higher, and notes "wrap" between octaves.  As an example, here are the
     twelve variations on a major chord (in this diagram the first note is always the root):
 
     1.  0,  4,  7
