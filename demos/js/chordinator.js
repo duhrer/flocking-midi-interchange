@@ -167,7 +167,6 @@
         }
     };
 
-    // TODO: Note positions always appear to be the same, and are always wrong.
     flock.midi.interchange.demos.chordinator.paintAllowedNotes = function (that, allowedOffsets) {
         that.sendToUi(that.options.uiPaintMessages.allBlack);
 
@@ -187,8 +186,6 @@
 
             // TODO: break this behaviour down further and perhaps improve the offset->note generation.
             if (invertedMessage.note > 0 && invertedMessage.note < 128) {
-                // TODO: remove
-                console.log(JSON.stringify(invertedMessage));
                 that.sendToUi(invertedMessage);
             }
         });
