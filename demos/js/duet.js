@@ -19,7 +19,7 @@
 
     // Keep track of how many times each note is currently being held.
     flock.midi.interchange.demos.duet.updateModel = function (duetHarness, message) {
-        var increment = message.type === "noteOn" ? 1 : -1;
+        var increment = (message.type === "noteOn" && message.velocity) ? 1 : -1;
         var noteHeldCount = duetHarness.model.notes[message.note] + increment;
         duetHarness.applier.change(["notes", message.note], noteHeldCount);
     };
@@ -29,14 +29,18 @@
         var outputConnection = fluid.get(combinedOutput, "connection");
 
         if (outputConnection) {
-            var message = {
-                channel: 0,
-                type: updateValue === 2 ? "noteOn" : "noteOff",
-                note: parseInt(updatePath[updatePath.length - 1], 10),
-                // TODO: smoother handling of velocity.
-                velocity: 127
-            };
-            outputConnection.send(message);
+            // Both pads have to hold a note to hit it (2) and release the note to stop it (0).
+            if (updateValue !== 1) {
+
+                var message = {
+                    channel: 0,
+                    type: updateValue === 2 ? "noteOn" : "noteOff",
+                    note: parseInt(updatePath[updatePath.length - 1], 10),
+                    // TODO: smoother handling of velocity.
+                    velocity: updateValue === 2 ? 127 : 0
+                };
+                outputConnection.send(message);
+            }
         }
     };
 
@@ -92,16 +96,12 @@
                 type: "flock.auto.ui.midiConnector",
                 container: "{that}.dom.leftInput",
                 options: {
-                    portType: "input",
-                    preferredDevice: "Launchpad"
+                    portType: "input"
                 }
             },
             leftRouter: {
                 type: "flock.midi.interchange.transformingRouter",
                 options: {
-                    rules: {
-                        note: flock.midi.interchange.tunings.launchpad.common
-                    },
                     events: {
                         note: "{leftInput}.events.note"
                     },
@@ -122,24 +122,19 @@
                 type: "flock.auto.ui.midiConnector",
                 container: "{that}.dom.leftOutput",
                 options: {
-                    portType: "output",
-                    preferredDevice: "Launchpad"
+                    portType: "output"
                 }
             },
             rightInput: {
                 type: "flock.auto.ui.midiConnector",
                 container: "{that}.dom.rightInput",
                 options: {
-                    portType: "input",
-                    preferredDevice: "Launchpad Pro Standalone Port"
+                    portType: "input"
                 }
             },
             rightRouter: {
                 type: "flock.midi.interchange.transformingRouter",
                 options: {
-                    rules: {
-                        note: flock.midi.interchange.tunings.launchpadPro.common
-                    },
                     events: {
                         note: "{rightInput}.events.note"
                     },
@@ -160,20 +155,7 @@
                 type: "flock.auto.ui.midiConnector",
                 container: "{that}.dom.rightOutput",
                 options: {
-                    portType: "output",
-                    preferredDevice: "Launchpad Pro Standalone Port",
-                    components: {
-                        connection: {
-                            options: {
-                                listeners: {
-                                    "onReady.paintLaunchPadPro": {
-                                        funcName: "flock.midi.interchange.demos.duet.paintLaunchPadPro",
-                                        args:     ["{rightOutput}"] // output
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    portType: "output"
                 }
             },
             combinedOutput: {
@@ -189,6 +171,91 @@
                 excludeSource: "init",
                 funcName: "flock.midi.interchange.demos.duet.sendToCombinedOutput",
                 args: ["{duet}", "{combinedOutput}", "{change}.path", "{change}.value"] // duetHarness, combinedOutput, updatePath, updateValue
+            }
+        }
+    });
+
+    fluid.defaults("flock.midi.interchange.demos.duet.launchpad", {
+        gradeNames: ["flock.midi.interchange.demos.duet"],
+        components: {
+            leftInput: {
+                options: {
+                    preferredDevice: "Launchpad"
+                }
+            },
+            leftRouter: {
+                options: {
+                    rules: {
+                        note: flock.midi.interchange.tunings.launchpad.common
+                    }
+                }
+            },
+            leftOutput: {
+                options: {
+                    preferredDevice: "Launchpad"
+                }
+            },
+            rightInput: {
+                options: {
+                    preferredDevice: "Launchpad Pro Standalone Port"
+                }
+            },
+            rightRouter: {
+                options: {
+                    rules: {
+                        note: flock.midi.interchange.tunings.launchpadPro.common
+                    }
+                }
+            },
+            rightOutput: {
+                options: {
+                    preferredDevice: "Launchpad Pro Standalone Port",
+                    components: {
+                        connection: {
+                            options: {
+                                listeners: {
+                                    "onReady.paintLaunchPadPro": {
+                                        funcName: "flock.midi.interchange.demos.duet.paintLaunchPadPro",
+                                        args:     ["{rightOutput}"] // output
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    fluid.defaults("flock.midi.interchange.demos.duet.oddCouple", {
+        gradeNames: ["flock.midi.interchange.demos.duet"],
+        components: {
+            leftInput: {
+                options: {
+                    preferredDevice: "Launchpad"
+                }
+            },
+            leftRouter: {
+                options: {
+                    rules: {
+                        note: flock.midi.interchange.tunings.launchpad.common
+                    }
+                }
+            },
+            leftOutput: {
+                options: {
+                    preferredDevice: "Launchpad"
+                }
+            },
+            rightInput: {
+                options: {
+                    preferredDevice: "EIE"
+                }
+            },
+            combinedOutput: {
+                options: {
+                    preferredDevice: "MIDI Patchbay Input"
+                }
             }
         }
     });

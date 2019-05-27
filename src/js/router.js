@@ -10,7 +10,9 @@
         }
 
         var transformedMessage = rules ? fluid.model.transformWithRules(message, rules) : message;
-        that.events.onTransformedMessage.fire(transformedMessage);
+        if (transformedMessage) {
+            that.events.onTransformedMessage.fire(transformedMessage);
+        }
     };
 
     fluid.defaults("flock.midi.interchange.transformingRouter", {
@@ -19,8 +21,13 @@
             onTransformedMessage: null
         },
         rules: {
+            // rule to "mute" a type of notes
+            mute: {"": false },
+            // rule to "pass through" a type of notes unaltered.
             passthrough: { "": "" },
-            note: "{that}.options.rules.passthrough",
+            note: { "": "" },
+            // TODO: Figure out why these aren't visible from the base grade downstream.
+            //note: "{transformingRouter}.options.rules.passthrough",
             control: "{that}.options.rules.passthrough",
             program: "{that}.options.rules.passthrough",
             aftertouch: "{that}.options.rules.passthrough",
