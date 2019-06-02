@@ -43,7 +43,7 @@
     fluid.defaults("flock.midi.interchange.demos.chordinator.loom", {
         gradeNames: ["flock.midi.interchange.oda.launchpadPro.loom"],
         uiPaintMessages: {
-            allWhite: {
+            allNotesToDefault: {
                 type: "sysex", data: [
                     // common header
                     0, 0x20, 0x29, 0x02, 0x10,
@@ -81,7 +81,7 @@
                 // Paint the "side LED" (0x63) white
                 // F0h 00h 20h 29h 02h 10h 0Ah <LED> <Colour> F7h
                 { type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 0xA, 0x63, 1]},
-                "{that}.options.uiPaintMessages.allWhite"
+                "{that}.options.uiPaintMessages.allNotesToDefault"
             ]
         },
         invokers: {

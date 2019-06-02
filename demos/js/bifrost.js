@@ -46,7 +46,7 @@
     "use strict";
     var flock = fluid.registerNamespace("flock");
 
-    fluid.registerNamespace("flock.midi.interchange.demos.chordinator");
+    fluid.registerNamespace("flock.midi.interchange.demos.bifrost");
 
     /**
      *
@@ -57,7 +57,7 @@
      * @return {Boolean} - `true` if the chord has all the notes, `false` otherwise.
      *
      */
-    flock.midi.interchange.demos.chordinator.chordHasNotes = function (chord, notes) {
+    flock.midi.interchange.demos.bifrost.chordHasNotes = function (chord, notes) {
         if (notes.length) {
             var missingNote = fluid.find(notes, function (note) {
                 return (chord.indexOf(note % 12) === -1) || undefined;
@@ -78,10 +78,10 @@
      * @return {Array<Array<Number>>} - An array that contains all the chords that include the specified notes.
      *
      */
-    flock.midi.interchange.demos.chordinator.findChordsWithNotes = function (candidateChords, notes) {
+    flock.midi.interchange.demos.bifrost.findChordsWithNotes = function (candidateChords, notes) {
         var chordsWithNotes = [];
         fluid.each(candidateChords, function (candidateChord) {
-            if (flock.midi.interchange.demos.chordinator.chordHasNotes(candidateChord, notes)) {
+            if (flock.midi.interchange.demos.bifrost.chordHasNotes(candidateChord, notes)) {
                 chordsWithNotes.push(candidateChord);
             }
         });
@@ -95,7 +95,7 @@
      * @param {Array<Array<Number>>} chords - An array of chords, which are themselves arrays of notes.
      * @return {Array<Number>} - The distinct "offsets" (modulo 12).
      */
-    flock.midi.interchange.demos.chordinator.distinctOffsets = function (chords) {
+    flock.midi.interchange.demos.bifrost.distinctOffsets = function (chords) {
         var offsetMap = {};
         fluid.each(chords, function (chord) {
             fluid.each(chord, function (note) {
@@ -103,11 +103,11 @@
                 offsetMap[noteAsInt % 12] = true;
             });
         });
-        var distinctOffsets = flock.midi.interchange.demos.chordinator.mapToIntArray(offsetMap);
+        var distinctOffsets = flock.midi.interchange.demos.bifrost.mapToIntArray(offsetMap);
         return distinctOffsets;
     };
 
-    flock.midi.interchange.demos.chordinator.mapToIntArray = function (map) {
+    flock.midi.interchange.demos.bifrost.mapToIntArray = function (map) {
         var distinctIntMap = {};
         fluid.each(map, function (value, key) {
             if (value) {
@@ -119,24 +119,11 @@
         return keysAsInts;
     };
 
-    flock.midi.interchange.demos.chordinator.allNotesForOffsets = function (offsets) {
-        var allNotes = [];
-
-        fluid.each(offsets, function (offset) {
-            for (var a = 0; a < 11; a++) {
-                var octaveOffset = a * 12;
-                allNotes.push(offset + octaveOffset);
-            }
-        });
-
-        return allNotes;
-    };
-
-    flock.midi.interchange.demos.chordinator.handleNoteOn = function (that, originalMessage) {
+    flock.midi.interchange.demos.bifrost.handleNoteOn = function (that, originalMessage) {
         var transformedMessage = fluid.model.transformWithRules(originalMessage, flock.midi.interchange.tunings.launchpadPro.common);
 
         // When adding notes, we can filter what's currently possible down to just chords that include the new note.
-        var possibleChords = flock.midi.interchange.demos.chordinator.findChordsWithNotes(that.allowedChords, [transformedMessage.note]);
+        var possibleChords = flock.midi.interchange.demos.bifrost.findChordsWithNotes(that.allowedChords, [transformedMessage.note]);
 
         // There are chords possible with the added note, so play, display, et cetera.
         if (possibleChords.length) {
@@ -149,15 +136,8 @@
             // Filter the current list of possible chords to just the ones that include the new note.
             that.allowedChords = possibleChords;
 
-            var activeNotesAsArray = flock.midi.interchange.demos.chordinator.mapToIntArray(that.activeNotes);
-            // Everything is still possible until there are at least two held notes.
-            if (activeNotesAsArray.length > 1) {
-                var allowedOffsets = flock.midi.interchange.demos.chordinator.distinctOffsets(possibleChords);
-                flock.midi.interchange.demos.chordinator.paintDevice(that, allowedOffsets);
-            }
-            else {
-                that.sendToUi(that.options.uiPaintMessages.allNotesToDefault);
-            }
+            // Update the device UI.
+            flock.midi.interchange.demos.bifrost.paintDevice(that);
 
             // Pass the note along to the output device.
             // TODO: break this behaviour down further and perhaps improve the offset->note generation.
@@ -167,143 +147,180 @@
         }
     };
 
-    flock.midi.interchange.demos.chordinator.paintDevice = function (that, allowedOffsets) {
-        that.sendToUi(that.options.uiPaintMessages.allBlack);
+    // TODO: function to paint the bottom controls with their respective colours (same as velocity!)
 
-        // Update the UIs with the range of remaining allowed notes. that.sendToUi and that.oda.X
-        var allowedNotes = flock.midi.interchange.demos.chordinator.allNotesForOffsets(allowedOffsets);
-        fluid.each(allowedNotes, function (allowedNote) {
-            var originalMessage = {
-                channel: 0,
-                type: "noteOn",
-                note: allowedNote, // TODO: This screams out for a proper transform either in the input, the routing, or the output.
-                velocity: 3, // White.
-            };
-
-            // transform back to the UI tuning for the Launchpad Pro
-            var invertedTransform = fluid.model.transform.invertConfiguration(flock.midi.interchange.tunings.launchpadPro.common);
-            var invertedMessage= fluid.model.transformWithRules(originalMessage, invertedTransform);
-
-            // TODO: break this behaviour down further and perhaps improve the offset->note generation.
-            if (invertedMessage.note > 0 && invertedMessage.note < 128) {
-                that.sendToUi(invertedMessage);
+    flock.midi.interchange.demos.bifrost.paintDevice = function (that) {
+        var activeNotesAsArray = flock.midi.interchange.demos.bifrost.mapToIntArray(that.activeNotes);
+        if (activeNotesAsArray.length) {
+            var valueArray = [];
+            var allowedOffsets = flock.midi.interchange.demos.bifrost.distinctOffsets(that.allowedChords);
+            // We should only be trying to paint notes 20-83.
+            for (var a = 20; a < 84; a++ ) {
+                var offset = a % 12;
+                if (that.activeNotes[a]) {
+                    valueArray.push(1);
+                }
+                else if (that.activeOffsets[offset]) {
+                    valueArray.push(0.65);
+                }
+                else if (allowedOffsets.indexOf(offset) !== -1) {
+                    valueArray.push(0.15);
+                }
+                else {
+                    valueArray.push(0);
+                }
             }
-        });
+
+            flock.midi.interchange.demos.bifrost.sendValueArrayToDevice(that, valueArray);
+        }
+        else {
+            flock.midi.interchange.demos.bifrost.sendValueArrayToDevice(that, that.options.valueSchemes.allNotesToDefault)
+        }
     };
 
-    flock.midi.interchange.demos.chordinator.noteMapToOffsets = function (map) {
+    flock.midi.interchange.demos.bifrost.generateColourArray = function (that, valueArray) {
+        var colourArray = [];
+
+        fluid.each(valueArray, function (singleValue) {
+            colourArray.push(flock.midi.interchange.demos.bifrost.calculateSingleColor(that, "r", singleValue));
+            colourArray.push(flock.midi.interchange.demos.bifrost.calculateSingleColor(that, "g", singleValue));
+            colourArray.push(flock.midi.interchange.demos.bifrost.calculateSingleColor(that, "b", singleValue));
+        });
+
+        return colourArray;
+    };
+
+    // TODO: Puzzle out how we want to handle brightness and contrast.
+    flock.midi.interchange.demos.bifrost.calculateSingleColor = function (that, channel, value) {
+        var colourLevel = fluid.get(that.model.colourLevels, channel);
+        var calculatedColourLevel = Math.round(that.model.brightness * colourLevel * value);
+        return calculatedColourLevel;
+    };
+
+
+    flock.midi.interchange.demos.bifrost.sendValueArrayToDevice = function (that, valueArray) {
+        var header = [
+            // common header
+            0, 0x20, 0x29, 0x02, 0x10,
+            // "RGB Grid Sysex" command
+            0xF,
+            // 0: all pads, 1: square drum pads only.
+            1
+        ];
+        var colourArray = flock.midi.interchange.demos.bifrost.generateColourArray(that, valueArray);
+        var data = header.concat(colourArray);
+        that.sendToUi({
+            type: "sysex",
+            data: data
+        });
+
+        // Paint the "side velocity" (0x63) a colour that matches the colour scheme.
+        // F0h 00h 20h 29h 02h 10h 0Ah <velocity> <Colour> F7h
+        that.sendToUi({ type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 0xA, 0x63, that.model.colourLevels.velocity]});
+
+        fluid.each(that.options.colourSchemes, function (colourScheme) {
+            if (colourScheme.control) {
+                that.sendToUi({ type: "control", channel: 0, number: colourScheme.control, value: colourScheme.velocity});
+            }
+        })
+    };
+
+    flock.midi.interchange.demos.bifrost.noteMapToOffsets = function (map) {
         var offsetMap = {};
         fluid.each(map, function (value, key) {
             if (value) {
                 offsetMap[key % 12] = true;
             }
         });
-        return flock.midi.interchange.demos.chordinator.mapToIntArray(offsetMap);
+        return flock.midi.interchange.demos.bifrost.mapToIntArray(offsetMap);
     };
 
-
-    flock.midi.interchange.demos.chordinator.handleNoteOff = function (that, originalMessage) {
+    flock.midi.interchange.demos.bifrost.handleNoteOff = function (that, originalMessage) {
         var transformedMessage = fluid.model.transformWithRules(originalMessage, flock.midi.interchange.tunings.launchpadPro.common);
 
         // Remove the note from the list of "held" notes (actual MIDI input value) if it's there.
         that.activeNotes[transformedMessage.note] = false;
 
         // Update the list of distinct relative notes (%12 values) based on the held notes.
-        var offsetsAsArray = flock.midi.interchange.demos.chordinator.noteMapToOffsets(that.activeNotes);
+        var offsetsAsArray = flock.midi.interchange.demos.bifrost.noteMapToOffsets(that.activeNotes);
         that.activeOffsets = fluid.arrayToHash(offsetsAsArray);
 
         // Generate an updated list of allowed chords.  For now, seems like we have to do a full pass to bring material back.
-        var allowedChords = flock.midi.interchange.demos.chordinator.findChordsWithNotes(flock.midi.interchange.demos.chordinator.allChords, offsetsAsArray);
+        var allowedChords = flock.midi.interchange.demos.bifrost.findChordsWithNotes(flock.midi.interchange.demos.chordinator.allChords, offsetsAsArray);
         that.allowedChords = allowedChords;
 
-        var activeNotesAsArray = flock.midi.interchange.demos.chordinator.mapToIntArray(that.activeNotes);
-        // Everything is still possible until there are at least two held notes.
-        if (activeNotesAsArray.length > 1) {
-            // Update the UI with the range of remaining allowed notes.
-            var allowedOffsets = flock.midi.interchange.demos.chordinator.distinctOffsets(allowedChords);
-            flock.midi.interchange.demos.chordinator.paintDevice(that, allowedOffsets);
-        }
-        else {
-            that.sendToUi(that.options.uiPaintMessages.allNotesToDefault);
-        }
+        flock.midi.interchange.demos.bifrost.paintDevice(that);
 
         // Pass the note along to the output device (we could make this conditional, but it's harmless).
         that.sendToNoteOut(transformedMessage);
     };
 
+    flock.midi.interchange.demos.bifrost.handleControl = function (that, midiMessage) {
+        if (midiMessage.value) {
+            // CCs one through eight control the colour
+            var colourScheme = fluid.find(that.options.colourSchemes, function (candidateColourScheme) {
+                return candidateColourScheme.control === midiMessage.number ? candidateColourScheme : undefined;
+            });
+            if (colourScheme) {
+                that.applier.change("colourLevels", colourScheme);
+            }
+
+            // TODO: Add support for brightness, contrast.
+        }
+    };
+
     // TODO: Make a generalised pattern for this, we use it so so often.
-    flock.midi.interchange.demos.chordinator.sendToOutput = function (outputComponent, message) {
+    flock.midi.interchange.demos.bifrost.sendToOutput = function (outputComponent, message) {
         var outputConnection = fluid.get(outputComponent, "connection");
         if (outputConnection) {
             outputConnection.send(message);
         }
     };
 
-    //flock.midi.interchange.demos.chordinator.handleOdaMessage = function (that, midiMessage) {
-    //    if (midiMessage.type === "noteOn") {
-    //        flock.midi.interchange.demos.chordinator.handleNoteOn(that, midiMessage);
-    //    }
-    //    else if (midiMessage.type === "noteOff") {
-    //        flock.midi.interchange.demos.chordinator.handleNoteOff(that, midiMessage);
-    //    }
-    //};
-
     // Although this grade has a lot in common with the ODA loom and transforming router, it is currently separate
     // because many of its checks prevent messages from being transported.  Need to come up with a pattern for this,
     // perhaps updating the transforming router grade to filter notes that transform to `false`, and also a means of
     // handling "asymmetric" UI and note outputs that need different transforms.
-    fluid.defaults("flock.midi.interchange.demos.chordinator", {
+    fluid.defaults("flock.midi.interchange.demos.bifrost", {
         gradeNames: ["fluid.viewComponent"],
         preferredInputDevice:    "Launchpad Pro Standalone Port",
         preferredUIOutputDevice: "Launchpad Pro Standalone Port",
-        uiPaintMessages: {
-            allNotesToDefault: {
-                type: "sysex", data: [
-                    // common header
-                    0, 0x20, 0x29, 0x02, 0x10,
-                    // "RGB Grid Sysex" command
-                    0xF,
-                    // 0: all pads, 1: square drum pads only.
-                    1,
-                    // each row represents a single row of colour data as 8 sets of r, g, b values.
-                    0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F,
-                    0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F,
-                    0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F,
-                    0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F,
-                    0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F,
-                    0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F,
-                    0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F,
-                    0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F, 0x3F
-                ]
-            },
-            // We don't particularly care if we clobber the control keys with black, so we don't need the full grid here.
-            allBlack: {
-                // All notes to a single colour
-                // F0h 00h 20h 29h 02h 10h 0Eh <Colour> F7h
-                type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 0xE, 0]
-            },
-            startup: [
-                // TODO: Figure out how to reuse this more cleanly.
-                // Boilerplate sysex to set mode and layout, see:
-                // https://customer.novationmusic.com/sites/customer/files/novation/downloads/10598/launchpad-pro-programmers-reference-guide_0.pdf
-                // All sysex messages for the launchpad pro have the same header (framing byte removed)
-                // 00h 20h 29h 02h 10h
-                // Select "standalone" mode.
-                { type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 33, 1] },
-                // Select "programmer" layout
-                { type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 44, 3]},
-                // Paint the "side LED" (0x63) white
-                // F0h 00h 20h 29h 02h 10h 0Ah <LED> <Colour> F7h
-                { type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 0xA, 0x63, 1]},
-                "{that}.options.uiPaintMessages.allNotesToDefault"
-            ]
+        model: {
+            brightness: 63,
+            contrast:   1,
+            colourLevels: "{that}.options.colourSchemes.white"
         },
+        valueSchemes: {
+            allNotesToDefault: "@expand:fluid.generate(64, 0.125)" // 0.125, note awaiting selection
+        },
+        colourSchemes: {
+            white:  { r: 1, g: 1,    b: 1, control: 1, velocity: 1  },
+            red:    { r: 1, g: 0,    b: 0, control: 2, velocity: 60 },
+            orange: { r: 1, g: 0.25, b: 0, control: 3, velocity: 9  }, // In HTML the RGB values for orange would be way off, but for the Launchpad Pro it works.
+            yellow: { r: 1, g: 1,    b: 0, control: 4, velocity: 13 },
+            green:  { r: 0, g: 1,    b: 0, control: 5, velocity: 17 },
+            blue:   { r: 0, g: 1,    b: 1, control: 6, velocity: 90 },
+            indigo: { r: 0, g: 0,    b: 1, control: 7, velocity: 79 },
+            violet: { r: 1, g: 0,    b: 1, control: 8, velocity: 53 }
+        },
+        setupMessages: [
+            // TODO: Figure out how to reuse this more cleanly.
+            // Boilerplate sysex to set mode and layout, see:
+            // https://customer.novationmusic.com/sites/customer/files/novation/downloads/10598/launchpad-pro-programmers-reference-guide_0.pdf
+            // All sysex messages for the launchpad pro have the same header (framing byte removed)
+            // 00h 20h 29h 02h 10h
+            // Select "standalone" mode.
+            { type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 33, 1] },
+            // Select "programmer" layout
+            { type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 44, 3]}
+        ],
         members: {
             activeOffsets: {},
             activeNotes:   {},
             allowedChords: flock.midi.interchange.demos.chordinator.allChords,
         },
         events: {
+            control: "{noteInput}.events.control",
             noteOn:  "{noteInput}.events.noteOn",
             noteOff: "{noteInput}.events.noteOff"
         },
@@ -320,7 +337,7 @@
                 type: "flock.auto.ui.midiConnector",
                 container: "{that}.dom.noteInput",
                 options: {
-                    preferredDevice: "{chordinator}.options.preferredInputDevice",
+                    preferredDevice: "{bifrost}.options.preferredInputDevice",
                     portType: "input",
                     components: {
                         midiPortSelector: {
@@ -337,7 +354,7 @@
                 type: "flock.auto.ui.midiConnector",
                 container: "{that}.dom.noteOutput",
                 options: {
-                    preferredDevice: "{chordinator}.options.preferredOutputDevice",
+                    preferredDevice: "{bifrost}.options.preferredOutputDevice",
                     portType: "output",
                     components: {
                         midiPortSelector: {
@@ -355,15 +372,19 @@
                 container: "{that}.dom.uiOutput",
                 options: {
                     portType: "output",
-                    preferredDevice: "{chordinator}.options.preferredUIOutputDevice",
+                    preferredDevice: "{bifrost}.options.preferredUIOutputDevice",
                     components: {
                         connection: {
                             options: {
                                 sysex: true, // Required to configure the Launchpad Pro.
                                 listeners: {
-                                    "onReady.paintUiOutput": {
+                                    "onReady.setupDevice": {
                                         funcName: "fluid.each",
-                                        args:     ["{chordinator}.options.uiPaintMessages.startup", "{chordinator}.sendToUi"]
+                                        args:     ["{bifrost}.options.setupMessages", "{bifrost}.sendToUi"]
+                                    },
+                                    "onReady.paintKeys": {
+                                        funcName: "flock.midi.interchange.demos.bifrost.sendValueArrayToDevice",
+                                        args: ["{bifrost}", "{bifrost}.options.valueSchemes.allNotesToDefault"]
                                     }
                                 }
                             }
@@ -381,22 +402,43 @@
         },
         invokers: {
             sendToNoteOut: {
-                funcName: "flock.midi.interchange.demos.chordinator.sendToOutput",
+                funcName: "flock.midi.interchange.demos.bifrost.sendToOutput",
                 args: ["{noteOutput}", "{arguments}.0"] // outputComponent, message
             },
             sendToUi: {
-                funcName: "flock.midi.interchange.demos.chordinator.sendToOutput",
+                funcName: "flock.midi.interchange.demos.bifrost.sendToOutput",
                 args: ["{uiOutput}", "{arguments}.0"] // outputComponent, message
             }
         },
         listeners: {
             "noteOn.handle": {
-                funcName: "flock.midi.interchange.demos.chordinator.handleNoteOn",
+                funcName: "flock.midi.interchange.demos.bifrost.handleNoteOn",
                 args: ["{that}", "{arguments}.0"] // midiMessage
             },
             "noteOff.handle": {
-                funcName: "flock.midi.interchange.demos.chordinator.handleNoteOff",
+                funcName: "flock.midi.interchange.demos.bifrost.handleNoteOff",
                 args: ["{that}", "{arguments}.0"] // midiMessage
+            },
+            "control.handle": {
+                funcName: "flock.midi.interchange.demos.bifrost.handleControl",
+                args: ["{that}", "{arguments}.0"] // midiMessage
+            }
+        },
+        modelListeners: {
+            "brightness": {
+                excludeSource: "init",
+                funcName: "flock.midi.interchange.demos.bifrost.paintDevice",
+                args: ["{that}"]
+            },
+            "contrast": {
+                excludeSource: "init",
+                funcName: "flock.midi.interchange.demos.bifrost.paintDevice",
+                args: ["{that}"]
+            },
+            "colourLevels": {
+                excludeSource: "init",
+                funcName: "flock.midi.interchange.demos.bifrost.paintDevice",
+                args: ["{that}"]
             }
         }
     });
