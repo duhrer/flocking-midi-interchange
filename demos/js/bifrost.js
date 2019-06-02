@@ -295,7 +295,7 @@
         },
         colourSchemes: {
             white:  { r: 1, g: 1,    b: 1, control: 1, velocity: 1  },
-            red:    { r: 1, g: 0,    b: 0, control: 2, velocity: 60 },
+            red:    { r: 1, g: 0,    b: 0, control: 2, velocity: 5 },
             orange: { r: 1, g: 0.25, b: 0, control: 3, velocity: 9  }, // In HTML the RGB values for orange would be way off, but for the Launchpad Pro it works.
             yellow: { r: 1, g: 1,    b: 0, control: 4, velocity: 13 },
             green:  { r: 0, g: 1,    b: 0, control: 5, velocity: 17 },
