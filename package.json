@@ -10,6 +10,7 @@
     "author": "Tony Atkins <duhrer@gmail.com>",
     "license": "BSD-3-Clause",
     "dependencies": {
+        "bergson": "0.14.0",
         "flocking": "2.0.0-dev.20190101T211732Z.efbf6e2",
         "flocking-midi-select-ng": "1.0.0-dev.20190219T121520Z.893914c",
         "infusion": "3.0.0-dev.20190212T124747Z.23b4bc89d",
