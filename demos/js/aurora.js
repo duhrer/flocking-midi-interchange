@@ -187,7 +187,7 @@
         contrastScheme: {
             held:     1.0,
             adjacent: 0.1,
-            diagonal: 0.05
+            diagonal: 0.025
         },
         colourSchemes: {
             white:  { r: 1, g: 1,    b: 1, control: 1, velocity: 1  },
