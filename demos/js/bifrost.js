@@ -147,8 +147,6 @@
         }
     };
 
-    // TODO: function to paint the bottom controls with their respective colours (same as velocity!)
-
     flock.midi.interchange.demos.bifrost.paintDevice = function (that) {
         var activeNotesAsArray = flock.midi.interchange.demos.bifrost.mapToIntArray(that.activeNotes);
         if (activeNotesAsArray.length) {
