@@ -3,6 +3,46 @@
     "use strict";
     fluid.registerNamespace("flock.midi.interchange.demos.duet");
 
+
+    // Add the SVG that will hold our colour data.
+    flock.midi.interchange.demos.duet.addSvg = function (that) {
+        var svgContainer = that.locate("svg");
+        svgContainer.html(that.options.svgData);
+    };
+
+    // #device-note-112
+    // elementToPaint.css("fill", htmlColour);
+    flock.midi.interchange.demos.duet.updateSvg = function (that) {
+        var svgContainer = that.locate("svg");
+        var svgElement = $(svgContainer);
+
+        // Set all the existing notes to black. Probably not needed with the current strategy.
+        //svgElement.find(".device-note").css("fill", "#000000");
+
+        // Iterate through the held notes and update the display.
+        fluid.each(that.model.notes, function (value, note) {
+            var noteSelector = "#device-note-" + flock.midi.interchange.oda.zeroPadNumber(parseInt(note, 10));
+            var htmlColour = "#000000";
+            if (value === 1) {
+                htmlColour = "#ff0000";
+            }
+            else if (value === 2) {
+                htmlColour = "#00ffff";
+            }
+            else if (value === 3) {
+                htmlColour = "#ffffff"
+            }
+            var noteElement = svgElement.find(noteSelector);
+            noteElement.css("fill", htmlColour);
+        });
+    };
+
+    // TODO: Add something to relay the note model to the onscreen UI, such that:
+    // 1. Notes with a value of 1 (left partner only) are red.
+    // 2. Notes with a value of 2 (right partner only) are cyan (green + blue)
+    // 3. Notes with a value of 3 (both partners) are white.
+    // 4. Notes are blurred as we did with the aurora, center is 100%, edges are 75%, diagonals are 50%
+
     // Inverse transform and send the note to our partner as visual feedback.
     flock.midi.interchange.demos.duet.sendPartnerUiNote = function (noteMessage, partnerRouter, outputComponent) {
         var outputConnection = fluid.get(outputComponent, "connection");
@@ -14,33 +54,28 @@
         }
     };
 
-    // TODO: make a note of playing notes and send anything playing on both to the combined output.  Should be a
-    // model listener.
-
     // Keep track of how many times each note is currently being held.
-    flock.midi.interchange.demos.duet.updateModel = function (duetHarness, message) {
-        var increment = (message.type === "noteOn" && message.velocity) ? 1 : -1;
-        var noteHeldCount = duetHarness.model.notes[message.note] + increment;
-        duetHarness.applier.change(["notes", message.note], noteHeldCount);
+    flock.midi.interchange.demos.duet.updateModel = function (duetHarness, message, source) {
+        var newValue = duetHarness.model.notes[message.note] ^ source;
+        duetHarness.applier.change(["notes", message.note], newValue);
+        flock.midi.interchange.demos.duet.updateSvg(duetHarness);
     };
 
-    // Play any notes that are held twice, stop, any that aren't.
+    // Play any notes that are held by both partners, stop any that are released on both.
     flock.midi.interchange.demos.duet.sendToCombinedOutput = function (duetHarness, combinedOutput, updatePath, updateValue) {
         var outputConnection = fluid.get(combinedOutput, "connection");
 
-        if (outputConnection) {
-            // Both pads have to hold a note to hit it (2) and release the note to stop it (0).
-            if (updateValue !== 1) {
+        // Both pads have to hold a note to hit it (3).
+        // Both pads have to release the note to stop it (0).
+        if (outputConnection && (updateValue === 0 || updateValue === 3)) {
+            var message = {
+                channel: 0,
+                note: parseInt(updatePath[updatePath.length - 1], 10),
+                type: updateValue === 3 ? "noteOn" : "noteOff",
+                velocity: updateValue === 3 ? 127 : 0
+            };
 
-                var message = {
-                    channel: 0,
-                    type: updateValue === 2 ? "noteOn" : "noteOff",
-                    note: parseInt(updatePath[updatePath.length - 1], 10),
-                    // TODO: smoother handling of velocity.
-                    velocity: updateValue === 2 ? 127 : 0
-                };
-                outputConnection.send(message);
-            }
+            outputConnection.send(message);
         }
     };
 
@@ -72,11 +107,13 @@
             rightInput:     ".midi-right-input",
             leftOutput:     ".midi-left-output",
             rightOutput:    ".midi-right-output",
-            combinedOutput: ".midi-combined-output"
+            combinedOutput: ".midi-combined-output",
+            svg:            ".duet-svg"
         },
         model: {
             notes: "@expand:fluid.generate(128,0)"
         },
+        svgData: flock.midi.interchange.svg.oda,
         sysex: true,
         distributeOptions: [
             {
@@ -113,7 +150,7 @@
                         // Add/remove notes to combined model
                         "onTransformedMessage.updateModel": {
                             funcName: "flock.midi.interchange.demos.duet.updateModel",
-                            args: ["{duet}", "{arguments}.0"] // duetHarness, noteMessage
+                            args: ["{duet}", "{arguments}.0", 1] // duetHarness, noteMessage, source
                         }
                     }
                 }
@@ -146,7 +183,7 @@
                         // Add/remove notes to combined model
                         "onTransformedMessage.updateModel": {
                             funcName: "flock.midi.interchange.demos.duet.updateModel",
-                            args: ["{duet}", "{arguments}.0"] // duetHarness, noteMessage
+                            args: ["{duet}", "{arguments}.0", 2] // duetHarness, noteMessage, source
                         }
                     }
                 }
@@ -172,11 +209,20 @@
                 funcName: "flock.midi.interchange.demos.duet.sendToCombinedOutput",
                 args: ["{duet}", "{combinedOutput}", "{change}.path", "{change}.value"] // duetHarness, combinedOutput, updatePath, updateValue
             }
+        },
+        listeners: {
+            "onCreate.addSvg": {
+                funcName: "flock.midi.interchange.demos.duet.addSvg",
+                args: ["{that}"]
+            }
         }
     });
 
+    // TODO: Generate a launchpad ODA whose notes are tuned to the common tuning.
+    // TODO: Add the "aurora" effect, which requires an understanding of which notes are our neighbours.
     fluid.defaults("flock.midi.interchange.demos.duet.launchpad", {
         gradeNames: ["flock.midi.interchange.demos.duet"],
+        svgData: flock.midi.interchange.svg.launchpadCommon,
         components: {
             leftInput: {
                 options: {

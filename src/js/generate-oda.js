@@ -181,3 +181,73 @@ flock.midi.interchange.svgGen.singleRow({
     outputPath: "%flocking-midi-interchange/dist/singleRowPixelHigh.svg",
     cellHeight:  1
 });
+
+/*
+
+    Generate an SVG that represents the "common" tuning between the launchpad and launchpad pro.
+
+    76 77 78 79 80 81 82 83
+    68 69 70 71 72 73 74 75
+    60 61 62 63 64 65 66 67
+    52 53 54 55 56 57 58 59
+    44 45 46 47 48 49 50 51
+    36 37 38 39 40 41 42 43
+    28 29 30 31 32 33 34 35
+    20 21 22 23 24 25 26 27
+
+ */
+
+fluid.registerNamespace("flock.midi.interchange.svgGen.launchpadCommon");
+
+flock.midi.interchange.svgGen.launchpadCommon.getXmlAsJson = function (that) {
+    var svgAsJson = fluid.merge({}, that.options.baseXmlAsJson);
+    var viewBoxHeight = (that.options.cellHeight + (that.options.strokeWidth/2)) * that.options.rows;
+    var viewBoxWidth = that.options.columns * (that.options.cellWidth + that.options.marginWidth + that.options.strokeWidth);
+    svgAsJson.svg.viewBox = [0, 0, viewBoxWidth, viewBoxHeight].join(" ");
+    svgAsJson.svg.g = {
+        class: "all-notes",
+        rect: []
+    };
+
+    for (var row = 0; row < that.options.rows ; row++) {
+        for (var column = 0; column < that.options.columns; column++) {
+            var x = (that.options.cellWidth + that.options.marginWidth + (that.options.strokeWidth*2)) * column;
+            var y = (that.options.cellHeight + (that.options.strokeWidth*2)) * row;
+            var note = (76 - (8 * row)) + column;
+
+            var thisRect = {
+                ry: "0",
+                rx: "0",
+                y: y,
+                x: x ,
+                height: that.options.cellHeight,
+                width: that.options.cellWidth,
+                class: "device-note",
+                id: "device-note-" + flock.midi.interchange.svgGen.zeroPadNumber(note),
+                style: "fill:#000000;stroke:none;stroke-width:" + that.options.strokeWidth
+            };
+            svgAsJson.svg.g.rect.push(thisRect);
+        }
+    }
+
+    return svgAsJson;
+};
+
+fluid.defaults("flock.midi.interchange.svgGen.launchpadCommon", {
+    gradeNames: ["flock.midi.interchange.svgGen"],
+    outputPath: "%flocking-midi-interchange/dist/launchpadCommon.svg",
+    cellWidth:   40,
+    cellHeight:  30,
+    strokeWidth: 0,
+    marginWidth: 0,
+    columns: 8,
+    rows: 8,
+    invokers: {
+        getXmlAsJson: {
+            funcName: "flock.midi.interchange.svgGen.launchpadCommon.getXmlAsJson",
+            args:     ["{that}"]
+        }
+    }
+});
+
+flock.midi.interchange.svgGen.launchpadCommon();
