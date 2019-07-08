@@ -3,6 +3,12 @@ body {
     color: #ffffff;
 }
 
+.duet-logo {
+    margin-top: 2em;
+    margin-bottom: 5em;
+}
+
 .duet-svg {
-    width: 65%
+    width: 65%;
+    margin-bottom: 5em;
 }

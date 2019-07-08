@@ -10,8 +10,6 @@
         svgContainer.html(that.options.svgData);
     };
 
-    // #device-note-112
-    // elementToPaint.css("fill", htmlColour);
     flock.midi.interchange.demos.duet.updateSvg = function (that) {
         var svgContainer = that.locate("svg");
         var svgElement = $(svgContainer);
@@ -37,12 +35,6 @@
         });
     };
 
-    // TODO: Add something to relay the note model to the onscreen UI, such that:
-    // 1. Notes with a value of 1 (left partner only) are red.
-    // 2. Notes with a value of 2 (right partner only) are cyan (green + blue)
-    // 3. Notes with a value of 3 (both partners) are white.
-    // 4. Notes are blurred as we did with the aurora, center is 100%, edges are 75%, diagonals are 50%
-
     // Inverse transform and send the note to our partner as visual feedback.
     flock.midi.interchange.demos.duet.sendPartnerUiNote = function (noteMessage, partnerRouter, outputComponent) {
         var outputConnection = fluid.get(outputComponent, "connection");
@@ -58,7 +50,7 @@
     flock.midi.interchange.demos.duet.updateModel = function (duetHarness, message, source) {
         var newValue = duetHarness.model.notes[message.note] ^ source;
         duetHarness.applier.change(["notes", message.note], newValue);
-        flock.midi.interchange.demos.duet.updateSvg(duetHarness);
+        duetHarness.updateSvg();
     };
 
     // Play any notes that are held by both partners, stop any that are released on both.
@@ -215,11 +207,165 @@
                 funcName: "flock.midi.interchange.demos.duet.addSvg",
                 args: ["{that}"]
             }
+        },
+        invokers: {
+            updateSvg: {
+                funcName: "flock.midi.interchange.demos.duet.updateSvg",
+                args:     ["{that}"]
+            }
         }
     });
 
-    // TODO: Generate a launchpad ODA whose notes are tuned to the common tuning.
-    // TODO: Add the "aurora" effect, which requires an understanding of which notes are our neighbours.
+    flock.midi.interchange.demos.duet.updateSvg = function (that) {
+        var svgContainer = that.locate("svg");
+        var svgElement = $(svgContainer);
+
+        // Set all the existing notes to black. Probably not needed with the current strategy.
+        //svgElement.find(".device-note").css("fill", "#000000");
+
+        // Iterate through the held notes and update the display.
+        fluid.each(that.model.notes, function (value, note) {
+            var noteSelector = "#device-note-" + flock.midi.interchange.oda.zeroPadNumber(parseInt(note, 10));
+            var htmlColour = "#000000";
+            if (value === 1) {
+                htmlColour = "#ff0000";
+            }
+            else if (value === 2) {
+                htmlColour = "#00ffff";
+            }
+            else if (value === 3) {
+                htmlColour = "#ffffff"
+            }
+            var noteElement = svgElement.find(noteSelector);
+            noteElement.css("fill", htmlColour);
+        });
+    };
+
+    fluid.registerNamespace("flock.midi.interchange.demos.duet.launchpad");
+
+    flock.midi.interchange.demos.duet.launchpad.mergeCell = function (originalCell, toMerge) {
+        if (!originalCell) {
+            return toMerge;
+        }
+        else {
+            var merged = {};
+            fluid.each(["r", "g", "b"], function (colourKey) {
+                merged[colourKey] = originalCell[colourKey] + toMerge[colourKey];
+            });
+            return merged;
+        }
+    };
+
+    // For the launchpad, add the "aurora" effect, which requires an understanding of which notes are our neighbours.
+    flock.midi.interchange.demos.duet.launchpad.updateSvg = function (that) {
+        var svgContainer = that.locate("svg");
+        var svgElement = $(svgContainer);
+
+        // Set all the existing notes to black.
+        svgElement.find(".device-note").css("fill", "#000000");
+
+        /*
+             76 77 78 79 80 81 82 83
+             68 69 70 71 72 73 74 75
+             60 61 62 63 64 65 66 67
+             52 53 54 55 56 57 58 59
+             44 45 46 47 48 49 50 51
+             36 37 38 39 40 41 42 43
+             28 29 30 31 32 33 34 35
+             20 21 22 23 24 25 26 27
+         */
+        // Calculate the colour map for the held notes.
+        var colourMap = {};
+        fluid.each(that.model.notes, function (value, note) {
+            var noteAsNumber = parseInt(note, 10);
+            if (value && noteAsNumber >= 20 && noteAsNumber <= 83) {
+                var offsetNoteNumber = noteAsNumber - 20;
+                var row = Math.floor(offsetNoteNumber / 8);
+                var col = offsetNoteNumber % 8;
+
+                var baseColourSpec = {
+                    r: (value === 1 || value === 3) ? 255 : 0,
+                    g: (value === 2 || value === 3) ? 255 : 0,
+                    b: (value === 2 || value === 3) ? 255 : 0
+                };
+
+                var edgeColourSpec = {
+                    r: Math.round(baseColourSpec.r * 0.25),
+                    g: Math.round(baseColourSpec.g * 0.25),
+                    b: Math.round(baseColourSpec.b * 0.25)
+                };
+
+                var cornerColourSpec = {
+                    r: Math.round(baseColourSpec.r * 0.125),
+                    g: Math.round(baseColourSpec.g * 0.125),
+                    b: Math.round(baseColourSpec.b * 0.125)
+                };
+
+                // The note itself
+                colourMap[note] = baseColourSpec;
+
+                // Upstairs neighbours
+                if (row > 0) {
+                    // NW
+                    if (col > 0) {
+                        colourMap[noteAsNumber - 9] = flock.midi.interchange.demos.duet.launchpad.mergeCell(colourMap[noteAsNumber - 9], cornerColourSpec);
+                    }
+
+                    // N
+                    colourMap[noteAsNumber - 8] = flock.midi.interchange.demos.duet.launchpad.mergeCell(colourMap[noteAsNumber - 8], edgeColourSpec);
+
+                    // NE
+                    if (col < 7)  {
+                        colourMap[noteAsNumber - 7] = flock.midi.interchange.demos.duet.launchpad.mergeCell(colourMap[noteAsNumber - 7], cornerColourSpec);
+                    }
+                }
+
+                // Left neighbour
+                if (col > 0) {
+                    colourMap[noteAsNumber - 1] = flock.midi.interchange.demos.duet.launchpad.mergeCell(colourMap[noteAsNumber - 1], edgeColourSpec);
+                }
+
+                // Right neighbour
+                if (col < 7) {
+                    colourMap[noteAsNumber + 1] = flock.midi.interchange.demos.duet.launchpad.mergeCell(colourMap[noteAsNumber + 1], edgeColourSpec);
+                }
+
+                // Downstairs neighbours
+                if (row < 7) {
+                    // SW
+                    if (col > 0) {
+                        colourMap[noteAsNumber + 7] = flock.midi.interchange.demos.duet.launchpad.mergeCell(colourMap[noteAsNumber + 7], cornerColourSpec);
+                    }
+
+                    // S
+                    colourMap[noteAsNumber + 8] = flock.midi.interchange.demos.duet.launchpad.mergeCell(colourMap[noteAsNumber + 8], edgeColourSpec);
+
+                    // SE
+                    if (col < 7) {
+                        colourMap[noteAsNumber + 9] = flock.midi.interchange.demos.duet.launchpad.mergeCell(colourMap[noteAsNumber + 9], cornerColourSpec);
+                    }
+                }
+            }
+        });
+
+        // Update the display
+        fluid.each(colourMap, function (colourDesc, note) {
+            var noteAsNumber = parseInt(note, 10);
+            var noteSelector = "#device-note-" + flock.midi.interchange.oda.zeroPadNumber(noteAsNumber);
+            var htmlColour   = "#";
+            fluid.each(["r","g","b"], function (colourKey) {
+                var colourValue = colourDesc[colourKey];
+                var colourAsHexString = Math.min(255, colourValue).toString(16);
+                if (colourValue < 16) {
+                    htmlColour += "0";
+                }
+                htmlColour += colourAsHexString;
+            });
+            var noteElement  = svgElement.find(noteSelector);
+            noteElement.css("fill", htmlColour);
+        });
+    };
+
     fluid.defaults("flock.midi.interchange.demos.duet.launchpad", {
         gradeNames: ["flock.midi.interchange.demos.duet"],
         svgData: flock.midi.interchange.svg.launchpadCommon,
@@ -269,6 +415,12 @@
                         }
                     }
                 }
+            }
+        },
+        invokers: {
+            updateSvg: {
+                funcName: "flock.midi.interchange.demos.duet.launchpad.updateSvg",
+                args:     ["{that}"]
             }
         }
     });

@@ -236,8 +236,8 @@ flock.midi.interchange.svgGen.launchpadCommon.getXmlAsJson = function (that) {
 fluid.defaults("flock.midi.interchange.svgGen.launchpadCommon", {
     gradeNames: ["flock.midi.interchange.svgGen"],
     outputPath: "%flocking-midi-interchange/dist/launchpadCommon.svg",
-    cellWidth:   40,
-    cellHeight:  30,
+    cellWidth:   70,
+    cellHeight:  35,
     strokeWidth: 0,
     marginWidth: 0,
     columns: 8,
