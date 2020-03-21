@@ -13,13 +13,15 @@
         "bergson": "0.14.0",
         "flocking": "2.0.0-dev.20190101T211732Z.efbf6e2",
         "flocking-midi-select-ng": "1.0.0-dev.20190219T121520Z.893914c",
-        "infusion": "3.0.0-dev.20190212T124747Z.23b4bc89d",
-        "mkdirp": "0.5.1"
+        "infusion": "3.0.0-dev.20190212T124747Z.23b4bc89d"
     },
     "devDependencies": {
         "gpii-grunt-lint-all": "1.0.0-dev.20180629T081932Z.8a1f7fe",
         "grunt": "1.0.1",
+        "mkdirp": "^0.5.1",
         "node-jqunit": "1.1.8",
+        "recursive-copy": "^2.0.10",
+        "rimraf": "^3.0.0",
         "xml-mapping": "1.7.1"
     }
 }

@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>"Laser Screwdriver" Demo</title>
+
+    <script src="../node_modules/infusion/dist/infusion-all.js"></script>
+    <script src="../node_modules/flocking/dist/flocking-all.js"></script>
+
+    <script src="../node_modules/flocking/src/ui/selectbox/js/selectbox.js"></script>
+    <script src="../node_modules/flocking/src/ui/midi/midi-port-selector/js/midi-port-selector.js"></script>
+    <script src="../node_modules/flocking/src/ui/midi/midi-connector/js/midi-connector.js"></script>
+
+    <script src="../node_modules/flocking-midi-select-ng/src/js/auto-midi-system.js"></script>
+    <script src="../node_modules/flocking-midi-select-ng/src/js/select-box.js"></script>
+    <script src="../node_modules/flocking-midi-select-ng/src/js/auto-midi-port-selector.js"></script>
+    <script src="../node_modules/flocking-midi-select-ng/src/js/auto-midi-connector.js"></script>
+
+    <script src="../src/js/router.js"></script>
+    <script src="../src/js/tunings/launchpad-pro-to-tonnetz.js"></script>
+
+    <script src="./js/laser-screwdriver.js"></script>
+</head>
+<body>
+    <div class="laser-screwdriver-container">
+        <div class="note-input"></div>
+        <div class="note-output"></div>
+    </div>
+
+    <script type="text/javascript">
+        var harness = flock.midi.interchange.demos.laserScrewdriver(".laser-screwdriver-container");
+    </script>
+</body>
+</html>
