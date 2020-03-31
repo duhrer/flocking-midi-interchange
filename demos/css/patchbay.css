@@ -1,0 +1,9 @@
+.single-router:first-of-type {
+    padding-top: 0.5em;
+    border-top: none;
+}
+.single-router {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-top: 1px solid gray;
+}
