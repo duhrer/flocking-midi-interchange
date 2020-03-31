@@ -36,11 +36,10 @@
                     fluid.set(that.ghostNotesByChannel, [channel, note], newVelocity);
                     //// TODO: make a "strategy" toggle and make this an optional strategy.
                     // "aftertouch" strategy
-                    //that.sendNote({ channel: channel, type: "aftertouch", note: note, velocity: newVelocity, pressure: newVelocity });
-
+                    that.sendNote({ channel: channel, type: "aftertouch", note: note, velocity: newVelocity, pressure: newVelocity });
                     // "echo" strategy
-                    that.sendNote({ channel: channel, type: "noteOff", note: note, velocity: 0 });
-                    that.sendNote({ channel: channel, type: "noteOn", note: note, velocity: newVelocity });
+                    //that.sendNote({ channel: channel, type: "noteOff", note: note, velocity: 0 });
+                    //that.sendNote({ channel: channel, type: "noteOn", note: note, velocity: newVelocity });
                 }
                 else {
                     toPurge.push(note);
@@ -72,7 +71,7 @@
 
     fluid.defaults("flock.midi.interchange.demos.extendedRelease", {
         gradeNames: ["fluid.viewComponent"],
-        decrement: 0.21,
+        decrement: 0.1666,
         selectors: {
             noteInput:  ".note-input",
             noteOutput: ".note-output",
