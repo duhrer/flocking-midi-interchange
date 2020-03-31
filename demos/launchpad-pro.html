@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Launchpad Pro Demo</title>
+    <title>Launchpad Pro Guitar</title>
 
     <script src="../node_modules/infusion/dist/infusion-all.js"></script>
     <script src="../node_modules/flocking/dist/flocking-all.js"></script>
@@ -25,10 +25,11 @@
     <script src="../src/js/tunings/launchpad-pro-to-guitar.js"></script>
     <script src="../src/js/uis/launchpad-pro-oda.js"></script>
     <script src="../src/js/uis/launchpad-pro-oda-loom.js"></script>
+    <script src="./js/launchpad-pro-guitar.js"></script>
 </head>
 <body>
     <div style="width:100%" align="center">
-        <h1>Launchpad Pro Demo</h1>
+        <h1>Launchpad Pro Guitar</h1>
 
         <div class="oda-container"></div>
 
@@ -38,7 +39,7 @@
     </div>
 
     <script type="text/javascript">
-        var loom = flock.midi.interchange.oda.launchpadPro.loom("body");
+        var loom = flock.midi.interchange.demos.lpg.loom("body");
     </script>
 </body>
 </html>
