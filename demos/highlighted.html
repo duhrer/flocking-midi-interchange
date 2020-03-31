@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>"Lazy Consensus" Demo</title>
+    <title>"Uniformly Highlighted Launchpad Pro" Demo</title>
 
     <script src="../node_modules/infusion/dist/infusion-all.js"></script>
     <script src="../node_modules/flocking/dist/flocking-base.js"></script>
@@ -14,26 +14,25 @@
     <script src="../node_modules/flocking-midi-select-ng/src/js/auto-midi-port-selector.js"></script>
     <script src="../node_modules/flocking-midi-select-ng/src/js/auto-midi-connector.js"></script>
 
-    <!-- Bergson dependencies -->
-    <script src="../node_modules/bergson/dist/bergson-only.js"></script>
-
     <script src="../src/js/router.js"></script>
+    <script src="../src/js/tunings/launchpad-pro-to-common.js"></script>
+    <script src="../src/js/tunings/launchpad-pro-to-highlighted.js"></script>
 
-    <script src="./js/consensus.js"></script>
+    <script src="./js/launchpad-highlighted-notes.js"></script>
+    <style>
+        .highlighted-loom { margin-top: 5em; }
+    </style>
 </head>
 <body bgcolor="black">
-    <div align="center">
-        <img src="images/lazy-consensus.svg"/>
-    </div>
 
-    <div class="consensus-harness">
+    <div class="highlighted-loom">
         <div class="note-input"></div>
-        <div class="note-output"></div>
         <div class="ui-output"></div>
+        <div class="note-output"></div>
     </div>
 
     <script type="text/javascript">
-        var consensus = flock.midi.interchange.demos.consensus(".consensus-harness");
+        var consensus = flock.midi.interchange.demos.highlights(".highlighted-loom");
     </script>
 </body>
 </html>

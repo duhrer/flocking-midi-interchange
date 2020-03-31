@@ -29,11 +29,12 @@ flock.midi.interchange.wrapSvgFiles = function (that) {
             var filePatternMatches = inputFile.match(/^(.+)\.svg$/i);
             if (filePatternMatches) {
                 var filenameMinusExtension = filePatternMatches[1];
-                var name = "flock.midi.interchange.svg." + filenameMinusExtension;
+                var name = that.options.filenamePrefix + "." + filenameMinusExtension;
                 var fullInputPath = path.resolve(resolvedInputPath, inputFile);
                 var payload = fs.readFileSync(fullInputPath, { encoding: "utf8"});
                 var fullOutputPath = path.resolve(resolvedOutputPath, "svg-" + filenameMinusExtension + ".js");
                 var jsContent = fluid.stringTemplate(that.options.codeTemplate, {
+                    prefix: that.options.filenamePrefix,
                     name: name,
                     payload: JSON.stringify(payload)
                 });
@@ -51,7 +52,8 @@ fluid.defaults("flock.midi.interchange.svgJsFileGenerator", {
     gradeNames: ["fluid.component"],
     inputDirs: ["%flocking-midi-interchange/src/images", "%flocking-midi-interchange/dist"],
     outputDir: "%flocking-midi-interchange/dist",
-    codeTemplate: "/* globals fluid */\n(function (fluid) {\n\tvar flock = fluid.registerNamespace(\"flock\");\n\tfluid.registerNamespace(\"flock.midi.interchange.svg\");\n\t%name = %payload;\n})(fluid);\n",
+    filenamePrefix: "flock.midi.interchange.svg",
+    codeTemplate: "/* globals fluid */\n(function (fluid) {\n\tvar flock = fluid.registerNamespace(\"flock\");\n\tfluid.registerNamespace(\"%prefix\");\n\t%name = %payload;\n})(fluid);\n",
     listeners: {
         "onCreate.wrapSvgFiles": {
             funcName: "flock.midi.interchange.wrapSvgFiles",
