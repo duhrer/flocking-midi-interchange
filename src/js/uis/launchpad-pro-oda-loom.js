@@ -8,8 +8,8 @@
 
     fluid.defaults("flock.midi.interchange.oda.launchpadPro.loom", {
         gradeNames: ["flock.midi.interchange.oda.loom"],
-        preferredUiOutput: "Launchpad Pro Standalone Port",
-        preferredInput: "Launchpad Pro Standalone Port",
+        // preferredUiOutput: "Launchpad Pro Standalone Port",
+        // preferredInput: "Launchpad Pro Standalone Port",
         uiPaintMessages: {
             startup: flock.midi.interchange.oda.launchpadPro.uis.guitarColours
         },

@@ -21,7 +21,6 @@
         that.events.addRouter.fire(newSelector);
     };
 
-    // TODO: Button to add routers
     // TODO: Button to delete a particular router, should be part of a custom router grade and trigger the destruction of the markup as well.
 
     // Our router instance

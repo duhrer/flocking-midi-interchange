@@ -1,4 +1,5 @@
 /* A harness to tune a Launchpad Pro like a guitar, including capo controls */
+// TODO: Figure out a way to support multiple instances with a single loom, perhaps with dynamic components.
 (function (fluid, flock) {
     "use strict";
 
