@@ -3,45 +3,123 @@
     "use strict";
     fluid.registerNamespace("flock.midi.interchange.demos.consensus");
 
+    /*
+
+        TODO: Gather the data we need to calculated a weighted pitch which is:
+
+        The sum of all (velocity * pitch) values
+        ----------------------------------------
+        The sum of all velocity values
+
+
+        The average velocity is calculated as:
+
+        The sum of all velocity values
+        -----------------------------------------
+        The number of held notes
+
+
+        For each update, we need to:
+
+        1) Subtract the old (velocity * pitch) from the sum of all (velocity * pitch) values.
+        2) Add the new (velocity * pitch) to the sum of all (velocity * pitch).
+        3) Subtract the old velocity from the sum of all velocity values.
+        4) Add the new velocity to the sum of all velocity values.
+        5) Update the number of held notes.
+        6) Notify the parent component if there are changes.
+
+     */
+    // TODO: Move this to the individual input components
+    // TODO: track the velocity per note
+    // TODO: If the velocity for any note changes, update the velocitySum
     flock.midi.interchange.demos.consensus.handleNoteMessage = function (that, midiMessage) {
-        // TODO: Transform the input to standardise the tuning.
-        var isHeld = (midiMessage.type === "noteOn" && midiMessage.velocity) ? true : false;
-        if (isHeld) {
-            that.heldVelocities[midiMessage.note] = midiMessage.velocity;
-        }
-        else {
-            delete that.heldVelocities[midiMessage.note];
-        }
+        var oldVelocity = fluid.get(that.velocityByNote, midiMessage.note) || 0;
+        var newVelocity = fluid.get(midiMessage, "velocity") || 0;
+        if (newVelocity !== oldVelocity) {
+            fluid.set(that.velocityByNote, [midiMessage.note], midiMessage.velocity);
 
-        that.targetState = flock.midi.interchange.demos.consensus.calculateAverages(that.heldVelocities);
-    };
+            // Subtract the old (velocity * pitch) from the sum of all (velocity * pitch) values.
+            that.pitchWeightedVelocity -= (oldVelocity * midiMessage.note);
 
-    flock.midi.interchange.demos.consensus.calculateAverages = function (noteMap) {
-        var noteSum     = 0;
-        var velocitySum = 0;
-        var activeNotes = 0;
-        fluid.each(noteMap, function (velocity, noteAsString) {
-            if (velocity) {
-                noteSum += parseInt(noteAsString, 10);
-                velocitySum += velocity;
-                activeNotes++;
+            // Add the new (velocity * pitch) to the sum of all (velocity * pitch).
+            that.pitchWeightedVelocity += (newVelocity * midiMessage.note);
+
+            // Subtract the old velocity from the sum of all velocity values.
+            that.totalVelocity -= oldVelocity;
+
+            // Add the new velocity to the sum of all velocity values.
+            that.totalVelocity += newVelocity;
+
+            // Update the number of held notes as required.
+            if (oldVelocity === 0) {
+                that.heldNotes++;
             }
-        });
-        var averageNote = noteSum/activeNotes;
-        var averageVelocity = Math.round(velocitySum / activeNotes);
-        return { activeNotes: activeNotes, averageNote: averageNote, averageVelocity: averageVelocity };
+            else if (newVelocity ===  0) {
+                that.heldNotes--;
+            }
+
+            // Notify the parent component that there are changes.
+            that.events.notesUpdated.fire();
+        }
     };
 
-    flock.midi.interchange.demos.consensus.sendToOutput = function (outputComponent, uiOutputComponent, message) {
+    fluid.defaults("flock.midi.interchange.demos.consensus.input", {
+        gradeNames: ["flock.auto.ui.midiConnector"],
+        portType: "input",
+        boxLabel: "Input",
+        events: {
+            notesUpdated: null
+        },
+        members: {
+            velocityByNote: {},
+            heldNotes: 0,
+            totalVelocity: 0,
+            pitchWeightedVelocity: 0
+        },
+        components: {
+            midiPortSelector: {
+                options: {
+                    strings: {
+                        selectBoxLabel: "{flock.midi.interchange.demos.consensus.input}.options.boxLabel",
+                    }
+                }
+            }
+        },
+        listeners: {
+            "note": {
+                funcName: "flock.midi.interchange.demos.consensus.handleNoteMessage",
+                args:     ["{that}", "{arguments}.0"] // midiMessage
+            }
+        }
+    });
+
+    // TODO: Add a means of deleting inputs.
+    // TODO: Add a means of saving the selected inputs.
+
+    flock.midi.interchange.demos.consensus.updateTarget = function (that) {
+        var totalHeldNotes = 0;
+        var totalVelocity = 0;
+        var totalPitchWeightedVelocity = 0;
+
+        var inputComponents = fluid.queryIoCSelector(that, "flock.midi.interchange.demos.consensus.input");
+        fluid.each(inputComponents, function (inputComponent) {
+            totalHeldNotes += inputComponent.heldNotes;
+            totalVelocity += inputComponent.totalVelocity;
+            totalPitchWeightedVelocity += inputComponent.pitchWeightedVelocity;
+        });
+
+        var weightedPitch = totalVelocity ? Math.round(totalPitchWeightedVelocity / totalVelocity) : 0;
+        var averageVelocity = totalHeldNotes ? Math.round(totalVelocity / totalHeldNotes) : 0;
+
+        console.log("targetPitch:", weightedPitch, "targetVelocity:", averageVelocity);
+        that.targetPitch    = weightedPitch;
+        that.targetVelocity = averageVelocity;
+    };
+
+    flock.midi.interchange.demos.consensus.sendToOutput = function (outputComponent, message) {
         var outputConnection = fluid.get(outputComponent, "connection");
         if (outputConnection) {
             outputConnection.send(message);
-        }
-
-        // TODO: Transform the output to reverse the input tuning and use the selected colour scheme.
-        var uiOutputConnection = fluid.get(uiOutputComponent, "connection");
-        if (uiOutputConnection) {
-            uiOutputConnection.send(message);
         }
     };
 
@@ -55,177 +133,156 @@
     };
 
     flock.midi.interchange.demos.consensus.adjustCourse = function (that) {
-        // Check the current set of playing notes against the target and adjust course.
-        if (that.targetState.activeNotes) {
-            // Find the current "state of play" and adjust course.
-            var playingState = flock.midi.interchange.demos.consensus.calculateAverages(that.playingVelocities);
-            // { activeNotes: activeNotes, averageNote: averageNote, averageVelocity: averageVelocity }
-
-            if (playingState.activeNotes) {
-                var velocityPolarity = playingState.averageVelocity === that.targetState.averageVelocity ? 0 : that.targetState.averageVelocity > playingState.averageVelocity ? 1 : -1;
-                var adjustedVelocity = Math.min(127, Math.max(0, playingState.averageVelocity + (velocityPolarity * that.options.velocityDelta)));
-                var notePolarity = playingState.averageNote === that.targetState.averageNote ? 0 : that.targetState.averageNote > playingState.averageNote ? 1 : -1;
-                var adjustedNote = Math.min(127, Math.max(0, playingState.averageNote + (notePolarity * that.options.noteDelta)));
-                that.playAverageNote(adjustedNote, adjustedVelocity);
+        // We only need to adjust course if we're not already at the desired target note and velocity.
+        if ((that.currentVelocity !== that.targetVelocity) || (that.currentPitch !== that.targetPitch)) {
+            // Stop playing if the new target velocity is zero.
+            if (that.targetVelocity === 0) {
+                that.sendToOutput({
+                    channel:  that.model.outputChannel,
+                    type:     "noteOff",
+                    note:     that.currentPitch,
+                    velocity: 0
+                });
+                that.currentPitch    = 0;
+                that.currentVelocity = 0;
+                that.targetPitch     = 0;
             }
-            // Start playing the average note directly.
+            // Play a single note if there is no note playing at the moment.
+            else if (that.currentVelocity === 0 && that.targetVelocity !== 0) {
+                that.sendToOutput({
+                    channel:  that.model.outputChannel,
+                    type:     "noteOn",
+                    note:     that.targetPitch,
+                    velocity: that.targetVelocity
+                });
+                that.currentPitch    = that.targetPitch;
+                that.currentVelocity = that.targetVelocity;
+            }
+            // Transition towards the target pitch if we are already playing something.
             else {
-                that.playAverageNote(that.targetState.averageNote, that.targetState.averageVelocity);
-            }
-        }
-        // No notes are held.  Fade any remaining playing notes.
-        else {
-            fluid.each(that.playingVelocities, function (velocity, noteAsString) {
-                if (velocity) {
-                    var note = parseInt(noteAsString, 10);
-                    var newVelocity = Math.max(0, velocity - that.options.velocityDelta);
-                    var noteType = newVelocity ? "aftertouch" : "noteOff";
+                if (that.targetPitch !== that.currentPitch) {
+                    // Silence the previous note
                     that.sendToOutput({
-                        channel: that.model.outputChannel,
-                        type: noteType,
-                        note: note,
-                        velocity: newVelocity
+                        channel:  that.model.outputChannel,
+                        type:     "noteOff",
+                        note:     that.currentPitch,
+                        velocity: 0
                     });
-
-                    // Save the value if there is one, delete the entry if it's been silenced.
-                    if (newVelocity) {
-                        that.playingVelocities[noteAsString] = newVelocity;
-                    }
-                    else {
-                        delete that.playingVelocities[noteAsString];
-                    }
                 }
-            });
+
+                var pitchDiff      = that.targetPitch - that.currentPitch;
+                var pitchIncrement = pitchDiff ? pitchDiff/Math.abs(pitchDiff) : 0;
+                var newPitch       = that.currentPitch + pitchIncrement;
+
+                var velocityDiff      = that.targetVelocity - that.currentVelocity;
+                var velocityDirection = velocityDiff ? velocityDiff/Math.abs(velocityDiff) : 0;
+
+                // As the velocity changes involved are generally bigger, we line up the velocity offset based on
+                // the number of updates we need to reach the target pitch.
+                var pitchSyncedOffset = Math.round(velocityDiff/pitchDiff);
+
+                // Make sure that we don't overshoot on the last update.
+                var velocityOffset    = Math.min(Math.abs(velocityDiff), pitchSyncedOffset);
+                var velocityIncrement = velocityDirection * velocityOffset;
+
+                // Extra protection to avoid overshooting.
+                var newVelocity = Math.min(127, (that.currentVelocity + velocityIncrement));
+
+                var noteType = that.targetPitch === that.currentPitch ? "aftertouch" : "noteOn";
+
+                // Play/update the note.
+                var noteOnMessage = {
+                    channel: that.model.outputChannel,
+                    type:     noteType,
+                    note:     newPitch,
+                    velocity: newVelocity
+                };
+
+                console.log(JSON.stringify(noteOnMessage, null, 2));
+                that.sendToOutput(noteOnMessage);
+
+                that.currentVelocity = newVelocity;
+                that.currentPitch    = newPitch;
+            }
         }
     };
 
-    flock.midi.interchange.demos.consensus.playAverageNote = function (that, averageNote, averageVelocity) {
-        console.log("average note", averageNote);
-        var trailingNote         = Math.floor(averageNote);
-        var leadingNote          = trailingNote + 1;
-        var leadingNoteFraction  = averageNote % 1;
-        var trailingNoteFraction = 1 - leadingNoteFraction;
-        var trailingNoteVelocity = Math.round(averageVelocity * trailingNoteFraction);
-        var leadingNoteVelocity  = Math.round(averageVelocity * leadingNoteFraction);
+    flock.midi.interchange.demos.consensus.addInput = function (that) {
+        var existingInputs = fluid.queryIoCSelector(that, "flock.midi.interchange.demos.consensus.input");
+        var newInputNumber = (existingInputs.length || 0) + 1;
+        var newId = "input-" + newInputNumber;
+        var newName = "Input " + newInputNumber;
+        var newSelector = "#" + newId;
 
-        // Play and/or adjust our "trailing" note.
-        var trailingNoteType = fluid.get(that.playingVelocities, trailingNote) ? "aftertouch" : "noteOn";
-        that.sendToOutput({
-            channel: that.model.outputChannel,
-            type: trailingNoteType,
-            note: trailingNote,
-            velocity: trailingNoteVelocity,
-            pressure: trailingNoteVelocity
-        });
-        that.playingVelocities[trailingNote] = trailingNoteVelocity;
+        // Render input container
+        var routerContainer = that.locate("inputContainer");
+        var newHtml = fluid.stringTemplate(that.options.templates.input, { id: newId });
+        routerContainer.append(newHtml);
 
-        // We have a fractional "leading" note to play and/or adjust.
-        if (leadingNoteFraction) {
-            var leadingNoteType = fluid.get(that.playingVelocities, leadingNote) ? "aftertouch" : "noteOn";
-            that.sendToOutput({
-                channel: that.model.outputChannel,
-                type: leadingNoteType,
-                note: leadingNote,
-                velocity: leadingNoteVelocity,
-                pressure: leadingNoteVelocity
-            });
-            that.playingVelocities[leadingNote] = leadingNoteVelocity;
-        }
-        // The "leading" note was previously active and needs to be cleared.
-        else if (fluid.get(that.playingVelocities, leadingNote)) {
-            that.sendToOutput({
-                channel: that.model.outputChannel,
-                type: "noteOff",
-                note: leadingNote,
-                velocity: 0
-            });
-            delete that.playingVelocities[leadingNote];
-        }
+        that.dom.clear();
 
-        // Silence anything else that shouldn't be playing.
-        fluid.each(that.playingVelocities, function (velocity, noteAsString) {
-            var playingNote = parseInt(noteAsString, 10);
-            if (playingNote !== trailingNote && playingNote !== leadingNote) {
-                if (velocity) {
-                    that.sendToOutput({
-                        channel: that.model.outputChannel,
-                        type: "noteOff",
-                        note: playingNote,
-                        velocity: 0
-                    });
-                    that.playingVelocities[playingNote] = 0;
-                }
-            }
-        });
-
-        // Purge any values zeroed above.
-        that.playingVelocities = fluid.transform(that.playingVelocities, function (velocity) {
-            return velocity || undefined;
-        });
+        // Create input component using dynamicOptions and createOnEvent.
+        that.events.addInput.fire(newSelector, newName);
     };
 
     fluid.defaults("flock.midi.interchange.demos.consensus", {
         gradeNames: ["fluid.viewComponent"],
-        selectors: {
-            noteInput:  ".note-input",
-            noteOutput: ".note-output",
-            uiOutput:   ".ui-output",
+        events: {
+            addInput: null
         },
-        velocityDelta: 16,
-        noteDelta: 1,
-        preferredInputDevice:    "Launchpad Pro Standalone Port",
-        preferredOutputDevice:   "EIE", // Only thing I have with polyphonic aftertouch.
-        preferredUiOutputDevice: "Launchpad Pro Standalone Port",
+        templates: {
+            input: "\n<div class=\"single-input\" id=\"%id\"></div>\n"
+        },
+        selectors: {
+            addInputButton: ".add-input-button",
+            inputContainer: ".input-container",
+            noteOutput: ".note-output",
+        },
         model: {
             outputChannel: 0
         },
         members: {
-            heldVelocities:    {},
-            playingVelocities: {},
-            targetState: {
-                heldNotes: 0
-            }
+            currentVelocity: 0,
+            currentPitch:    0,
+            targetVelocity:  0,
+            targetPitch:     0
         },
         invokers: {
-            sendToOutput: {
-                funcName: "flock.midi.interchange.demos.consensus.sendToOutput",
-                args: ["{that}.noteOutput", "{that}.uiOutput", "{arguments}.0"] // outputComponent, uiOutputComponent, message
+            addInput: {
+                funcName: "flock.midi.interchange.demos.consensus.addInput",
+                args: ["{that}"]
             },
             adjustCourse: {
                 funcName: "flock.midi.interchange.demos.consensus.adjustCourse",
                 args: ["{that}"]
             },
-            playAverageNote: {
-                funcName: "flock.midi.interchange.demos.consensus.playAverageNote",
-                args: ["{that}", "{arguments}.0", "{arguments}.1"] // that, averageNote, averageVelocity
+            updateTarget: {
+                funcName: "flock.midi.interchange.demos.consensus.updateTarget",
+                args:     ["{that}"]
+            },
+            sendToOutput: {
+                funcName: "flock.midi.interchange.demos.consensus.sendToOutput",
+                args: ["{that}.noteOutput", "{arguments}.0"] // outputComponent, message
+            }
+        },
+        dynamicComponents: {
+            noteInput: {
+                createOnEvent: "addInput",
+                container: "{arguments}.0",
+                type: "flock.midi.interchange.demos.consensus.input",
+                options: {
+                    boxLabel: "{arguments}.1",
+                    listeners: {
+                        "notesUpdated.updateTarget": {
+                            "func": "{flock.midi.interchange.demos.consensus}.updateTarget"
+                        }
+                    }
+                }
             }
         },
         components: {
             enviro: {
                 type: "flock.enviro"
-            },
-            noteInput: {
-                type: "flock.auto.ui.midiConnector",
-                container: "{that}.dom.noteInput",
-                options: {
-                    preferredDevice: "{consensus}.options.preferredInputDevice",
-                    portType: "input",
-                    components: {
-                        midiPortSelector: {
-                            options: {
-                                strings: {
-                                    selectBoxLabel: "Note Input",
-                                }
-                            }
-                        }
-                    },
-                    listeners: {
-                        "note": {
-                            funcName: "flock.midi.interchange.demos.consensus.handleNoteMessage",
-                            args: ["{consensus}", "{arguments}.0"] // midiMessage
-                        }
-                    }
-                }
             },
             noteOutput: {
                 type: "flock.auto.ui.midiConnector",
@@ -238,24 +295,6 @@
                             options: {
                                 strings: {
                                     selectBoxLabel: "Note Output",
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            // TODO: Configure the Launchpad Pro on startup.
-            uiOutput: {
-                type: "flock.auto.ui.midiConnector",
-                container: "{that}.dom.uiOutput",
-                options: {
-                    preferredDevice: "{consensus}.options.preferredUiOutputDevice",
-                    portType: "output",
-                    components: {
-                        midiPortSelector: {
-                            options: {
-                                strings: {
-                                    selectBoxLabel: "UI Output",
                                 }
                             }
                         }
@@ -277,9 +316,19 @@
             }
         },
         listeners: {
+            // Start the "course correction" polling.
             "onCreate.scheduleCourseAdjustment": {
                 funcName: "flock.midi.interchange.demos.consensus.scheduleCourseAdjustment",
                 args: ["{that}"]
+            },
+            "onCreate.addInput": {
+                "funcName": "{that}.addInput"
+            },
+            // TODO: Add keyboard input handling.
+            "onCreate.wireAddButtonClick": {
+                "this": "{that}.dom.addInputButton",
+                method: "on",
+                args:   ["click", "{that}.addInput"]
             }
         }
     });
