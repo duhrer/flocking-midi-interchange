@@ -145,7 +145,7 @@
         124: "#faeffa",
         125: "#fcfcfc",
         126: "#fdfdfd",
-        127: "#ffffff",
+        127: "#ffffff"
     };
 
     // "red shift" colour scheme where 0 is black, low (slow) frequencies are red, white is dead centre, and high (fast) frequencies are blue.
@@ -277,7 +277,7 @@
         124: "#0c0cff",
         125: "#0808ff",
         126: "#0404ff",
-        127: "#0000ff",
+        127: "#0000ff"
     };
 
     // Sampled from illustrations in the Launchpad Pro Programmer's Guide and device photos.

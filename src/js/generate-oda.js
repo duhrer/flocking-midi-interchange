@@ -1,3 +1,4 @@
+/* eslint-env node */
 /*
 
     Generate an ODA as JSON, and then produce an SVG file based on the same using xml-mapping.
@@ -72,7 +73,7 @@
 var fluid = require("infusion");
 var flock = fluid.registerNamespace("flock");
 
-var XMLMapping = require('xml-mapping');
+var XMLMapping = require("xml-mapping");
 var fs = require("fs");
 
 require("../../");
@@ -130,7 +131,7 @@ flock.midi.interchange.svgGen.singleRow.getXmlAsJson = function (that) {
     var svgAsJson = fluid.merge({}, that.options.baseXmlAsJson);
     // TODO: Figure out how to work this for things like the single pixel ODA that need to have a larger
     // document height.  Optional property?
-    var viewBoxHeight = (that.options.cellWidth + (that.options.strokeWidth/2));
+    var viewBoxHeight = (that.options.cellWidth + (that.options.strokeWidth / 2));
     var viewBoxWidth = 125 * ( viewBoxHeight + that.options.marginWidth);
     svgAsJson.svg.viewBox = [0, 0, viewBoxWidth, viewBoxHeight].join(" ");
     svgAsJson.svg.g = {
@@ -201,7 +202,7 @@ fluid.registerNamespace("flock.midi.interchange.svgGen.launchpadCommon");
 
 flock.midi.interchange.svgGen.launchpadCommon.getXmlAsJson = function (that) {
     var svgAsJson = fluid.merge({}, that.options.baseXmlAsJson);
-    var viewBoxHeight = (that.options.cellHeight + (that.options.strokeWidth/2)) * that.options.rows;
+    var viewBoxHeight = (that.options.cellHeight + (that.options.strokeWidth / 2)) * that.options.rows;
     var viewBoxWidth = that.options.columns * (that.options.cellWidth + that.options.marginWidth + that.options.strokeWidth);
     svgAsJson.svg.viewBox = [0, 0, viewBoxWidth, viewBoxHeight].join(" ");
     svgAsJson.svg.g = {
@@ -211,8 +212,8 @@ flock.midi.interchange.svgGen.launchpadCommon.getXmlAsJson = function (that) {
 
     for (var row = 0; row < that.options.rows ; row++) {
         for (var column = 0; column < that.options.columns; column++) {
-            var x = (that.options.cellWidth + that.options.marginWidth + (that.options.strokeWidth*2)) * column;
-            var y = (that.options.cellHeight + (that.options.strokeWidth*2)) * row;
+            var x = (that.options.cellWidth + that.options.marginWidth + (that.options.strokeWidth * 2)) * column;
+            var y = (that.options.cellHeight + (that.options.strokeWidth * 2)) * row;
             var note = (76 - (8 * row)) + column;
 
             var thisRect = {

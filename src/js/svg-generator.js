@@ -1,3 +1,4 @@
+/* eslint-env node */
 /*
 
     Generate a javascript "wrapper" for all SVG images found in `./src/images/`, and save them to the `dist` directory.

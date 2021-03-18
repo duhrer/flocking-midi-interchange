@@ -1,3 +1,5 @@
+/* eslint-env node */
+"use strict";
 var fluid = require("infusion");
 
 var my = fluid.registerNamespace("my");
@@ -8,8 +10,9 @@ my.component.addModelListener = function (that) {
     that.applier.modelChanged.addListener({ segs: ["very", "deep"] }, that.logModelChange, "nu-haim-space");
 };
 
-my.component.logModelChange = function (that, value, oldValue, pathSegs, changeRequest, transaction) {
-    console.log("value:", value, "pathSegs:", pathSegs);
+// that, value, oldValue, pathSegs, changeRequest, transaction
+my.component.logModelChange = function (that, value, oldValue, pathSegs) {
+    fluid.log("value:", value, "pathSegs:", pathSegs);
 };
 
 fluid.defaults("my.component", {

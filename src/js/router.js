@@ -1,4 +1,4 @@
-/* globals fluid, flock */
+/* eslint-env browser */
 (function (fluid, flock) {
     "use strict";
     fluid.registerNamespace("flock.midi.interchange");

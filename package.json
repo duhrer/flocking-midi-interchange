@@ -4,8 +4,7 @@
     "description": "A library to assist in writing declarative \"MIDI interchanges\", like arpeggiators, transposers, and even UI generators.",
     "main": "index.js",
     "scripts": {
-        "postinstall": "node src/js/generate-namespaced-svg-js-files.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "lint": "fluid-lint-all"
     },
     "author": "Tony Atkins <duhrer@gmail.com>",
     "license": "BSD-3-Clause",
@@ -16,11 +15,12 @@
         "infusion": "3.0.0-dev.20200326T173810Z.24ddb2718"
     },
     "devDependencies": {
-        "gpii-grunt-lint-all": "1.0.7",
-        "grunt": "1.2.1",
+        "eslint": "7.22.0",
+        "eslint-config-fluid": "2.0.0",
+        "fluid-lint-all": "1.0.4",
         "mkdirp": "1.0.4",
         "node-jqunit": "1.1.8",
-        "recursive-copy": "2.0.10",
+        "recursive-copy": "2.0.11",
         "rimraf": "3.0.2",
         "xml-mapping": "1.7.1"
     }

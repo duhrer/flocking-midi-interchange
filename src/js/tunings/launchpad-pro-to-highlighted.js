@@ -13,7 +13,6 @@
 
  */
 // TODO: Update the common launchpad tuning and make this the common grade instead.
-/* globals fluid, flock */
 (function (fluid, flock) {
     "use strict";
     fluid.registerNamespace("flock.midi.interchange.tunings.launchpadPro");
@@ -95,7 +94,7 @@
                     { inputValue: 15, outputValue: 28 },
                     { inputValue: 16, outputValue: 29 },
                     { inputValue: 17, outputValue: 30 },
-                    { inputValue: 18, outputValue: 31 },
+                    { inputValue: 18, outputValue: 31 }
                 ]
             }
         }

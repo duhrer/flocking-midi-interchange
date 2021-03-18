@@ -1,7 +1,6 @@
 // A simple "patchbay" to connect one MIDI device to another.
 (function (fluid, flock) {
     "use strict";
-
     fluid.registerNamespace("flock.midi.interchange.patchbay");
 
     flock.midi.interchange.patchbay.addRouter = function (that) {
@@ -33,7 +32,7 @@
                         midiPortSelector: {
                             options: {
                                 strings: {
-                                    selectBoxLabel: "Input",
+                                    selectBoxLabel: "Input"
                                 }
                             }
                         }
@@ -46,7 +45,7 @@
                         midiPortSelector: {
                             options: {
                                 strings: {
-                                    selectBoxLabel: "Output",
+                                    selectBoxLabel: "Output"
                                 }
                             }
                         }

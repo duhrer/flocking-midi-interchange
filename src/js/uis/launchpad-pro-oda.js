@@ -3,7 +3,7 @@
     "Onscreen Device Analogue" for the Novation Launchpad Pro.
 
  */
-(function (fluid, $){
+(function (fluid) {
     "use strict";
 
     fluid.defaults("flock.midi.interchange.oda.launchpadPro", {
@@ -12,4 +12,4 @@
         // TODO: Transition all traditional "map" approaches to use transforms instead.
         htmlColourByVelocity: flock.midi.interchange.colours.htmlColourByVelocity.launchpadPro
     });
-})(fluid, $);
+})(fluid);

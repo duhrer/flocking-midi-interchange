@@ -1,3 +1,4 @@
+/* eslint-env browser */
 /*
 
     Transform the Launchpad Pro's "programmer" tuning to a guitar-like "E" tuning, where:
@@ -20,7 +21,6 @@
 
     TODO: Add the right controls as additional notes for both the Launchpad and Launchpad Pro
  */
-/* globals fluid, flock */
 (function (fluid, flock) {
     "use strict";
     fluid.registerNamespace("flock.midi.interchange.tunings.launchpadPro");
@@ -113,7 +113,7 @@
                         { inputValue: 85, outputValue: 79 },
                         { inputValue: 86, outputValue: 80 },
                         { inputValue: 87, outputValue: 81 },
-                        { inputValue: 88, outputValue: 82 },
+                        { inputValue: 88, outputValue: 82 }
                     ]
                 }
             }
@@ -161,7 +161,7 @@
                         // "High D"
                         // 80c 81 82 83 84 85 86 87 88 89c => 86 87 88 89 90 91 92 93 94 95
                         { inputValue: 80, outputValue: 74 },
-                        { inputValue: 89, outputValue: 83 },
+                        { inputValue: 89, outputValue: 83 }
                     ]
                 }
             }

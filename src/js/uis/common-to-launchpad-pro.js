@@ -1,7 +1,8 @@
-(function (fluid, flock) {
+(function () {
     "use strict";
 
     // Sampled from illustrations in the Launchpad Pro Programmer's Guide
+    /* eslint-disable-next-line  no-unused-vars */
     var htmlByVelocity = {
         0: "#000000",
         1: "#191919",
@@ -132,4 +133,4 @@
         126: "#B45905",
         127: "#461401"
     };
-})(fluid, flock);
+})();

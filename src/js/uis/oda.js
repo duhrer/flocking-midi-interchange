@@ -4,7 +4,7 @@
     Ableton Push.
 
  */
-(function (fluid, $){
+(function (fluid, $) {
     "use strict";
     var flock = fluid.registerNamespace("flock");
 
@@ -42,12 +42,12 @@
         if (targetDetails.type === "cc") {
             message.type   = "control";
             message.number = targetDetails.number;
-            message.value  = eventType === "down" ? 127: 0;
+            message.value  = eventType === "down" ? 127 : 0;
         }
         else {
-            message.type     = eventType === "down" ? "noteOn": "noteOff";
+            message.type     = eventType === "down" ? "noteOn" : "noteOff";
             message.note     = targetDetails.number;
-            message.velocity = eventType === "down" ? 127: 0;
+            message.velocity = eventType === "down" ? 127 : 0;
         }
         that.events.outputMessage.fire(message);
     };
@@ -114,7 +114,7 @@
         selectors: {
             control: ".device-control",
             frame:   "#device-frame",
-            note:    ".device-note",
+            note:    ".device-note"
         },
         invokers: {
             "handleMouseDown": {

@@ -12,7 +12,6 @@
     11 12 13 14 15 16 17 18         =>              20 21 22 23 24 25 26 27
 
  */
-/* globals fluid, flock */
 (function (fluid, flock) {
     "use strict";
     fluid.registerNamespace("flock.midi.interchange.tunings.launchpadPro");
@@ -94,7 +93,7 @@
                     { inputValue: 15, outputValue: 24 },
                     { inputValue: 16, outputValue: 25 },
                     { inputValue: 17, outputValue: 26 },
-                    { inputValue: 18, outputValue: 27 },
+                    { inputValue: 18, outputValue: 27 }
                 ]
             }
         }

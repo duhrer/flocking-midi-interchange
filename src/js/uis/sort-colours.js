@@ -1,6 +1,8 @@
+/* eslint-env node */
+"use strict";
 var fluid = require("infusion");
 
-invertMap = function (originalMap) {
+var invertMap = function (originalMap) {
     var flippedMap = {};
     fluid.each(originalMap, function (value, key) {
         flippedMap[value] = key;
@@ -8,7 +10,7 @@ invertMap = function (originalMap) {
     return flippedMap;
 };
 
-colourByVelocity = {
+var colourByVelocity = {
     0: "#000000",
     1: "#CCCCCC",
     2: "#EEEEEE",
@@ -149,13 +151,14 @@ keys.sort(function (a, b) {
     return intA - intB;
 });
 
-console.log("{");
+fluid.log("{");
 fluid.each(keys, function (colour) {
-    var velocity = velocityByColour[colour]
-    console.log(velocity + ": \"" + colour + "\",")
+    var velocity = velocityByColour[colour];
+    fluid.log(velocity + ": \"" + colour + "\",");
 });
-console.log("}");
+fluid.log("}");
 
+/* eslint-disable-next-line  no-unused-vars */
 var foo = {
     0: "#000000",
     87: "#00FF00",
@@ -281,5 +284,5 @@ var foo = {
     124: "#FEFF33",
     5: "#FF0000",
     12: "#ffdd66",
-    3: "#FFFFFF",
+    3: "#FFFFFF"
 };

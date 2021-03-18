@@ -56,7 +56,7 @@
                         midiPortSelector: {
                             options: {
                                 strings: {
-                                    selectBoxLabel: "UI Output",
+                                    selectBoxLabel: "UI Output"
                                 }
                             }
                         },
@@ -119,5 +119,5 @@
                 }
             }
         }
-    })
+    });
 })(fluid, flock);

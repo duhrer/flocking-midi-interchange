@@ -14,7 +14,6 @@
     112 113 114 115 116 117 118 119       =>        39 43 47 51 55 59 63 67
 
  */
-/* globals fluid, flock */
 (function (fluid, flock) {
     "use strict";
     fluid.registerNamespace("flock.midi.interchange.tunings.launchpadPro");
