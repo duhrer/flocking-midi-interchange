@@ -64,7 +64,7 @@
     };
 
     fluid.defaults("flock.midi.interchange.demos.consensus.input", {
-        gradeNames: ["flock.auto.ui.midiConnector"],
+        gradeNames: ["flock.midi.connectorView"],
         portType: "input",
         boxLabel: "Input",
         events: {
@@ -111,7 +111,7 @@
         var weightedPitch = totalVelocity ? Math.round(totalPitchWeightedVelocity / totalVelocity) : 0;
         var averageVelocity = totalHeldNotes ? Math.round(totalVelocity / totalHeldNotes) : 0;
 
-        console.log("targetPitch:", weightedPitch, "targetVelocity:", averageVelocity);
+        // console.log("targetPitch:", weightedPitch, "targetVelocity:", averageVelocity);
         that.targetPitch    = weightedPitch;
         that.targetVelocity = averageVelocity;
     };
@@ -198,13 +198,53 @@
                     velocity: newVelocity
                 };
 
-                console.log(JSON.stringify(noteOnMessage, null, 2));
+                // console.log(JSON.stringify(noteOnMessage, null, 2));
                 that.sendToOutput(noteOnMessage);
 
                 that.currentVelocity = newVelocity;
                 that.currentPitch    = newPitch;
             }
+
+            that.updateCanvas();
         }
+    };
+
+    flock.midi.interchange.demos.consensus.updateCanvas = function (that) {
+        var canvas = document.getElementById("consensus-oscilloscope");
+        var context = canvas.getContext("2d");
+        // Clear the current contents;
+        context.fillStyle = "rgba(0,0,0,1)";
+        context.fillRect(0,0, canvas.width, canvas.height);
+
+        // Draw the notes held on each controller.
+        var allInputs = fluid.queryIoCSelector(that, "flock.midi.interchange.demos.consensus.input");
+        fluid.each(allInputs, function (inputComponent, componentIndex) {
+            var pointerColour = that.options.instrumentColours[componentIndex % 4];
+            fluid.each(inputComponent.velocityByNote, function (velocity, pitch) {
+                flock.midi.interchange.demos.consensus.drawPointer(context, pitch, velocity, pointerColour, componentIndex + 1);
+            });
+        });
+
+        // Draw the "current" and "target" notes.
+        if (that.currentPitch !== that.targetPitch) {
+            flock.midi.interchange.demos.consensus.drawPointer(context, that.targetPitch, that.targetVelocity, that.options.targetNoteColour, 0);
+        }
+
+        flock.midi.interchange.demos.consensus.drawPointer(context, that.currentPitch, that.currentVelocity, that.options.currentNoteColour, 0);
+    };
+
+    flock.midi.interchange.demos.consensus.drawPointer = function (context, pitch, velocity, colour, offset) {
+        var radius = Math.log2(Math.max(velocity, 1));
+        var cx = ((context.canvas.width / 128) * pitch) + (radius/2);
+
+        // Stagger instruments around the central "average" track.
+        var yOffsetDir = offset % 2 ? 1 : -1;
+        var cy = (context.canvas.height / 2) + (15 * Math.ceil(offset / 2) * yOffsetDir);
+
+        context.beginPath();
+        context.arc(cx, cy, radius, 0, 2 * Math.PI);
+        context.fillStyle = colour;
+        context.fill();
     };
 
     flock.midi.interchange.demos.consensus.addInput = function (that) {
@@ -227,6 +267,13 @@
 
     fluid.defaults("flock.midi.interchange.demos.consensus", {
         gradeNames: ["fluid.viewComponent"],
+        instrumentColours: [
+            "#00ff0099",
+            "#0000ff99",
+            "#ff000099",
+        ],
+        currentNoteColour: "#ffffff",
+        targetNoteColour: "#999999",
         events: {
             addInput: null
         },
@@ -256,6 +303,10 @@
                 funcName: "flock.midi.interchange.demos.consensus.adjustCourse",
                 args: ["{that}"]
             },
+            updateCanvas: {
+                funcName: "flock.midi.interchange.demos.consensus.updateCanvas",
+                args:     ["{that}"]
+            },
             updateTarget: {
                 funcName: "flock.midi.interchange.demos.consensus.updateTarget",
                 args:     ["{that}"]
@@ -281,14 +332,11 @@
             }
         },
         components: {
-            enviro: {
-                type: "flock.enviro"
-            },
             noteOutput: {
-                type: "flock.auto.ui.midiConnector",
+                type: "flock.midi.connectorView",
                 container: "{that}.dom.noteOutput",
                 options: {
-                    preferredDevice: "{consensus}.options.preferredOutputDevice",
+                    preferredPort: "{consensus}.options.preferredOutputDevice",
                     portType: "output",
                     components: {
                         midiPortSelector: {

@@ -149,7 +149,7 @@
         distributeOptions: [
             {
                 source: "{that}.options.sysex",
-                target: "{that flock.auto.midi.system}.options.sysex"
+                target: "{that flock.midi.system}.options.sysex"
             },
             {
                 source: "{that}.options.sysex",
@@ -157,9 +157,6 @@
             }
         ],
         components: {
-            enviro: {
-                type: "flock.enviro"
-            },
             router: {
                 type: "flock.midi.interchange.transformingRouter",
                 options: {
@@ -179,18 +176,18 @@
                 }
             },
             noteInput: {
-                type: "flock.auto.ui.midiConnector",
+                type: "flock.midi.connectorView",
                 container: "{that}.dom.noteInput",
                 options: {
-                    preferredDevice: "{transformingRouterHarness}.options.preferredInputDevice",
+                    preferredPort: "{transformingRouterHarness}.options.preferredInputDevice",
                     portType: "input"
                 }
             },
             noteOutput: {
-                type: "flock.auto.ui.midiConnector",
+                type: "flock.midi.connectorView",
                 container: "{that}.dom.noteOutput",
                 options: {
-                    preferredDevice: "{transformingRouterHarness}.options.preferredOutputDevice",
+                    preferredPort: "{transformingRouterHarness}.options.preferredOutputDevice",
                     portType: "output"
                 }
             }

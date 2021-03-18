@@ -85,7 +85,7 @@
 
     fluid.defaults("flock.midi.interchange.connector.input", {
         portType: "input",
-        gradeNames: ["flock.auto.ui.midiConnector"],
+        gradeNames: ["flock.midi.connectorView"],
         rules: {
             note: {
                 pathSegments: [
@@ -209,7 +209,7 @@
     };
 
     fluid.defaults("flock.midi.interchange.connector.output", {
-        gradeNames: ["flock.auto.ui.midiConnector"],
+        gradeNames: ["flock.midi.connectorView"],
         portType: "output",
         // inverse transforms based on change and path
         rules: {

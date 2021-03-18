@@ -224,14 +224,11 @@
             uiOutput:   ".ui-output"
         },
         components: {
-            enviro: {
-                type: "flock.enviro"
-            },
             noteInput: {
-                type: "flock.auto.ui.midiConnector",
+                type: "flock.midi.connectorView",
                 container: "{that}.dom.noteInput",
                 options: {
-                    preferredDevice: "{aurora}.options.preferredInputDevice",
+                    preferredPort: "{aurora}.options.preferredInputDevice",
                     portType: "input",
                     components: {
                         midiPortSelector: {
@@ -245,10 +242,10 @@
                 }
             },
             noteOutput: {
-                type: "flock.auto.ui.midiConnector",
+                type: "flock.midi.connectorView",
                 container: "{that}.dom.noteOutput",
                 options: {
-                    preferredDevice: "{aurora}.options.preferredOutputDevice",
+                    preferredPort: "{aurora}.options.preferredOutputDevice",
                     portType: "output",
                     components: {
                         midiPortSelector: {
@@ -262,11 +259,11 @@
                 }
             },
             uiOutput: {
-                type: "flock.auto.ui.midiConnector",
+                type: "flock.midi.connectorView",
                 container: "{that}.dom.uiOutput",
                 options: {
                     portType: "output",
-                    preferredDevice: "{aurora}.options.preferredUIOutputDevice",
+                    preferredPort: "{aurora}.options.preferredUIOutputDevice",
                     components: {
                         connection: {
                             options: {

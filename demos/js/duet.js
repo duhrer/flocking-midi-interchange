@@ -110,7 +110,7 @@
         distributeOptions: [
             {
                 source: "{that}.options.sysex",
-                target: "{that flock.auto.midi.system}.options.sysex"
+                target: "{that flock.midi.system}.options.sysex"
             },
             {
                 source: "{that}.options.sysex",
@@ -118,11 +118,8 @@
             }
         ],
         components: {
-            enviro: {
-                type: "flock.enviro"
-            },
             leftInput: {
-                type: "flock.auto.ui.midiConnector",
+                type: "flock.midi.connectorView",
                 container: "{that}.dom.leftInput",
                 options: {
                     portType: "input"
@@ -148,14 +145,14 @@
                 }
             },
             leftOutput: {
-                type: "flock.auto.ui.midiConnector",
+                type: "flock.midi.connectorView",
                 container: "{that}.dom.leftOutput",
                 options: {
                     portType: "output"
                 }
             },
             rightInput: {
-                type: "flock.auto.ui.midiConnector",
+                type: "flock.midi.connectorView",
                 container: "{that}.dom.rightInput",
                 options: {
                     portType: "input"
@@ -181,14 +178,14 @@
                 }
             },
             rightOutput: {
-                type: "flock.auto.ui.midiConnector",
+                type: "flock.midi.connectorView",
                 container: "{that}.dom.rightOutput",
                 options: {
                     portType: "output"
                 }
             },
             combinedOutput: {
-                type: "flock.auto.ui.midiConnector",
+                type: "flock.midi.connectorView",
                 container: "{that}.dom.combinedOutput",
                 options: {
                     portType: "output"
@@ -372,7 +369,7 @@
         components: {
             leftInput: {
                 options: {
-                    preferredDevice: "Launchpad"
+                    preferredPort: "Launchpad"
                 }
             },
             leftRouter: {
@@ -384,12 +381,12 @@
             },
             leftOutput: {
                 options: {
-                    preferredDevice: "Launchpad"
+                    preferredPort: "Launchpad"
                 }
             },
             rightInput: {
                 options: {
-                    preferredDevice: "Launchpad Pro Standalone Port"
+                    preferredPort: "Launchpad Pro Standalone Port"
                 }
             },
             rightRouter: {
@@ -401,7 +398,7 @@
             },
             rightOutput: {
                 options: {
-                    preferredDevice: "Launchpad Pro Standalone Port",
+                    preferredPort: "Launchpad Pro Standalone Port",
                     components: {
                         connection: {
                             options: {
@@ -430,7 +427,7 @@
         components: {
             leftInput: {
                 options: {
-                    preferredDevice: "Launchpad"
+                    preferredPort: "Launchpad"
                 }
             },
             leftRouter: {
@@ -442,17 +439,17 @@
             },
             leftOutput: {
                 options: {
-                    preferredDevice: "Launchpad"
+                    preferredPort: "Launchpad"
                 }
             },
             rightInput: {
                 options: {
-                    preferredDevice: "EIE"
+                    preferredPort: "EIE"
                 }
             },
             combinedOutput: {
                 options: {
-                    preferredDevice: "MIDI Patchbay Input"
+                    preferredPort: "MIDI Patchbay Input"
                 }
             }
         }

@@ -89,14 +89,11 @@
             }
         },
         components: {
-            enviro: {
-                type: "flock.enviro"
-            },
             noteInput: {
-                type: "flock.auto.ui.midiConnector",
+                type: "flock.midi.connectorView",
                 container: "{that}.dom.noteInput",
                 options: {
-                    preferredDevice: "{loom}.options.preferredInputDevice",
+                    preferredPort: "{loom}.options.preferredInputDevice",
                     portType: "input"
                 }
             }

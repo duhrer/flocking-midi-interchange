@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>"Extended Release" Demo</title>
+    <title>LUMI Demo</title>
 
     <script src="../node_modules/infusion/dist/infusion-all.js"></script>
 
@@ -17,23 +17,19 @@
     <script src="../node_modules/flocking-midi/src/ui/connector-view/js/connector-view.js"></script>
     <script src="../node_modules/flocking-midi/src/ui/message-monitor-view/js/message-monitor-view.js"></script>
 
-    <!-- Bergson dependencies -->
-    <script src="../node_modules/bergson/dist/bergson-only.js"></script>
-
-    <script src="../src/js/router.js"></script>
-
-    <script src="./js/extended-release.js"></script>
+    <script src="js/lumi.js"></script>
 </head>
-<body bgcolor="black">
-    <h1>"Extended Release" Demo</h1>
+<body>
+<div style="width:100%" align="center">
+    <h1>LUMI Demo</h1>
 
-    <div class="extended-release-container">
-        <div class="note-input"></div>
-        <div class="note-output"></div>
-    </div>
+    <div class="note-input"></div>
+    <div class="ui-output"></div>
+    <div class="note-output"></div>
+</div>
 
-    <script type="text/javascript">
-        var extendedRelease = flock.midi.interchange.demos.extendedRelease(".extended-release-container");
-    </script>
+<script type="text/javascript">
+    var lumi = flock.midi.interchange.demos.lumi("body");
+</script>
 </body>
 </html>

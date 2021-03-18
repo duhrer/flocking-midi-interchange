@@ -10,18 +10,18 @@
     "author": "Tony Atkins <duhrer@gmail.com>",
     "license": "BSD-3-Clause",
     "dependencies": {
-        "bergson": "0.14.0",
-        "flocking": "2.0.0-dev.20190101T211732Z.efbf6e2",
-        "flocking-midi-select-ng": "1.0.0-dev.20190219T121520Z.893914c",
-        "infusion": "3.0.0-dev.20190212T124747Z.23b4bc89d"
+        "bergson": "0.14.1",
+        "flocking": "2.0.2",
+        "flocking-midi": "colinbdclark/flocking-midi#gh-30",
+        "infusion": "3.0.0-dev.20200326T173810Z.24ddb2718"
     },
     "devDependencies": {
-        "gpii-grunt-lint-all": "1.0.0-dev.20180629T081932Z.8a1f7fe",
-        "grunt": "1.0.1",
-        "mkdirp": "^0.5.1",
+        "gpii-grunt-lint-all": "1.0.7",
+        "grunt": "1.2.1",
+        "mkdirp": "1.0.4",
         "node-jqunit": "1.1.8",
-        "recursive-copy": "^2.0.10",
-        "rimraf": "^3.0.0",
+        "recursive-copy": "2.0.10",
+        "rimraf": "3.0.2",
         "xml-mapping": "1.7.1"
     }
 }

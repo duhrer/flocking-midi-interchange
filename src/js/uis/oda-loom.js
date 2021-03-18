@@ -47,10 +47,10 @@
         },
         components: {
             uiOutput: {
-                type: "flock.auto.ui.midiConnector",
+                type: "flock.midi.connectorView",
                 container: "{that}.dom.uiOutput",
                 options: {
-                    preferredDevice: "{loom}.options.preferredUiOutput",
+                    preferredPort: "{loom}.options.preferredUiOutput",
                     portType: "output",
                     components: {
                         midiPortSelector: {
@@ -97,7 +97,7 @@
             },
             noteInput: {
                 options: {
-                    preferredDevice: "{loom}.options.preferredInput",
+                    preferredPort: "{loom}.options.preferredInput",
                     listeners: {
                         "control.displayOnOda": {
                             func: "{oda}.events.control.fire",

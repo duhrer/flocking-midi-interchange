@@ -281,8 +281,8 @@
     // handling "asymmetric" UI and note outputs that need different transforms.
     fluid.defaults("flock.midi.interchange.demos.bifrost", {
         gradeNames: ["fluid.viewComponent"],
-        preferredInputDevice:    "Launchpad Pro Standalone Port",
-        preferredUIOutputDevice: "Launchpad Pro Standalone Port",
+        preferredInputDevice:    "Launchpad Pro 1 Standalone Port",
+        preferredUIOutputDevice: "Launchpad Pro 1 Standalone Port",
         model: {
             brightness: 63,
             contrast:   1,
@@ -328,14 +328,11 @@
             uiOutput:   ".ui-output"
         },
         components: {
-            enviro: {
-                type: "flock.enviro"
-            },
             noteInput: {
-                type: "flock.auto.ui.midiConnector",
+                type: "flock.midi.connectorView",
                 container: "{that}.dom.noteInput",
                 options: {
-                    preferredDevice: "{bifrost}.options.preferredInputDevice",
+                    preferredPort: "{bifrost}.options.preferredInputDevice",
                     portType: "input",
                     components: {
                         midiPortSelector: {
@@ -349,10 +346,10 @@
                 }
             },
             noteOutput: {
-                type: "flock.auto.ui.midiConnector",
+                type: "flock.midi.connectorView",
                 container: "{that}.dom.noteOutput",
                 options: {
-                    preferredDevice: "{bifrost}.options.preferredOutputDevice",
+                    preferredPort: "{bifrost}.options.preferredOutputDevice",
                     portType: "output",
                     components: {
                         midiPortSelector: {
@@ -366,11 +363,11 @@
                 }
             },
             uiOutput: {
-                type: "flock.auto.ui.midiConnector",
+                type: "flock.midi.connectorView",
                 container: "{that}.dom.uiOutput",
                 options: {
                     portType: "output",
-                    preferredDevice: "{bifrost}.options.preferredUIOutputDevice",
+                    preferredPort: "{bifrost}.options.preferredUIOutputDevice",
                     components: {
                         connection: {
                             options: {
