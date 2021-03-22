@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>Launchpad Pong</title>
+
+    <script src="../node_modules/infusion/dist/infusion-all.js"></script>
+
+    <script src="../node_modules/flocking-midi/src/core.js"></script>
+    <script src="../node_modules/flocking-midi/src/receiver.js"></script>
+    <script src="../node_modules/flocking-midi/src/connection.js"></script>
+    <script src="../node_modules/flocking-midi/src/system.js"></script>
+    <script src="../node_modules/flocking-midi/src/controller.js"></script>
+
+    <script src="../node_modules/flocking/src/ui/selectbox/js/selectbox.js"></script>
+
+    <script src="../node_modules/flocking-midi/src/ui/port-selector/js/port-selector.js"></script>
+    <script src="../node_modules/flocking-midi/src/ui/port-selector/js/port-select-box.js"></script>
+    <script src="../node_modules/flocking-midi/src/ui/connector-view/js/connector-view.js"></script>
+    <script src="../node_modules/flocking-midi/src/ui/message-monitor-view/js/message-monitor-view.js"></script>
+
+    <!-- Bergson dependencies -->
+    <script src="../node_modules/bergson/dist/bergson-only.js"></script>
+
+    <script src="../src/js/router.js"></script>
+    <script src="../src/js/tunings/launchpad-pro-to-common.js"></script>
+
+    <script src="./js/launchpad-pong.js"></script>
+</head>
+<body>
+<div id="launchpad-pong-loom">
+    <div class="note-input"></div>
+    <div class="note-output"></div>
+
+    <div class="ui-output"></div>
+</div>
+
+<script type="text/javascript">
+    flock.midi.interchange.demos.launchpadPong("body");
+</script>
+</body>
+</html>
