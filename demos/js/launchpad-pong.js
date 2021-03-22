@@ -2,7 +2,6 @@
     "use strict";
     fluid.registerNamespace("flock.midi.interchange.demos.launchpadPong");
 
-
     fluid.defaults("flock.midi.interchange.demos.launchpadPong", {
         gradeNames: ["fluid.viewComponent"],
         preferredInputDevice:    "Launchpad Pro 7 Standalone Port",
@@ -54,7 +53,6 @@
             noteOutput: ".note-output",
             uiOutput:   ".ui-output"
         },
-        // TODO: Add bergson scheduler
         components: {
             noteInput: {
                 type: "flock.midi.connectorView",
@@ -259,13 +257,16 @@
 
                 // Display "ball" if this is its position
                 if (col === that.ball.col && row === that.ball.row) {
-                    var ballColours = flock.midi.interchange.demos.launchpadPong.generateSingleCellColours(that, 1);
+                    // Play updated note if it hasn't already been played as an "impact".
+                    var ballNote = flock.midi.interchange.demos.launchpadPong.noteFromPosition(that.ball.row, that.ball.col);
+                    var ballOpacity = that.impactNotes[ballNote] ? 1 : 0.25;
+                    var ballColours = flock.midi.interchange.demos.launchpadPong.generateSingleCellColours(that, ballOpacity);
                     allNotes.push(ballColours);
                 }
                 // Otherwise, display any held notes.
                 else {
                     var isHeld = fluid.get(that.activeNotes, noteForPosition);
-                    var cellOpacity = isHeld ? 0.75 : 0;
+                    var cellOpacity = isHeld ? 0.125 : 0;
                     var singleCellColours = flock.midi.interchange.demos.launchpadPong.generateSingleCellColours(that, cellOpacity);
                     allNotes.push(singleCellColours);
                 }
@@ -295,7 +296,6 @@
 
     flock.midi.interchange.demos.launchpadPong.handleControl = function (that, midiMessage) {
         // TODO: Add support for raising/lowering pitch
-        // TODO: Add support for increasing/decreasing speed
         if (midiMessage.value) {
             if (midiMessage.number >=1 && midiMessage.number <=8) {
                 // CCs one through eight control the colour
@@ -402,22 +402,6 @@
         var oldCommonRelativeMessage = fluid.model.transformWithRules(oldLaunchpadRelativeMessage, flock.midi.interchange.tunings.launchpadPro.common);
         that.sendToNoteOut(oldCommonRelativeMessage);
 
-        // Clear out any notes previously triggered by an impact.
-        fluid.each(that.impactNotes, function (isPlaying, impactNote) {
-            if (isPlaying) {
-                var impactLaunchpadRelativeMessage = {
-                    channel: 0,
-                    type: "noteOff",
-                    note: impactNote,
-                    velocity: 0
-                };
-                var impactCommonRelativeMessage = fluid.model.transformWithRules(impactLaunchpadRelativeMessage, flock.midi.interchange.tunings.launchpadPro.common);
-                that.sendToNoteOut(impactCommonRelativeMessage);
-
-                delete that.impactNotes[impactNote];
-            }
-        });
-
         var nextSpace = flock.midi.interchange.demos.launchpadPong.calculateNextSpace(that);
         var nextSpaceWithBlockers = flock.midi.interchange.demos.launchpadPong.calculateBlockers(that, nextSpace);
 
@@ -438,20 +422,12 @@
 
          */
 
-        var playCollision = false;
-
-        // Go straight by default.
-        var nextRow = that.ball.row + that.ball.vy;
-        var nextCol = that.ball.col + that.ball.vx;
-
-        var impactRow = nextRow;
-        var impactCol = nextCol;
-
+        var willCollide = false;
         var angleChange = 0;
 
         // The square dead in front of us is blocked.
         if (nextSpaceWithBlockers.center.isBlocked) {
-            playCollision = true;
+            willCollide = true;
 
             var isDiagonal = (Math.abs(that.ball.vx) + Math.abs(that.ball.vy)) === 2;
             if (isDiagonal && nextSpaceWithBlockers.center.isWall) {
@@ -461,71 +437,91 @@
                 if (nextSpaceWithBlockers.center.row < 0 || nextSpaceWithBlockers.center.row > 7) {
                     that.ball.vy *= -1;
                 }
-                nextRow = that.ball.row + that.ball.vy;
-                nextCol = that.ball.col + that.ball.vx;
             }
             else {
                 that.ball.vx *= -1;
                 that.ball.vy *= -1;
-                nextRow = that.ball.row + that.ball.vy;
-                nextCol = that.ball.col + that.ball.vx;
             }
         }
         else if (nextSpaceWithBlockers.left.isBlocked && !nextSpaceWithBlockers.right.isBlocked) {
-            playCollision = true;
+            willCollide = true;
 
             // Nudge right by 45 degrees.
             angleChange = 45;
         }
         else if (nextSpaceWithBlockers.right.isBlocked && !nextSpaceWithBlockers.left.isBlocked) {
-            playCollision = true;
+            willCollide = true;
 
             // Nudge left by 45 degrees.
             angleChange = -45;
         }
 
-        if (angleChange) {
-            var currentAngle = flock.midi.interchange.demos.launchpadPong.angleFromVelocities(that.ball.vx, that.ball.vy);
-            var newAngle = currentAngle + angleChange;
-            var newRadians = newAngle * Math.PI / 180;
-            that.ball.vx = Math.round(Math.cos(newRadians));
-            that.ball.vy = Math.round(Math.sin(newRadians));
-            nextRow = that.ball.row + that.ball.vy;
-            nextCol = that.ball.col + that.ball.vx;
-        }
+        if (willCollide) {
+            if (angleChange) {
+                var currentAngle = flock.midi.interchange.demos.launchpadPong.angleFromVelocities(that.ball.vx, that.ball.vy);
+                var newAngle = currentAngle + angleChange;
+                var newRadians = newAngle * Math.PI / 180;
+                that.ball.vx = Math.round(Math.cos(newRadians));
+                that.ball.vy = Math.round(Math.sin(newRadians));
+            }
 
-        if (playCollision) {
-            // Play a note for the point of impact.
-            var impactNote = flock.midi.interchange.demos.launchpadPong.noteFromPosition(impactRow, impactCol);
+            // Play a note for the ball.
+            var ballNote = flock.midi.interchange.demos.launchpadPong.noteFromPosition(that.ball.row, that.ball.col);
             var impactLaunchpadRelativeMessage = {
                 channel: 0,
                 type: "noteOn",
-                note: impactNote,
-                velocity: 127
+                note: ballNote,
+                velocity: that.model.colourScheme.velocity
             };
+
+            that.sendToUi(impactLaunchpadRelativeMessage);
+
             var impactCommonRelativedMessage = fluid.model.transformWithRules(impactLaunchpadRelativeMessage, flock.midi.interchange.tunings.launchpadPro.common);
+            impactCommonRelativedMessage.velocity = 127;
             that.sendToNoteOut(impactCommonRelativedMessage);
 
-            that.impactNotes[impactNote] = true;
+            that.impactNotes[ballNote] = that.impactNotes[ballNote] ? that.impactNotes[ballNote]++ : 1;
         }
+        else {
+            var nextRow = that.ball.row + that.ball.vy;
+            var nextCol = that.ball.col + that.ball.vx;
 
-        // Play updated note.
-        var newNote = flock.midi.interchange.demos.launchpadPong.noteFromPosition(nextRow, nextCol);
-        var newLaunchpadRelativeMessage = {
-            channel: 0,
-            type: "noteOn",
-            note: newNote,
-            velocity: 16
-        };
+            // Clear out any notes previously triggered by an impact.
+            fluid.each(that.impactNotes, function (timesToPlay, impactNote) {
+                // Anything > 0, keep the note playing.
+                if (timesToPlay) {
+                    that.impactNotes[impactNote]--;
+                }
+                // On zero, stop the note and then stop tracking this as an impact note.
+                else {
+                    var impactLaunchpadRelativeMessage = {
+                        channel: 0,
+                        type: "noteOff",
+                        note: impactNote,
+                        velocity: 0
+                    };
+                    var impactCommonRelativeMessage = fluid.model.transformWithRules(impactLaunchpadRelativeMessage, flock.midi.interchange.tunings.launchpadPro.common);
+                    that.sendToNoteOut(impactCommonRelativeMessage);
+                    delete that.impactNotes[impactNote]
+                }
+            });
 
-        var newCommonRelativedMessage = fluid.model.transformWithRules(newLaunchpadRelativeMessage, flock.midi.interchange.tunings.launchpadPro.common);
-        that.sendToNoteOut(newCommonRelativedMessage);
+            var newNote = flock.midi.interchange.demos.launchpadPong.noteFromPosition(nextRow, nextCol);
+            var newLaunchpadRelativeMessage = {
+                channel: 0,
+                type: "noteOn",
+                note: newNote,
+                velocity: 16
+            };
 
-        that.ball.row = nextRow;
-        that.ball.col = nextCol;
+            var newCommonRelativedMessage = fluid.model.transformWithRules(newLaunchpadRelativeMessage, flock.midi.interchange.tunings.launchpadPro.common);
+            that.sendToNoteOut(newCommonRelativedMessage);
 
-        flock.midi.interchange.demos.launchpadPong.paintDevice(that);
-        // TODO: Apply any changes to the speed.
+            that.ball.row = nextRow;
+            that.ball.col = nextCol;
+
+            flock.midi.interchange.demos.launchpadPong.paintDevice(that);
+        }
     };
 
     // Calculate the "left", "center" and "right" squares that are right in "front" of us.
