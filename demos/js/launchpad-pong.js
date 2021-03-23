@@ -32,8 +32,8 @@
             violet: { r: 1, g: 0,    b: 1, control: 8, velocity: 53 }
         },
         members: {
-            bpm: 120,
-            currentBpm: 120,
+            bpm: 256,
+            currentBpm: 256,
             impactNotes: {},
             activeNotes: {},
             ball: {
@@ -322,14 +322,14 @@
             // }
             // Decrease BPM on left arrow.
             else if (midiMessage.number === 93) {
-                if (that.bpm > 20) {
-                    that.bpm -= 20;
+                if (that.bpm > 16) {
+                    that.bpm /= Math.sqrt(2);
                 }
             }
             // Increase BPM on right arrow.
             else if (midiMessage.number === 94) {
-                if (that.bpm < 1200) {
-                    that.bpm += 20;
+                if (that.bpm < 2400) {
+                    that.bpm *= Math.sqrt(2);
                 }
             }
         }
