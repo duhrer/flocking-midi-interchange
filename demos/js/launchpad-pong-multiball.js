@@ -274,9 +274,17 @@
             for (var col = 0; col < 8; col++) {
                 var noteForPosition = flock.midi.interchange.demos.launchpadPong.noteFromPosition(row, col);
 
+                var isHeld = fluid.get(that.activeNotes, noteForPosition);
                 var ballAtPosition = fluid.get(ballPositions, [row, col]);
+
+                // Display as a "held" note if this note is being pressed.
+                if (isHeld) {
+                    var cellOpacity = isHeld ? 0.125 : 0;
+                    var singleCellColours = flock.midi.interchange.demos.launchpadPong.generateSingleCellColours(that, cellOpacity);
+                    allNotes.push(singleCellColours);
+                }
                 // Display "ball" if on is at this position.
-                if ( ballAtPosition !== undefined) {
+                else if ( ballAtPosition !== undefined) {
                     // Play updated note if it hasn't already been played as an "impact".
                     var ballNote = flock.midi.interchange.demos.launchpadPong.noteFromPosition(row, col);
                     var hitPointOpacity = ballAtPosition.hp / 4;
@@ -284,12 +292,9 @@
                     var ballColours = flock.midi.interchange.demos.launchpadPong.generateSingleCellColours(that, ballOpacity);
                     allNotes.push(ballColours);
                 }
-                // Otherwise, display any held notes.
                 else {
-                    var isHeld = fluid.get(that.activeNotes, noteForPosition);
-                    var cellOpacity = isHeld ? 0.125 : 0;
-                    var singleCellColours = flock.midi.interchange.demos.launchpadPong.generateSingleCellColours(that, cellOpacity);
-                    allNotes.push(singleCellColours);
+                    var emptyCellColours = flock.midi.interchange.demos.launchpadPong.generateSingleCellColours(that, 0);
+                    allNotes.push(emptyCellColours);
                 }
             }
         }
@@ -300,13 +305,13 @@
     flock.midi.interchange.demos.launchpadPong.multiball.handleNoteOn = function (that, originalMessage) {
         var transformedMessage = fluid.model.transformWithRules(originalMessage, flock.midi.interchange.tunings.launchpadPro.common);
 
-        // TODO: Add logic to handle hitting an existing ball directly.
+        // TODO: Add logic to handle hitting an existing ball with a new played note.
 
         // Add the note to the list of "held" notes (actual MIDI input value).
         // We use the original note because we are going to have to paint it on the raw device.
         that.activeNotes[originalMessage.note] = true;
 
-        flock.midi.interchange.demos.launchpadPong.paintDevice(that);
+        flock.midi.interchange.demos.launchpadPong.multiball.paintDevice(that);
 
         that.sendToNoteOut(transformedMessage);
     };
@@ -322,7 +327,7 @@
         var newBall = flock.midi.interchange.demos.launchpadPong.multiball.newBallFromReleasedNoteMessage(that, originalMessage);
         that.balls.push(newBall);
 
-        flock.midi.interchange.demos.launchpadPong.paintDevice(that);
+        flock.midi.interchange.demos.launchpadPong.multiball.paintDevice(that);
 
         // Pass the note along to the output device (we could make this conditional, but it's harmless).
         that.sendToNoteOut(transformedMessage);

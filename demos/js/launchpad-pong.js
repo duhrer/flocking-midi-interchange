@@ -498,7 +498,7 @@
             };
 
             // TODO: This seems wrong, and is clobbered by paintUI anyway.  Try removing.
-            that.sendToUi(impactLaunchpadRelativeMessage);
+            // that.sendToUi(impactLaunchpadRelativeMessage);
 
             var impactCommonRelativedMessage = fluid.model.transformWithRules(impactLaunchpadRelativeMessage, flock.midi.interchange.tunings.launchpadPro.common);
             impactCommonRelativedMessage.velocity = 127;
