@@ -335,6 +335,8 @@
 
     flock.midi.interchange.demos.launchpadPong.multiball.newBallFromReleasedNoteMessage = function (that, message) {
         var ballDef = flock.midi.interchange.demos.launchpadPong.positionFromNote(message.note);
+        // TODO: Figure out how to scale HP so that ball sticks around longer at higher speeds.
+        // ballDef.hp = Math.round(Math.log2(that.bpm));
         ballDef.hp = that.options.startingHitPoints;
 
         ballDef.vx = that.options.vxMap[ballDef.row][ballDef.col];
@@ -418,13 +420,17 @@
 
                     var remainingBalls = ballsInCell.slice(1);
                     fluid.each(remainingBalls, function (nextCollidingBall) {
-                        var vxDiff = firstCollidingBall.vx - nextCollidingBall.vx;
-                        firstCollidingBall.vx -= vxDiff;
-                        nextCollidingBall.vx  += vxDiff;
+                        if (firstCollidingBall.vx != nextCollidingBall.vx) {
+                            var currentNextCollidingBallVx = nextCollidingBall.vx;
+                            nextCollidingBall.vx = firstCollidingBall.vx;
+                            firstCollidingBall.vx = currentNextCollidingBallVx;
+                        }
 
-                        var vyDiff = firstCollidingBall.vy - nextCollidingBall.vy;
-                        firstCollidingBall.vy -= vyDiff;
-                        nextCollidingBall.vy  += vyDiff;
+                        if (firstCollidingBall.vy != nextCollidingBall.vy) {
+                            var currentNextCollidingBallVy = nextCollidingBall.vy;
+                            nextCollidingBall.vy = firstCollidingBall.vy;
+                            firstCollidingBall.vy = currentNextCollidingBallVy;
+                        }
 
                         nextCollidingBall.hp--;
                         firstCollidingBall = nextCollidingBall;

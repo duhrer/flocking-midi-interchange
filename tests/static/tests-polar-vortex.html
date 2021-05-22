@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Unit Tests for "Polar Vortex"</title>
+
+        <!-- Bring in jQuery and other dependencies -->
+        <script type="text/javascript" src="../../node_modules/infusion/src/lib/jquery/core/js/jquery.js"></script>
+
+        <!-- Bring in fluid dependencies -->
+        <script type="text/javascript" src="../../node_modules/infusion/dist/infusion-all.js"></script>
+
+        <!-- Bring in Flocking dependencies -->
+        <script type="text/javascript" src="../../node_modules/flocking/dist/flocking-no-jquery.js"></script>
+
+        <!-- QUnit/jqUnit dependencies -->
+        <script type="text/javascript" src="../../node_modules/infusion/tests/lib/qunit/js/qunit.js"></script>
+        <script type="text/javascript" src="../../node_modules/infusion/tests/test-core/jqUnit/js/jqUnit.js"></script>
+        <script type="text/javascript" src="../../node_modules/infusion/tests/test-core/jqUnit/js/jqUnit-browser.js"></script>
+        <script src="/testem.js"></script>
+
+        <link rel="stylesheet" href="../../node_modules/infusion/tests/lib/qunit/css/qunit.css"/>
+
+        <!-- Our test fixtures -->
+        <script type="text/javascript" src="./js/tests-fixtures.js"></script>
+
+        <!-- Bring in client library being tested -->
+        <script type="text/javascript" src="/coverage/client/coverageSender.js"></script>
+        <script type="text/javascript" src="../../demos/js/polar-vortex.js"></script>
+    </head>
+    <body>
+        <h1 id="qunit-header">"Polar Vortex" Unit Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+
+        <!-- our QUnit tests -->
+        <script type="text/javascript" src="js/jqunit-polar-vortex.js"></script>
+    </body>
+</html>

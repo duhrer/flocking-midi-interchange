@@ -210,10 +210,17 @@
             1
         ];
         var data = header.concat(colourArray);
-        that.sendToUi({
-            type: "sysex",
-            data: data
-        });
+
+        try {
+            that.sendToUi({
+                type: "sysex",
+                data: data
+            });
+        }
+        catch (error) {
+            debugger;
+            console.error(error);
+        }
 
         // Paint the "side velocity" (0x63) a colour that matches the colour scheme.
         // F0h 00h 20h 29h 02h 10h 0Ah <velocity> <Colour> F7h

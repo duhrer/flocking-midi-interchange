@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Fluid Binder complete tests runner</title>
+
+    <link rel="stylesheet" href="../../node_modules/infusion/tests/lib/qunit/css/qunit.css"/>
+    <link rel="stylesheet" href="../../node_modules/infusion/tests/lib/qunit/addons/composite/qunit-composite.css"/>
+    <script type="text/javascript" src="../../node_modules/infusion/dist/infusion-all.js"></script>
+    <script type="text/javascript" src="../../node_modules/infusion/tests/lib/qunit/js/qunit.js"></script>
+    <script src="/testem.js"></script>
+    <script src="../../node_modules/infusion/tests/lib/qunit/addons/composite/qunit-composite.js"></script>
+
+    <script>
+        var rawTestSuites = {
+            "Binder Tests": [
+                "/tests-polar-vortex.html"
+            ]
+        };
+
+        fluid.each(rawTestSuites, function (tests, moduleName) {
+            var testsWithPaths = tests.map(function (entry) {
+                var leader = typeof Testem === "undefined" ? "." : "/tests/static";
+                return leader + entry;
+            });
+            QUnit.testSuites(moduleName, testsWithPaths);
+        });
+    </script>
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture">
+</div>
+</body>
+</html>
