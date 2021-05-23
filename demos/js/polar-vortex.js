@@ -37,6 +37,7 @@
         model: {
             attraction: -0.1,
             rotation: 30,
+            centrePitch: 220,
             colourScheme: "{that}.options.colourSchemes.white"
         },
         colourSchemes: {
@@ -235,7 +236,7 @@
                 var col = parseInt(matches[2], 10);
                 var firstCellDef = flock.midi.interchange.demos.polarVortex.getPolarFromXY(col, row);
                 firstCellDef.energy = 127;
-                var newChain = flock.midi.interchange.demos.polarVortex.createChain(firstCellDef);
+                var newChain = flock.midi.interchange.demos.polarVortex.createChain(that, firstCellDef);
                 that.tetheredChains["mouse"] = newChain;
             }
             catch (error) {
@@ -262,7 +263,7 @@
                     var col = parseInt(matches[2], 10);
                     var firstCellDef = flock.midi.interchange.demos.polarVortex.getPolarFromXY(col, row);
                     firstCellDef.energy = 127;
-                    var newChain = flock.midi.interchange.demos.polarVortex.createChain(firstCellDef);
+                    var newChain = flock.midi.interchange.demos.polarVortex.createChain(that, firstCellDef);
                     that.tetheredChains["keyboard-" + row + "-" + col] = newChain;
                 }
                 catch (error) {
@@ -318,7 +319,7 @@
     flock.midi.interchange.demos.polarVortex.handleNoteOn = function (that, midiMessage) {
         // Create a new "tethered chain" for this note.
         var firstCellDef = flock.midi.interchange.demos.polarVortex.polarFromMidiMessage(midiMessage);
-        var newChain = flock.midi.interchange.demos.polarVortex.createChain(firstCellDef);
+        var newChain = flock.midi.interchange.demos.polarVortex.createChain(that, firstCellDef);
         that.tetheredChains[midiMessage.note] = newChain;
     };
 
@@ -486,7 +487,7 @@
         return energyGrid;
     };
 
-    // TODO: Safely create an empty grid to use for grid-ising the raw position of all cells.
+    // Safely create an empty grid to use for grid-ising the raw position of all cells.
     flock.midi.interchange.demos.polarVortex.generateEmptyGrid = function () {
         var singleRow = fluid.generate(8, 0);
         var grid = fluid.generate(8, function (){ return fluid.copy(singleRow); }, true);
@@ -577,17 +578,25 @@
         flock.midi.interchange.demos.polarVortex.paintDevice(that);
     };
 
-    flock.midi.interchange.demos.polarVortex.createChain = function (firstCellDef) {
-        var newChain = {
-            cells: [firstCellDef]
-        };
+    flock.midi.interchange.demos.polarVortex.createChain = function (that, firstCellDef) {
+        var startingGain = firstCellDef.energy / 127;
+        var gain         = new Tone.Gain(startingGain).toDestination();
 
-        // TODO: Initialise Tone class and set starting parameters.
-        // 1. Left/Right offset tied to panning.
-        // 2. Up/Down offset tied to pitch.
-        // 3. Distance from centre controls ??? modulation? distortion?
-        // 4. Rotation around centre controls phase or other repeating setting.
-        // 5. All updates are tied to the polling frequency, so that they complete just before the next cycle.
+        var startingPanning = flock.midi.interchange.demos.polarVortex.getPanningFromPolar(firstCellDef.radius, firstCellDef.azimuth);
+        var panner          = new Tone.Panner(startingPanning);
+        panner.connect(gain);
+
+        var startingFrequency = flock.midi.interchange.demos.polarVortex.getFrequencyFromPolar(that, firstCellDef.radius, firstCellDef.azimuth);
+        const synth = new Tone.FMSynth();
+        synth.connect(panner);
+        synth.triggerAttack(startingFrequency);
+
+        var newChain = {
+            cells: [firstCellDef],
+            gain:   gain,
+            panner: panner,
+            synth:  synth
+        };
 
         return newChain;
     };
@@ -608,13 +617,6 @@
                     energy:  newEnergy
                 };
                 chainRecord.cells.push(newCell);
-
-                // TODO: Calculate new average Tone parameters and rampTo the new values.
-                // 1. Average Left/Right offset tied to panning.
-                // 2. Average Up/Down offset tied to pitch.
-                // 3. Average radius centre controls ??? modulation? distortion?
-                // 4. Average azimuth controls phase or other repeating setting.
-                // 5. All updates are tied to the polling frequency, so that they complete just before the next cycle.
             }
 
             // If we're not connected to a held note, delete the first segment in the "chain".
@@ -622,18 +624,38 @@
                 chainRecord.cells.shift();
             }
         }
+
+        // Check the length again as we may have shifted our last note away in the previous step.
+        if (chainRecord.cells.length) {
+            // Tone.js uses "time in seconds" for its transition functions.
+            var updateTimeInSeconds = 60 / that.options.bpm;
+
+            // Transition to the new pitch, which is based on the average position of all cells in the chain.
+            var averageFrequency = flock.midi.interchange.demos.polarVortex.getChainAverageFrequency(that, chainRecord);
+            chainRecord.synth.frequency.rampTo(averageFrequency, updateTimeInSeconds);
+
+            // Transition to the new panning level, which is based on the average position of all cells in the chain.
+            var averagePanning = flock.midi.interchange.demos.polarVortex.getChainAveragePanning(chainRecord);
+            chainRecord.panner.pan.rampTo(averagePanning, updateTimeInSeconds);
+
+            // Transition to the new volume level, which is based on the average energy of all cells in the chain.
+            var averageEnergy = flock.midi.interchange.demos.polarVortex.getChainAverageEnergy(chainRecord);
+            var newGain = Math.min(1, Math.max(0, (averageEnergy / 127)));
+            chainRecord.gain.gain.rampTo(newGain, updateTimeInSeconds);
+        }
         else {
             flock.midi.interchange.demos.polarVortex.deactivateChain(chainRecord);
         }
     };
 
     flock.midi.interchange.demos.polarVortex.deactivateChain = function (chainRecord) {
-        // TODO: Stop and then destroy all Tone classes related to this "chain".
-        // 1. Left/Right offset tied to panning.
-        // 2. Up/Down offset tied to pitch.
-        // 3. Distance from centre controls ??? modulation? distortion?
-        // 4. Rotation around centre controls phase or other repeating setting.
-        // 5. All updates are tied to the polling frequency, so that they complete just before the next cycle.
+        // Stop and then destroy all Tone classes related to this "chain".
+        chainRecord.gain.disconnect();
+        chainRecord.panner.disconnect();
+        chainRecord.synth.disconnect();
+        chainRecord.synth.dispose();
+        chainRecord.panner.dispose();
+        chainRecord.gain.dispose();
     };
 
     flock.midi.interchange.demos.polarVortex.getXYfromPolar = function (radius, azimuth) {
@@ -656,5 +678,45 @@
             radius: radius,
             azimuth: azimuthDegrees
         };
+    };
+
+    flock.midi.interchange.demos.polarVortex.getFrequencyFromPolar = function (that, radius, azimuth) {
+        var xYCoords = flock.midi.interchange.demos.polarVortex.getXYfromPolar(radius, azimuth);
+        var polarity  = xYCoords.y <= 3.5 ? -1 : 1;
+        var pitch = that.model.centrePitch * Math.pow(2, (radius * polarity));
+        return pitch;
+    };
+
+    flock.midi.interchange.demos.polarVortex.getPanningFromPolar = function (radius, azimuth) {
+        var xYCoords = flock.midi.interchange.demos.polarVortex.getXYfromPolar(radius, azimuth);
+        var panningLevel = Math.max(-1, Math.min(1, (xYCoords.x - 3.5) / 3.5));
+        return panningLevel;
+    };
+
+    flock.midi.interchange.demos.polarVortex.getChainAverageFrequency = function (that, chain) {
+        var totalFrequency = 0;
+        fluid.each(chain.cells, function (cell) {
+            totalFrequency += flock.midi.interchange.demos.polarVortex.getFrequencyFromPolar(that, cell.radius, cell.azimuth);
+        });
+        var averageFrequency = totalFrequency /  chain.cells.length;
+        return averageFrequency;
+    };
+
+    flock.midi.interchange.demos.polarVortex.getChainAveragePanning = function (chain) {
+        var totalPanning = 0;
+        fluid.each(chain.cells, function (cell) {
+            totalPanning += flock.midi.interchange.demos.polarVortex.getPanningFromPolar(cell.radius, cell.azimuth);
+        });
+        var averagePanning = totalPanning /  chain.cells.length;
+        return averagePanning;
+    };
+
+    flock.midi.interchange.demos.polarVortex.getChainAverageEnergy = function (chain) {
+        var totalEnergy = 0;
+        fluid.each(chain.cells, function (cell) {
+            totalEnergy += cell.energy;
+        });
+        var averageEnergy = totalEnergy / chain.cells.length;
+        return averageEnergy;
     };
 })(flock, fluid);
