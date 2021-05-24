@@ -37,14 +37,8 @@ flock.midi.interchange.generator.makeBundle = function (that) {
 
     promises.push(function () {
         var dirCreationPromise = fluid.promise();
-        mkdirp(that.options.targetDir, function (error) {
-            if (error) {
-                dirCreationPromise.reject(error);
-            }
-            else {
-                dirCreationPromise.resolve();
-            }
-        });
+        var mkdirpPromise = mkdirp(that.options.targetDir);
+        mkdirpPromise.then(dirCreationPromise.resolve, dirCreationPromise.reject);
         return dirCreationPromise;
     });
 
@@ -87,7 +81,9 @@ fluid.defaults("flock.midi.interchange.generator", {
         "./node_modules/flocking-midi/src/ui/message-monitor-view/js/message-monitor-view.js",
         "./node_modules/flocking-midi/src/ui/port-selector/js/port-select-box.js",
         "./node_modules/flocking-midi/src/ui/port-selector/js/port-selector.js",
-        "./node_modules/infusion/dist/infusion-all.js"
+        "./node_modules/flocking/src/ui/selectbox/js/selectbox.js",
+        "./node_modules/infusion/dist/infusion-all.js",
+        "./node_modules/tone/build/Tone.js"
     ],
     listeners: {
         "onCreate.createBundle": {
