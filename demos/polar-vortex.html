@@ -34,7 +34,9 @@
 <div id="polar-vortex-loom">
     <h2 class="polar-vortex-title">Polar Vortex</h2>
 
-    <div class="visualisation"></div>
+    <div class="visualisation">
+        <button class="tone-start-button" onclick="startPolarVortex()">Start</button>
+    </div>
 
     <div class="readouts">
         <div class="attraction__container" tabindex="0">
@@ -54,7 +56,10 @@
 </div>
 
 <script type="text/javascript">
-    var polarVortex = flock.midi.interchange.demos.polarVortex("body");
+    var polarVortex;
+    function startPolarVortex () {
+        polarVortex = flock.midi.interchange.demos.polarVortex("body");
+    }
 </script>
 </body>
 </html>

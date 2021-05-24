@@ -33,6 +33,8 @@
             activeNotes: {},
             tetheredChains: {},
             untetheredChains: [],
+            mouseOverPolarCoords: false,
+            touchCoords: {}
         },
         model: {
             attraction: -0.1,
@@ -137,20 +139,28 @@
                 funcName: "flock.midi.interchange.demos.polarVortex.handleRotationKeydown",
                 args: ["{that}", "{arguments}.0"] // event
             },
-            handleVisualisationMousedown: {
-                funcName: "flock.midi.interchange.demos.polarVortex.handleVisualisationMousedown",
-                args: ["{that}", "{arguments}.0"] // event
-            },
-            handleVisualisationMouseup: {
-                funcName: "flock.midi.interchange.demos.polarVortex.handleVisualisationMouseup",
-                args: ["{that}", "{arguments}.0"] // event
-            },
             handleVisualisationKeydown: {
                 funcName: "flock.midi.interchange.demos.polarVortex.handleVisualisationKeydown",
                 args: ["{that}", "{arguments}.0"] // event
             },
             handleVisualisationKeyup: {
                 funcName: "flock.midi.interchange.demos.polarVortex.handleVisualisationKeyup",
+                args: ["{that}", "{arguments}.0"] // event
+            },
+            handleVisualisationMouseover: {
+                funcName: "flock.midi.interchange.demos.polarVortex.handleVisualisationMouseover",
+                args: ["{that}", "{arguments}.0"] // event
+            },
+            handleVisualisationMouseoutOrMouseup: {
+                funcName: "flock.midi.interchange.demos.polarVortex.handleVisualisationMouseoutOrMouseup",
+                args: ["{that}", "{arguments}.0"] // event
+            },
+            handleVisualisationTouchstartOrTouchmove: {
+                funcName: "flock.midi.interchange.demos.polarVortex.handleVisualisationTouchstartOrTouchmove",
+                args: ["{that}", "{arguments}.0"] // event
+            },
+            handleVisualisationTouchendOrTouchcancel: {
+                funcName: "flock.midi.interchange.demos.polarVortex.handleVisualisationTouchendOrTouchcancel",
                 args: ["{that}", "{arguments}.0"] // event
             },
             sendToNoteOut: {
@@ -197,6 +207,42 @@
                 "this": "{that}.dom.rotationContainer",
                 "method": "keydown",
                 "args": ["{that}.handleRotationKeydown"]
+            },
+            // Mouse handling for visualisation.
+            "onCreate.bindVisualisationMouseover": {
+                "this": "{that}.dom.visualisation",
+                "method": "mouseover",
+                "args": ["{that}.handleVisualisationMouseover"]
+            },
+            "onCreate.bindVisualisationMouseout": {
+                "this": "{that}.dom.visualisation",
+                "method": "mouseout",
+                "args": ["{that}.handleVisualisationMouseoutOrMouseup"]
+            },
+            "onCreate.bindVisualisationMouseup": {
+                "this": "{that}.dom.visualisation",
+                "method": "mouseup",
+                "args": ["{that}.handleVisualisationMouseoutOrMouseup"]
+            },
+            "onCreate.bindVisualisationTouchstart": {
+                "this": "{that}.dom.visualisation",
+                "method": "mouseup",
+                "args": ["{that}.handleVisualisationTouchstart"]
+            },
+            "onCreate.bindVisualisationTouchsend": {
+                "this": "{that}.dom.visualisation",
+                "method": "mouseup",
+                "args": ["{that}.handleVisualisationTouchendOrTouchcancel"]
+            },
+            "onCreate.bindVisualisationTouchcancel": {
+                "this": "{that}.dom.visualisation",
+                "method": "mouseup",
+                "args": ["{that}.handleVisualisationTouchendOrTouchcancel"]
+            },
+            "onCreate.bindVisualisationTouchmove": {
+                "this": "{that}.dom.visualisation",
+                "method": "mouseup",
+                "args": ["{that}.handleVisualisationTouchstartOrTouchmove"]
             }
         },
         modelListeners: {
@@ -226,31 +272,33 @@
         attractionValueElement.text(that.model.attraction);
     };
 
-    flock.midi.interchange.demos.polarVortex.handleVisualisationMousedown = function (that, event) {
-        // Create a new "untethered chain" for this note.
-        // vc-" + row + "-" + col;
-        var matches = event.target.id && event.target.id.match(/vc-(.+)-(.+)/);
-        if (matches) {
-            try {
-                var row = parseInt(matches[1], 10);
-                var col = parseInt(matches[2], 10);
-                var firstCellDef = flock.midi.interchange.demos.polarVortex.getPolarFromXY(col, row);
-                firstCellDef.energy = 127;
-                var newChain = flock.midi.interchange.demos.polarVortex.createChain(that, firstCellDef);
-                that.tetheredChains["mouse"] = newChain;
-            }
-            catch (error) {
-                fluid.log("Can't determine row and column for element " + event.target.id);
-            }
+    flock.midi.interchange.demos.polarVortex.handleVisualisationMouseover = function (that, event) {
+        if (event.buttons) {
+            that.mouseOverPolarCoords = flock.midi.interchange.demos.polarVortex.polarFromEvent(event);
+        }
+        else {
+            that.mouseOverPolarCoords = false;
         }
     };
 
-    flock.midi.interchange.demos.polarVortex.handleVisualisationMouseup = function (that) {
-        var chainToUntether = fluid.get(that, "tetheredChains.mouse");
-        if (chainToUntether) {
-            that.untetheredChains.push(chainToUntether);
-            delete that.tetheredChains.mouse;
-        }
+    flock.midi.interchange.demos.polarVortex.handleVisualisationMouseoutOrMouseup = function (that) {
+        that.mouseOverPolarCoords = false;
+    };
+
+    flock.midi.interchange.demos.polarVortex.handleVisualisationTouchstartOrTouchmove = function (that, event) {
+        that.touchCoords[event.identifier] = flock.midi.interchange.demos.polarVortex.polarFromEvent(event);
+    };
+
+    flock.midi.interchange.demos.polarVortex.handleVisualisationTouchendOrTouchcancel = function (that, event) {
+        delete that.touchCoords[event.identifier];
+    };
+
+    flock.midi.interchange.demos.polarVortex.polarFromEvent = function (event) {
+        var bounds = event.target.getBoundingClientRect();
+        var x = event.offsetX / bounds.width * 8;
+        var y = 8 - (event.offsetY / bounds.height * 8);
+        var coords = flock.midi.interchange.demos.polarVortex.getPolarFromXY(x, y);
+        return coords;
     };
 
     flock.midi.interchange.demos.polarVortex.handleVisualisationKeydown = function (that, event) {
@@ -388,8 +436,6 @@
         visualisationContainer.html(elementsAsStrings.join("\n"));
         // We could probably restructure this as dynamic components or static markup, but for now...
         var cellContainers = visualisationContainer.find(".visualisation__cell");
-        cellContainers.mousedown(that.handleVisualisationMousedown);
-        cellContainers.mouseup(that.handleVisualisationMouseup);
         cellContainers.keydown(that.handleVisualisationKeydown);
         cellContainers.keyup(that.handleVisualisationKeyup);
     };
@@ -558,6 +604,7 @@
     };
 
     flock.midi.interchange.demos.polarVortex.updateChains= function (that) {
+        // Update the position of all existing chain cells.
         fluid.each(that.tetheredChains, function (tetheredChainRecord) {
             flock.midi.interchange.demos.polarVortex.updateChain(that, tetheredChainRecord, true);
         });
@@ -571,12 +618,39 @@
             return singleChain.cells.length > 0;
         });
 
+        // Generate a new "untethered chain" for each currently active mouse pointer.
+        var mouseAndTouchCoords = fluid.values(that.touchCoords);
+        if (that.mouseOverPolarCoords) {
+            mouseAndTouchCoords.push(that.mouseOverPolarCoords);
+        }
+
+        fluid.each(mouseAndTouchCoords, function (coords) {
+            var newCell = fluid.copy(coords);
+            newCell.energy = 127;
+            var newChain = flock.midi.interchange.demos.polarVortex.createChain(that, newCell);
+            that.untetheredChains.push(newChain);
+        });
+
+        // TODO: Same for touch.
+
         // Update the onscreen visualisation.
         flock.midi.interchange.demos.polarVortex.updateVisualisation(that);
 
         // Repaint the device.
         flock.midi.interchange.demos.polarVortex.paintDevice(that);
     };
+
+    // TODO: Add proper touch handling.
+    // https://developer.mozilla.org/en-US/docs/Web/API/Touch_events
+    //
+    //   el.addEventListener("touchstart", handleStart, false);
+    //   el.addEventListener("touchend", handleEnd, false);
+    //   el.addEventListener("touchcancel", handleCancel, false);
+    //   el.addEventListener("touchmove", handleMove, false);
+    //
+    // This is done by looking at each touch's Touch.identifier property. This property is a unique integer for each
+    // touch and remains consistent for each event during the duration of each finger's contact with the surface.
+    // On each updateChain cycle, spawn a note for any registered touches.
 
     flock.midi.interchange.demos.polarVortex.createChain = function (that, firstCellDef) {
         var startingGain = firstCellDef.energy / 127;
