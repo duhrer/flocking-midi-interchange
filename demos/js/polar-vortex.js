@@ -2,8 +2,6 @@
     "use strict";
     fluid.registerNamespace("flock.midi.interchange.demos.polarVortex");
 
-    // TODO: Initialise our Tone setup, ideally based on a UI input.
-
     fluid.defaults("flock.midi.interchange.demos.polarVortex", {
         gradeNames: ["fluid.viewComponent"],
         preferredInputDevice: "Launchpad Pro 1 Standalone Port",
@@ -19,18 +17,13 @@
             // Select "programmer" layout
             {type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 44, 3]}
         ],
-        minAttraction: -1,
-        maxAttraction: 1,
-        attractionChangeIncrement: 0.1,
-        minRotation: -45,
-        maxRotation: 45,
-        rotationChangeIncrement: 5,
-        bpm: 512, // TODO: Consider adding controls for this.
+        energyFloor: 0.0075, // A little below 1/127, i.e. when the MIDI velocity is already zero.
         decayRate: 0.8, // TODO: Controls for this?
         // keyboard input
         cellClickKeys: ["Enter", " "],
         members: {
             activeNotes: {},
+            currentBpm: 512,
             tetheredChains: {},
             untetheredChains: [],
             mouseOverPolarCoords: false,
@@ -38,6 +31,7 @@
         },
         model: {
             attraction: -0.1,
+            bpm: 512,
             rotation: 30,
             centrePitch: 220,
             colourScheme: "{that}.options.colourSchemes.white"
@@ -58,13 +52,13 @@
             noteOff: "{noteInput}.events.noteOff"
         },
         selectors: {
-            attractionContainer: ".attraction__container",
-            attractionValue: ".attraction__value",
-            noteInput:  ".note-input",
-            rotationContainer: ".rotation__container",
-            rotationValue: ".rotation__value",
-            uiOutput:   ".ui-output",
-            visualisation: ".visualisation"
+            noteInput:     ".note-input",
+            uiOutput:      ".ui-output",
+            visualisation: ".visualisation",
+            attraction: ".attraction",
+            rotation: ".rotation",
+            bpm: ".bpm",
+            pitch: ".pitch"
         },
         components: {
             noteInput: {
@@ -128,6 +122,60 @@
                         }
                     }
                 }
+            },
+            attraction: {
+                type: "flock.midi.interchange.demos.polarVortex.dial",
+                container: "{that}.dom.attraction",
+                options: {
+                    label: "Attraction",
+                    max: 1,
+                    min: -1,
+                    increment: 0.1,
+                    model: {
+                        value: "{flock.midi.interchange.demos.polarVortex}.model.attraction"
+                    }
+                }
+            },
+            rotation: {
+                type: "flock.midi.interchange.demos.polarVortex.dial",
+                container:  "{that}.dom.rotation",
+                options: {
+                    label: "Rotation",
+                    max: 45,
+                    min: -45,
+                    increment: 5,
+                    model: {
+                        value: "{flock.midi.interchange.demos.polarVortex}.model.rotation"
+                    }
+                }
+            },
+            bpm: {
+                type: "flock.midi.interchange.demos.polarVortex.dial",
+                container: "{that}.dom.bpm",
+                options: {
+                    label: "BPM",
+                    max: 45,
+                    min: -45,
+                    // TODO: Make a second grade for these that can handle powers and an offset.
+                    increment: 0,
+                    model: {
+                        value: "{flock.midi.interchange.demos.polarVortex}.model.bpm"
+                    }
+                }
+            },
+            pitch: {
+                type: "flock.midi.interchange.demos.polarVortex.dial",
+                container: "{that}.dom.pitch",
+                options: {
+                    label: "Pitch",
+                    max: 27.5,
+                    min: 880,
+                    // TODO: Make a second grade for these that can handle powers and an offset.
+                    increment: 0,
+                    model: {
+                        value: "{flock.midi.interchange.demos.polarVortex}.model.centrePitch"
+                    }
+                }
             }
         },
         invokers: {
@@ -185,6 +233,14 @@
                 funcName: "flock.midi.interchange.demos.polarVortex.renderVisualisation",
                 args: ["{that}"]
             },
+            "onCreate.paintBPM": {
+                funcName: "flock.midi.interchange.demos.polarVortex.displayBPM",
+                args: ["{that}"]
+            },
+            "onCreate.paintCentrePitch": {
+                funcName: "flock.midi.interchange.demos.polarVortex.displayCentrePitch",
+                args: ["{that}"]
+            },
             "noteOn.handle": {
                 funcName: "flock.midi.interchange.demos.polarVortex.handleNoteOn",
                 args: ["{that}", "{arguments}.0"] // midiMessage
@@ -196,17 +252,6 @@
             "control.handle": {
                 funcName: "flock.midi.interchange.demos.polarVortex.handleControl",
                 args: ["{that}", "{arguments}.0"] // midiMessage
-            },
-            // keyboard handling for attraction/rotation controls.
-            "onCreate.bindAttractionKeyDown": {
-                "this": "{that}.dom.attractionContainer",
-                "method": "keydown",
-                "args": ["{that}.handleAttractionKeydown"]
-            },
-            "onCreate.bindRotationKeyDown": {
-                "this": "{that}.dom.rotationContainer",
-                "method": "keydown",
-                "args": ["{that}.handleRotationKeydown"]
             },
             // Mouse handling for visualisation.
             "onCreate.bindVisualisationMouseover": {
@@ -258,18 +303,48 @@
             "attraction": {
                 funcName: "flock.midi.interchange.demos.polarVortex.displayAttraction",
                 args: ["{that}"]
+            },
+            "bpm": {
+                funcName: "flock.midi.interchange.demos.polarVortex.displayBPM",
+                args: ["{that}"]
+            },
+            "centrePitch": {
+                funcName: "flock.midi.interchange.demos.polarVortex.displayCentrePitch",
+                args: ["{that}"]
             }
         }
     });
 
     flock.midi.interchange.demos.polarVortex.displayRotation = function (that) {
-        var rotationValueElement = that.locate("rotationValue");
-        rotationValueElement.text(that.model.rotation);
+        // TODO: Make this update the launchpad.
     };
 
     flock.midi.interchange.demos.polarVortex.displayAttraction = function (that) {
-        var attractionValueElement = that.locate("attractionValue");
-        attractionValueElement.text(that.model.attraction);
+        // TODO: Make this update the launchpad.
+    };
+
+    flock.midi.interchange.demos.polarVortex.displayBPM = function (that) {
+        // The left column is 80, 70, etc., we use that for bpm
+        // We use powers of two per row, and adjust so that row 5 is the default 512.
+        var row = Math.round(Math.log2(that.model.bpm)) - 4;
+        for (var a = 1; a <= 8; a++) {
+            var type = (a === row) ? "noteOn" : "noteOff";
+            var velocity = (a === row) ? 1 : 0;
+            var note = (a * 10);
+            that.sendToUi({ channel: 0, type: type,  note: note, velocity: velocity});
+        }
+    };
+
+    flock.midi.interchange.demos.polarVortex.displayCentrePitch = function (that) {
+        // The right column is 89, 79, etc, we use that to control the "base" pitch.
+        // We use powers of two (i.e. octaves) per row.
+        var row = Math.log2(that.model.centrePitch / 27.5) + 1;
+        for (var a = 1; a <= 8; a++) {
+            var type = (a === row) ? "noteOn" : "noteOff";
+            var velocity = (a === row) ? 1 : 0;
+            var note = (a * 10) + 9;
+            that.sendToUi({ channel: 0, type: type, note: note, velocity: velocity});
+        }
     };
 
     flock.midi.interchange.demos.polarVortex.handleVisualisationMouseover = function (that, event) {
@@ -565,29 +640,34 @@
             }
             // Upward Arrow: Increase "attraction".
             else if (midiMessage.number === 91) {
-                if (that.model.attraction > that.options.minAttraction) {
-                    var newAttraction = flock.midi.interchange.demos.polarVortex.safeAdd(that.model.attraction, that.options.attractionChangeIncrement);
-                    that.applier.change("attraction", newAttraction);
-                }
+                that.attraction.increase();
             }
             // Downward Arrow: Decrease "attraction".
             else if (midiMessage.number === 92) {
-                if (that.model.attraction < that.options.maxAttraction) {
-                    var newAttraction = flock.midi.interchange.demos.polarVortex.safeAdd(that.model.attraction, -1 * that.options.attractionChangeIncrement);
-                    that.applier.change("attraction", newAttraction);
-                }
+                that.attraction.decrease();
             }
             // Left Arrow: Shift rotation counterclockwise.
             else if (midiMessage.number === 93) {
-                if (that.model.rotation > that.options.minRotation) {
-                    that.applier.change("rotation",  that.model.rotation - that.options.rotationChangeIncrement);
-                }
+                that.rotation.increase();
             }
             // Right Arrow: Shift rotation clockwise.
             else if (midiMessage.number === 94) {
-                if (that.model.rotation < that.options.maxRotation) {
-                    that.applier.change("rotation", that.model.rotation + that.options.rotationChangeIncrement);
-                }
+                that.rotation.decrease();
+            }
+            // The left column is 80, 70, etc., we use that for bpm
+            else if (midiMessage.number % 10 === 0) {
+                // TODO: Use the dial to change this.
+                var row = Math.floor(midiMessage.number / 10) - 1;
+                var newBpm = 32 * Math.pow(2, row);
+                that.applier.change("bpm", newBpm);
+            }
+            // The right column is 89, 79, etc, we use that to control the "base" pitch.
+            else if (midiMessage.number % 10 === 9) {
+                // TODO: Use the dial to change this.
+                var row = Math.floor(midiMessage.number / 10) - 1;
+                // Row zero is A0, and since octaves are powers of 2, each row higher is an octave higher.
+                var newCentrePitch = 27.5 * Math.pow(2, row);
+                that.applier.change("centrePitch", newCentrePitch);
             }
         }
     };
@@ -599,11 +679,18 @@
             callback: that.updateChains
         });
 
-        that.scheduler.setTimeScale(60 / that.options.bpm);
+        that.scheduler.setTimeScale(60 / that.model.bpm);
         that.scheduler.start();
     };
 
     flock.midi.interchange.demos.polarVortex.updateChains= function (that) {
+        // If our speed has changed, update the scheduler and trigger the next step early to avoid a "stutter".
+        if (that.currentBpm !== that.model.bpm) {
+            that.currentBpm = that.model.bpm;
+            that.scheduler.setTimeScale(60 / that.currentBpm);
+            return;
+        }
+
         // Update the position of all existing chain cells.
         fluid.each(that.tetheredChains, function (tetheredChainRecord) {
             flock.midi.interchange.demos.polarVortex.updateChain(that, tetheredChainRecord, true);
@@ -683,8 +770,9 @@
             var newAzimuth = (lastCell.azimuth + that.model.rotation)  % 360;
             var newEnergy  = lastCell.energy * that.options.decayRate;
 
-            // Add a new segment after the last segment if it would not take us out of bounds.
-            if (newRadius > 0 && newRadius < 5) {
+            // Add a new segment after the last segment if it would not take us out of bounds, and if its energy is
+            // above our cutoff (avoids "zombie" notes that hover indefinitely).
+            if (newRadius > 0 && newRadius < 5 && newEnergy > that.options.energyFloor) {
                 var newCell = {
                     radius:  newRadius,
                     azimuth: newAzimuth,
@@ -702,7 +790,7 @@
         // Check the length again as we may have shifted our last note away in the previous step.
         if (chainRecord.cells.length) {
             // Tone.js uses "time in seconds" for its transition functions.
-            var updateTimeInSeconds = 60 / that.options.bpm;
+            var updateTimeInSeconds = 60 / that.model.bpm;
 
             // Transition to the new pitch, which is based on the average position of all cells in the chain.
             var averageFrequency = flock.midi.interchange.demos.polarVortex.getChainAverageFrequency(that, chainRecord);

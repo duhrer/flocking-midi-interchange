@@ -48,10 +48,10 @@ body {
 .readouts {
     display: flex;
     flex-direction:row;
-    column-gap: 10rem;
+    column-gap: 5rem;
 }
 
-.attraction__container, .rotation__container {
+.dial {
     width: 5rem;
     height: 5rem;
     padding: 1.5rem;
