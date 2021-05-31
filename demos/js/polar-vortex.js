@@ -612,20 +612,23 @@
 
                             var energyAsOpacity     = (singleCell.energy + 1) / 128;
 
+                            // The bounds checking is all off by one in that the above are expressed in terms of the
+                            // "energy grid", which has a leading column and row for non-grid controls.
+
                             // Top Left
-                            if (flock.midi.interchange.demos.polarVortex.inBounds(trailingCol, trailingRow)) {
+                            if (flock.midi.interchange.demos.polarVortex.inBounds(trailingCol - 1, trailingRow - 1)) {
                                 energyGrid[trailingRow][trailingCol] += energyAsOpacity * xTrailingPercentage * yTrailingPercentage;
                             }
                             // Top Right
-                            if (flock.midi.interchange.demos.polarVortex.inBounds(leadingCol, trailingRow)) {
+                            if (flock.midi.interchange.demos.polarVortex.inBounds(leadingCol - 1, trailingRow - 1)) {
                                 energyGrid[trailingRow][leadingCol] += energyAsOpacity * xLeadingPercentage * yTrailingPercentage;
                             }
                             // Bottom Left
-                            if (flock.midi.interchange.demos.polarVortex.inBounds(trailingCol, leadingRow)) {
+                            if (flock.midi.interchange.demos.polarVortex.inBounds(trailingCol - 1, leadingRow - 1)) {
                                 energyGrid[leadingRow][trailingCol] += energyAsOpacity * xTrailingPercentage * yLeadingPercentage;
                             }
                             // Bottom Right
-                            if (flock.midi.interchange.demos.polarVortex.inBounds(leadingCol, leadingRow)) {
+                            if (flock.midi.interchange.demos.polarVortex.inBounds(leadingCol - 1, leadingRow - 1)) {
                                 energyGrid[leadingRow][leadingCol] += energyAsOpacity * xLeadingPercentage * yLeadingPercentage;
                             }
                         }
