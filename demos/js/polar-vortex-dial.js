@@ -1,12 +1,11 @@
 (function (flock, fluid) {
     "use strict";
 
-    fluid.defaults("flock.midi.interchange.demos.polarVortex.dial", {
+    fluid.defaults("flock.midi.interchange.demos.polarVortex.dial.base", {
         gradeNames: ["fluid.viewComponent"],
         label: "Dial",
         max: 10,
         min: -10,
-        increment: 1,
         markupTemplate:
             "<div class=\"dial\" tabindex=\"0\">\n" +
             "    <h4>%label</h4>\n" +
@@ -23,16 +22,8 @@
             value: ".dial__value"
         },
         invokers: {
-            decrease: {
-                funcName: "flock.midi.interchange.demos.polarVortex.dial.increment",
-                args: ["{that}", true] // that, invert
-            },
-            increase: {
-                funcName: "flock.midi.interchange.demos.polarVortex.dial.increment",
-                args: ["{that}"] // that, invert
-            },
             handleKeydown: {
-                funcName: "flock.midi.interchange.demos.polarVortex.dial.handleKeydown",
+                funcName: "fluid.notImplemented",
                 args: ["{that}", "{arguments}.0"] // event
             }
         },
@@ -51,6 +42,27 @@
             "value": {
                 funcName: "flock.midi.interchange.demos.polarVortex.dial.displayValue",
                 args: ["{that}"]
+            }
+        }
+    });
+
+    fluid.defaults("flock.midi.interchange.demos.polarVortex.dial", {
+        gradeNames: ["flock.midi.interchange.demos.polarVortex.dial.base"],
+        // 91-92 are attraction, 93-94 are rotation.
+        leftNote: 91,
+        rightNote: 92,
+        invokers: {
+            decrease: {
+                funcName: "flock.midi.interchange.demos.polarVortex.dial.increment",
+                args: ["{that}", true] // that, invert
+            },
+            increase: {
+                funcName: "flock.midi.interchange.demos.polarVortex.dial.increment",
+                args: ["{that}"] // that, invert
+            },
+            handleKeydown: {
+                funcName: "flock.midi.interchange.demos.polarVortex.dial.handleKeydown",
+                args: ["{that}", "{arguments}.0"] // event
             }
         }
     });
@@ -83,6 +95,50 @@
         var newValue = flock.midi.interchange.demos.polarVortex.safeAdd(that.model.value, increment);
         if (newValue >= that.options.min && newValue <= that.options.max) {
             that.applier.change("value", newValue);
+        }
+    };
+
+
+    fluid.defaults("flock.midi.interchange.demos.polarVortex.dial.log2", {
+        gradeNames: ["flock.midi.interchange.demos.polarVortex.dial.base"],
+        columnOffset: 0,
+        invokers: {
+            getPower: {
+                funcName: "flock.midi.interchange.demos.polarVortex.dial.log2.getPower",
+                args: ["{that}"]
+            },
+            setPower: {
+                funcName: "flock.midi.interchange.demos.polarVortex.dial.log2.setPower",
+                args: ["{that}", "{arguments}.0"]
+            },
+            handleKeydown: {
+                funcName: "flock.midi.interchange.demos.polarVortex.dial.log2.handleKeydown",
+                args: ["{that}", "{arguments}.0"] // event
+            }
+        }
+    });
+
+    flock.midi.interchange.demos.polarVortex.dial.log2.setPower = function (that, newPower) {
+        var newValue = Math.pow(2, newPower) * that.options.min;
+        if (newValue >= that.options.min && newValue <= that.options.max) {
+            that.applier.change("value", newValue);
+        }
+    };
+
+    flock.midi.interchange.demos.polarVortex.dial.log2.getPower = function (that, newPower) {
+        return Math.log2(that.model.value / that.options.min);
+    };
+
+
+    flock.midi.interchange.demos.polarVortex.dial.log2.handleKeydown = function (that, event) {
+        var currentPower = that.getPower();
+        if (event.key === "ArrowUp" || event.key === "ArrowRight") {
+            event.preventDefault();
+            that.setPower(currentPower + 1);
+        }
+        else if (event.key === "ArrowDown" || event.key === "ArrowLeft") {
+            event.preventDefault();
+            that.setPower(currentPower - 1);
         }
     };
 })(flock, fluid);

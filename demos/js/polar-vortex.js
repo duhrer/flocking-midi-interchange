@@ -34,7 +34,7 @@
             bpm: 512,
             rotation: 30,
             centrePitch: 220,
-            colourScheme: "{that}.options.colourSchemes.white"
+            colourSchemeName: "white"
         },
         colourSchemes: {
             white:  {r: 1, g: 1,    b: 1, control: 1, velocity: 1},
@@ -133,7 +133,8 @@
                     increment: 0.1,
                     model: {
                         value: "{flock.midi.interchange.demos.polarVortex}.model.attraction"
-                    }
+                    },
+                    sendToUiFn: "{flock.midi.interchange.demos.polarVortex}.sendToUi"
                 }
             },
             rotation: {
@@ -144,37 +145,39 @@
                     max: 45,
                     min: -45,
                     increment: 5,
+                    leftNote: 93,
+                    rightNote: 94,
                     model: {
                         value: "{flock.midi.interchange.demos.polarVortex}.model.rotation"
-                    }
+                    },
+                    sendToUiFn: "{flock.midi.interchange.demos.polarVortex}.sendToUi"
                 }
             },
             bpm: {
-                type: "flock.midi.interchange.demos.polarVortex.dial",
+                type: "flock.midi.interchange.demos.polarVortex.dial.log2",
                 container: "{that}.dom.bpm",
                 options: {
                     label: "BPM",
-                    max: 45,
-                    min: -45,
-                    // TODO: Make a second grade for these that can handle powers and an offset.
-                    increment: 0,
+                    max: 4096,
+                    min: 32,
                     model: {
                         value: "{flock.midi.interchange.demos.polarVortex}.model.bpm"
-                    }
+                    },
+                    sendToUiFn: "{flock.midi.interchange.demos.polarVortex}.sendToUi"
                 }
             },
             pitch: {
-                type: "flock.midi.interchange.demos.polarVortex.dial",
+                type: "flock.midi.interchange.demos.polarVortex.dial.log2",
                 container: "{that}.dom.pitch",
                 options: {
+                    columnOffset: 9,
                     label: "Pitch",
-                    max: 27.5,
-                    min: 880,
-                    // TODO: Make a second grade for these that can handle powers and an offset.
-                    increment: 0,
+                    max: 3520,
+                    min: 27.5,
                     model: {
                         value: "{flock.midi.interchange.demos.polarVortex}.model.centrePitch"
-                    }
+                    },
+                    sendToUiFn: "{flock.midi.interchange.demos.polarVortex}.sendToUi"
                 }
             }
         },
@@ -233,14 +236,6 @@
                 funcName: "flock.midi.interchange.demos.polarVortex.renderVisualisation",
                 args: ["{that}"]
             },
-            "onCreate.paintBPM": {
-                funcName: "flock.midi.interchange.demos.polarVortex.displayBPM",
-                args: ["{that}"]
-            },
-            "onCreate.paintCentrePitch": {
-                funcName: "flock.midi.interchange.demos.polarVortex.displayCentrePitch",
-                args: ["{that}"]
-            },
             "noteOn.handle": {
                 funcName: "flock.midi.interchange.demos.polarVortex.handleNoteOn",
                 args: ["{that}", "{arguments}.0"] // midiMessage
@@ -291,61 +286,33 @@
             }
         },
         modelListeners: {
-            "colourScheme": {
+            "colourSchemeName": {
                 excludeSource: "init",
                 funcName: "flock.midi.interchange.demos.polarVortex.paintDevice",
                 args: ["{that}"]
             },
             "rotation": {
-                funcName: "flock.midi.interchange.demos.polarVortex.displayRotation",
+                excludeSource: "init",
+                funcName: "flock.midi.interchange.demos.polarVortex.paintDevice",
                 args: ["{that}"]
             },
             "attraction": {
-                funcName: "flock.midi.interchange.demos.polarVortex.displayAttraction",
+                excludeSource: "init",
+                funcName: "flock.midi.interchange.demos.polarVortex.paintDevice",
                 args: ["{that}"]
             },
             "bpm": {
-                funcName: "flock.midi.interchange.demos.polarVortex.displayBPM",
+                excludeSource: "init",
+                funcName: "flock.midi.interchange.demos.polarVortex.paintDevice",
                 args: ["{that}"]
             },
-            "centrePitch": {
-                funcName: "flock.midi.interchange.demos.polarVortex.displayCentrePitch",
+            "pitch": {
+                excludeSource: "init",
+                funcName: "flock.midi.interchange.demos.polarVortex.paintDevice",
                 args: ["{that}"]
             }
         }
     });
-
-    flock.midi.interchange.demos.polarVortex.displayRotation = function (that) {
-        // TODO: Make this update the launchpad.
-    };
-
-    flock.midi.interchange.demos.polarVortex.displayAttraction = function (that) {
-        // TODO: Make this update the launchpad.
-    };
-
-    flock.midi.interchange.demos.polarVortex.displayBPM = function (that) {
-        // The left column is 80, 70, etc., we use that for bpm
-        // We use powers of two per row, and adjust so that row 5 is the default 512.
-        var row = Math.round(Math.log2(that.model.bpm)) - 4;
-        for (var a = 1; a <= 8; a++) {
-            var type = (a === row) ? "noteOn" : "noteOff";
-            var velocity = (a === row) ? 1 : 0;
-            var note = (a * 10);
-            that.sendToUi({ channel: 0, type: type,  note: note, velocity: velocity});
-        }
-    };
-
-    flock.midi.interchange.demos.polarVortex.displayCentrePitch = function (that) {
-        // The right column is 89, 79, etc, we use that to control the "base" pitch.
-        // We use powers of two (i.e. octaves) per row.
-        var row = Math.log2(that.model.centrePitch / 27.5) + 1;
-        for (var a = 1; a <= 8; a++) {
-            var type = (a === row) ? "noteOn" : "noteOff";
-            var velocity = (a === row) ? 1 : 0;
-            var note = (a * 10) + 9;
-            that.sendToUi({ channel: 0, type: type, note: note, velocity: velocity});
-        }
-    };
 
     flock.midi.interchange.demos.polarVortex.handleVisualisationMouseover = function (that, event) {
         if (event.buttons) {
@@ -480,7 +447,34 @@
         var valueArray = flock.midi.interchange.demos.polarVortex.generateColourArray(that);
 
         // We reuse common utility functions from the launchpad pong component for lack of a better base grade.
-        flock.midi.interchange.demos.launchpadPong.sendValueArrayToDevice(that, valueArray);
+        flock.midi.interchange.demos.polarVortex.sendValueArrayToDevice(that, valueArray);
+    };
+
+    flock.midi.interchange.demos.polarVortex.sendValueArrayToDevice = function (that, colourArray) {
+        var header = [
+            // common header
+            0, 0x20, 0x29, 0x02, 0x10,
+            // "RGB Grid Sysex" command
+            0xF,
+            // 0: all pads, 1: square drum pads only.
+            0
+        ];
+        var data = header.concat(colourArray);
+
+        try {
+            that.sendToUi({
+                type: "sysex",
+                data: data
+            });
+        }
+        catch (error) {
+            debugger;
+            console.error(error);
+        }
+
+        // Paint the "side velocity" (0x63) a colour that matches the colour scheme.
+        // F0h 00h 20h 29h 02h 10h 0Ah <velocity> <Colour> F7h
+        that.sendToUi({ type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 0xA, 0x63, that.options.colourSchemes[that.model.colourSchemeName].velocity]});
     };
 
     flock.midi.interchange.demos.polarVortex.updateVisualisation = function (that) {
@@ -491,8 +485,8 @@
             var r = valueArray[a] * 6;
             var g = valueArray[a + 1] * 6;
             var b = valueArray[a + 2] * 6;
-            var row = Math.trunc(a / 24);
-            var col = Math.trunc((a % 24) / 3);
+            var row = Math.trunc(a / 30);
+            var col = Math.trunc((a % 30) / 3);
             var id = "#vc-" + row + "-" + col;
             var cellElement = visualisationContainer.find(id);
             cellElement.attr("style", "background-color: rgb(" + r + ", " + g + ", " + b + ");");
@@ -502,10 +496,14 @@
     flock.midi.interchange.demos.polarVortex.renderVisualisation = function (that) {
         var visualisationContainer = that.locate("visualisation");
         var elementsAsStrings = [];
-        for (var row = 7; row >= 0; row--) {
-            for (var col = 0; col < 8; col++) {
+        for (var row = 9; row >= 0; row--) {
+            for (var col = 0; col < 10; col++) {
                 var id = "vc-" + row + "-" + col;
-                elementsAsStrings.push("<div class=\"visualisation__cell\" tabindex=\"0\" id=\"" + id + "\" style=\"\"></div>");
+                var classNames = ["visualisation__cell"];
+                if ((row === 0 || row === 9) && (col === 0 || col === 9)) {
+                    classNames.push(".visualisation__cell--invisible");
+                }
+                elementsAsStrings.push("<div class=\"" + classNames.join("") + "\" tabindex=\"0\" id=\"" + id + "\" style=\"\"></div>");
             }
         }
         visualisationContainer.html(elementsAsStrings.join("\n"));
@@ -526,20 +524,50 @@
      *
      * @param {Object} that - The polar vortex component itself.
      * @return {Array<Number>} - An array of numbers from 0 to 1 that represent one colour channel for a single cell.
-     *  To paint an 8 x 8 grid, you need 64 x 3, or 192 values.
+     *  To paint a 10 x 10 grid, you need 100 x 3, or 300 values.
      *
      */
     flock.midi.interchange.demos.polarVortex.generateColourArray = function (that) {
         var energyGrid = flock.midi.interchange.demos.polarVortex.generateEnergyGrid(that);
 
         var allCellColours = [];
-        for (var row = 0; row < 8; row++) {
-            for (var col = 0; col < 8; col++) {
-                var cellColours = flock.midi.interchange.demos.launchpadPong.generateSingleCellColours(that, Math.min(1, energyGrid[row][col]));
-                allCellColours.push(cellColours);
+        for (var row = 0; row < 10; row++) {
+            // Paint the "colour bar".
+            if (row === 0) {
+                // Leave a space for the nonexistent leading column.
+                allCellColours.push([0,0,0]);
+
+                // Paint each of the colour controls.
+                fluid.each(that.options.colourSchemes, function (colourScheme, colourSchemeName) {
+                    var intensity = (colourSchemeName === that.model.colourSchemeName) ? 0x3F : 0x08;
+                    allCellColours.push([colourScheme.r * intensity, colourScheme.g * intensity, colourScheme.b * intensity]);
+                });
+
+                // Leave a space for the nonexistent trailing column.
+                allCellColours.push([0,0,0]);
+            }
+            // Paint everything else from the energy grid and match the current colour scheme.
+            else {
+                for (var col = 0; col < 10; col++) {
+                    var cellColours = flock.midi.interchange.demos.polarVortex.generateSingleCellColours(that, Math.min(1, energyGrid[row][col]));
+                    allCellColours.push(cellColours);
+                }
             }
         }
+
         return fluid.flatten(allCellColours);
+    };
+
+    flock.midi.interchange.demos.polarVortex.generateSingleCellColours = function (that, cellOpacity) {
+        var colourScheme = that.options.colourSchemes[that.model.colourSchemeName];
+        var cellValues = [];
+        fluid.each(["r", "g", "b"], function (colourKey, index) {
+            var maxLevel        = colourScheme[colourKey] * 0x3F;
+            var calculatedLevel = maxLevel * cellOpacity;
+
+            cellValues[index] = calculatedLevel;
+        });
+        return cellValues;
     };
 
     flock.midi.interchange.demos.polarVortex.inBounds = function(...valuesToCheck) {
@@ -572,14 +600,14 @@
                             // the y value of the cell is outside the bottom edge.
                             var yLeadingPercentage  = Math.abs(cellXYCoordinates.y % 1);
                             var yTrailingPercentage = 1 - yLeadingPercentage;
-                            var trailingRow         = Math.trunc(cellXYCoordinates.y);
+                            var trailingRow         = Math.trunc(cellXYCoordinates.y) + 1;
                             var leadingRow          = trailingRow + 1;
 
                             // Modulos are negative for negative numbers, which can invert later calculations when
                             // the x value of the cell is outside the left edge.
                             var xLeadingPercentage  = Math.abs(cellXYCoordinates.x % 1);
                             var xTrailingPercentage = 1 - xLeadingPercentage;
-                            var trailingCol         = Math.trunc(cellXYCoordinates.x);
+                            var trailingCol         = Math.trunc(cellXYCoordinates.x) + 1;
                             var leadingCol          = trailingCol + 1;
 
                             var energyAsOpacity     = (singleCell.energy + 1) / 128;
@@ -605,13 +633,46 @@
                 });
             });
         });
+
+        // Paint the BPM and pitch levels.
+        var bpmPower = that.bpm.getPower();
+        var pitchPower = that.pitch.getPower();
+        for (var row = 0; row < 10; row ++) {
+            if (row <= (bpmPower + 1)) {
+                energyGrid[row][0] = (row / 20);
+            }
+            if (row <= (pitchPower + 1)) {
+                energyGrid[row][9] = (row / 20);
+            }
+        }
+
+        // Paint the attraction.
+        var maxAttractionDeviation = (that.attraction.options.max - that.attraction.options.min) / 2;
+        var attractionLevel = that.model.attraction / maxAttractionDeviation;
+        if (attractionLevel < 0)  {
+            energyGrid[9][2] = Math.abs(attractionLevel);
+        }
+        else if (attractionLevel > 0) {
+            energyGrid[9][1] = attractionLevel;
+        }
+
+        // Paint the rotation.
+        var maxRotationDeviation = (that.rotation.options.max - that.rotation.options.min) / 2;
+        var rotationLevel = that.model.rotation / maxRotationDeviation;
+        if (rotationLevel < 0) {
+            energyGrid[9][4] = Math.abs(rotationLevel);
+        }
+        else if (rotationLevel > 0) {
+            energyGrid[9][3] = rotationLevel;
+        }
+
         return energyGrid;
     };
 
     // Safely create an empty grid to use for grid-ising the raw position of all cells.
     flock.midi.interchange.demos.polarVortex.generateEmptyGrid = function () {
-        var singleRow = fluid.generate(8, 0);
-        var grid = fluid.generate(8, function (){ return fluid.copy(singleRow); }, true);
+        var singleRow = fluid.generate(10, 0);
+        var grid = fluid.generate(10, function (){ return fluid.copy(singleRow); }, true);
         return grid;
     };
 
@@ -630,12 +691,11 @@
         if (midiMessage.value) {
             if (midiMessage.number >=1 && midiMessage.number <=8) {
                 // CCs one through eight control the colour
-                var colourScheme = fluid.find(that.options.colourSchemes, function (candidateColourScheme) {
-                    return candidateColourScheme.control === midiMessage.number ? candidateColourScheme : undefined;
+                var colourSchemeName = fluid.find(that.options.colourSchemes, function (candidateColourScheme, colourSchemeName) {
+                    return candidateColourScheme.control === midiMessage.number ? colourSchemeName : undefined;
                 });
-                // TODO: Toggle between positive and negative variations on the same colour theme if they hit the color twice.
-                if (colourScheme) {
-                    that.applier.change("colourScheme", colourScheme);
+                if (colourSchemeName) {
+                    that.applier.change("colourSchemeName", colourSchemeName);
                 }
             }
             // Upward Arrow: Increase "attraction".
@@ -656,18 +716,13 @@
             }
             // The left column is 80, 70, etc., we use that for bpm
             else if (midiMessage.number % 10 === 0) {
-                // TODO: Use the dial to change this.
                 var row = Math.floor(midiMessage.number / 10) - 1;
-                var newBpm = 32 * Math.pow(2, row);
-                that.applier.change("bpm", newBpm);
+                that.bpm.setPower(row);
             }
             // The right column is 89, 79, etc, we use that to control the "base" pitch.
             else if (midiMessage.number % 10 === 9) {
-                // TODO: Use the dial to change this.
                 var row = Math.floor(midiMessage.number / 10) - 1;
-                // Row zero is A0, and since octaves are powers of 2, each row higher is an octave higher.
-                var newCentrePitch = 27.5 * Math.pow(2, row);
-                that.applier.change("centrePitch", newCentrePitch);
+                that.pitch.setPower(row);
             }
         }
     };
