@@ -13,7 +13,7 @@
         "flocking": "2.0.2",
         "flocking-midi": "colinbdclark/flocking-midi#gh-30",
         "infusion": "3.0.0-dev.20200326T173810Z.24ddb2718",
-        "tone": "^14.7.77"
+        "tone": "14.7.77"
     },
     "devDependencies": {
         "eslint": "7.22.0",

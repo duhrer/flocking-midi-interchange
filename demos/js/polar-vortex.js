@@ -182,6 +182,10 @@
             }
         },
         invokers: {
+            generateColourArray: {
+                funcName: "flock.midi.interchange.demos.polarVortex.generateColourArray",
+                args: ["{that}"]
+            },
             handleAttractionKeydown: {
                 funcName: "flock.midi.interchange.demos.polarVortex.handleAttractionKeydown",
                 args: ["{that}", "{arguments}.0"] // event
@@ -221,6 +225,10 @@
             sendToUi: {
                 funcName: "flock.midi.interchange.demos.launchpadPong.sendToOutput",
                 args: ["{uiOutput}", "{arguments}.0"] // outputComponent, message
+            },
+            sendValueArrayToDevice: {
+                funcName: "flock.midi.interchange.demos.polarVortex.sendValueArrayToDevice",
+                args: ["{that}", "{arguments}.0"] // valueArray
             },
             updateChains: {
                 funcName: "flock.midi.interchange.demos.polarVortex.updateChains",
@@ -444,10 +452,9 @@
     };
 
     flock.midi.interchange.demos.polarVortex.paintDevice = function (that) {
-        var valueArray = flock.midi.interchange.demos.polarVortex.generateColourArray(that);
+        var valueArray = that.generateColourArray();
 
-        // We reuse common utility functions from the launchpad pong component for lack of a better base grade.
-        flock.midi.interchange.demos.polarVortex.sendValueArrayToDevice(that, valueArray);
+        that.sendValueArrayToDevice(valueArray);
     };
 
     flock.midi.interchange.demos.polarVortex.sendValueArrayToDevice = function (that, colourArray) {
@@ -479,6 +486,7 @@
 
     flock.midi.interchange.demos.polarVortex.updateVisualisation = function (that) {
         var visualisationContainer = that.locate("visualisation");
+        // Manually use the pro 1 version of the function since the visualisation follows those conventions.
         var valueArray = flock.midi.interchange.demos.polarVortex.generateColourArray(that);
         for (var a = 0; a < valueArray.length; a += 3) {
             // The Launchpad supports a range of 0-64 per colour, so we scale that up to 255 with a little "gain" added.
@@ -939,4 +947,95 @@
         var averageEnergy = totalEnergy / chain.cells.length;
         return averageEnergy;
     };
+
+
+    fluid.defaults("flock.midi.interchange.demos.polarVortex3", {
+        gradeNames: ["flock.midi.interchange.demos.polarVortex"],
+
+        preferredInputDevice: "Launchpad Pro MK3 LPProMK3 MIDI",
+        preferredUIOutputDevice: "Launchpad Pro MK3 LPProMK3 MIDI",
+        // TODO: Sysex to activate programmer mode on the pro 3.
+        setupMessages: [
+            // TODO: Figure out how to reuse this more cleanly.
+            // Boilerplate sysex to set mode and layout, see:
+            // https://customer.novationmusic.com/sites/customer/files/novation/downloads/10598/launchpad-pro-programmers-reference-guide_0.pdf
+            // All sysex messages for the launchpad pro have the same header (framing byte removed)
+            // 00h 20h 29h 02h 10h
+            // Select "standalone" mode.
+            // {type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 33, 1]},
+            // // Select "programmer" layout
+            // {type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 44, 3]}
+        ],
+        invokers: {
+            generateColourArray: {
+                funcName: "flock.midi.interchange.demos.polarVortex3.generateColourArray",
+                args: ["{that}"]
+            },
+            sendValueArrayToDevice: {
+                funcName: "flock.midi.interchange.demos.polarVortex3.sendValueArrayToDevice",
+                args: ["{that}", "{arguments}.0"] // valueArray
+            }
+        }
+    });
+
+    flock.midi.interchange.demos.polarVortex3.sendValueArrayToDevice = function (that, colourArray) {
+        //  F0h 00h 20h 29h 02h 0Eh 03h <Colour Spec> [ <Colour Spec> [_] ] F7h
+        var header = [
+            // common header
+            0, 0x20, 0x29, 0x02, 0xe,
+            // "RGB Grid Sysex" command
+            0x3
+        ];
+        var data = header.concat(colourArray);
+
+        try {
+            that.sendToUi({
+                type: "sysex",
+                data: data
+            });
+        }
+        catch (error) {
+            debugger;
+            console.error(error);
+        }
+    };
+
+    flock.midi.interchange.demos.polarVortex3.generateColourArray = function (that) {
+        var energyGrid = flock.midi.interchange.demos.polarVortex.generateEnergyGrid(that);
+
+        var allCellColours = [];
+
+        for (var row = 1; row < 10; row++) {
+            for (var col = 0; col < 10; col++) {
+                var cellIndex = (10 * row) + col;
+                var cellColours = flock.midi.interchange.demos.polarVortex3.generateSingleCellColours(that, Math.min(1, energyGrid[row][col]));
+                var cellDef = [3, cellIndex].concat(cellColours);
+                allCellColours.push(cellDef);
+            }
+        }
+
+        // Paint the "colour bar".
+        var cellIndex = 1;
+        fluid.each(that.options.colourSchemes, function (colourScheme, colourSchemeName) {
+            var intensity = (colourSchemeName === that.model.colourSchemeName) ? 0x6F : 0x0f;
+            // allCellColours.push([3, cellIndex, 127, 127, 0]);
+            allCellColours.push([3, cellIndex, colourScheme.r * intensity, colourScheme.g * intensity, colourScheme.b * intensity]);
+            cellIndex++;
+        });
+
+        return fluid.flatten(allCellColours);
+    };
+
+    flock.midi.interchange.demos.polarVortex3.generateSingleCellColours = function (that, cellOpacity) {
+        var colourScheme = that.options.colourSchemes[that.model.colourSchemeName];
+        var cellValues = [];
+        fluid.each(["r", "g", "b"], function (colourKey, index) {
+            var maxLevel        = colourScheme[colourKey] * 0x6F;
+            var calculatedLevel = maxLevel * cellOpacity;
+
+            cellValues[index] = calculatedLevel;
+        });
+        return cellValues;
+    };
+
 })(flock, fluid);
