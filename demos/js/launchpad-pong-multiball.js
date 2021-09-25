@@ -198,6 +198,18 @@
             }
         },
         invokers: {
+            generateColourArray:  {
+                funcName: "flock.midi.interchange.demos.launchpadPong.multiball.generateColourArray",
+                args: ["{that}"]
+            },
+            generateSingleCellColours: {
+                funcName: "flock.midi.interchange.demos.launchpadPong.generateSingleCellColours",
+                args: ["{that}", "{arguments}.0"] // intensity, cellIndex
+            },
+            sendValueArrayToDevice: {
+                funcName: "flock.midi.interchange.demos.launchpadPong.sendValueArrayToDevice",
+                args: ["{that}", "{arguments}.0"] // valueArray
+            },
             updateBall: {
                 funcName: "fluid.identity"
             },
@@ -251,8 +263,8 @@
      * @param that
      */
     flock.midi.interchange.demos.launchpadPong.multiball.paintDevice = function (that) {
-        var valueArray = flock.midi.interchange.demos.launchpadPong.multiball.generateColourArray(that);
-        flock.midi.interchange.demos.launchpadPong.sendValueArrayToDevice(that, valueArray);
+        var valueArray = that.generateColourArray();
+        that.sendValueArrayToDevice(valueArray);
     };
 
     /**
@@ -272,6 +284,8 @@
         });
         for (var row = 0; row < 8; row++)  {
             for (var col = 0; col < 8; col++) {
+
+                var cellIndex = (10 * (row + 1) + (col + 1));
                 var noteForPosition = flock.midi.interchange.demos.launchpadPong.noteFromPosition(row, col);
 
                 var isHeld = fluid.get(that.activeNotes, noteForPosition);
@@ -280,7 +294,7 @@
                 // Display as a "held" note if this note is being pressed.
                 if (isHeld) {
                     var cellOpacity = isHeld ? 0.125 : 0;
-                    var singleCellColours = flock.midi.interchange.demos.launchpadPong.generateSingleCellColours(that, cellOpacity);
+                    var singleCellColours = that.generateSingleCellColours(cellOpacity, cellIndex);
                     allNotes.push(singleCellColours);
                 }
                 // Display "ball" if on is at this position.
@@ -289,11 +303,11 @@
                     var ballNote = flock.midi.interchange.demos.launchpadPong.noteFromPosition(row, col);
                     var hitPointOpacity = ballAtPosition.hp / 4;
                     var ballOpacity = hitPointOpacity * (that.impactNotes[ballNote] ? 1 : 0.25);
-                    var ballColours = flock.midi.interchange.demos.launchpadPong.generateSingleCellColours(that, ballOpacity);
+                    var ballColours = that.generateSingleCellColours(ballOpacity, cellIndex);
                     allNotes.push(ballColours);
                 }
                 else {
-                    var emptyCellColours = flock.midi.interchange.demos.launchpadPong.generateSingleCellColours(that, 0);
+                    var emptyCellColours = that.generateSingleCellColours(0, cellIndex);
                     allNotes.push(emptyCellColours);
                 }
             }
@@ -500,5 +514,81 @@
 
         // Repaint the device.
         flock.midi.interchange.demos.launchpadPong.multiball.paintDevice(that);
-    }
+    };
+
+    fluid.defaults("flock.midi.interchange.demos.launchpadPong.multiball3", {
+        gradeNames: ["flock.midi.interchange.demos.launchpadPong.multiball"],
+        preferredInputDevice: "Launchpad Pro MK3 LPProMK3 MIDI",
+        preferredUIOutputDevice: "Launchpad Pro MK3 LPProMK3 MIDI",
+        // TODO: Sysex to activate programmer mode on the pro 3.
+        setupMessages: [],
+        invokers: {
+            generateColourArray:  {
+                funcName: "flock.midi.interchange.demos.launchpadPong.multiball3.generateColourArray",
+                args: ["{that}"]
+            },
+            generateSingleCellColours: {
+                funcName: "flock.midi.interchange.demos.launchpadPong3.generateSingleCellColours",
+                args: ["{that}", "{arguments}.0", "{arguments}.1"] // intensity, cellIndex
+            },
+            sendValueArrayToDevice: {
+                funcName: "flock.midi.interchange.demos.launchpadPong.multiball3.sendValueArrayToDevice",
+                args: ["{that}", "{arguments}.0"] // valueArray
+            }
+        }
+    });
+
+    // TODO: Extract this as a reusable pattern for all intensity * colour instruments.
+    fluid.registerNamespace("flock.midi.interchange.demos.launchpadPong3");
+    flock.midi.interchange.demos.launchpadPong3.generateSingleCellColours = function (that, cellOpacity, cellIndex) {
+        var colourScheme = that.options.colourSchemes[that.model.colourSchemeName];
+        var cellValues = [];
+        fluid.each(["r", "g", "b"], function (colourKey, index) {
+            var maxLevel        = colourScheme[colourKey] * 0x6F;
+            var calculatedLevel = maxLevel * cellOpacity;
+
+            cellValues[index] = calculatedLevel;
+
+        });
+
+        return [3, cellIndex].concat(cellValues);
+    };
+
+    flock.midi.interchange.demos.launchpadPong.multiball3.generateColourArray = function (that) {
+        var allCellColours = flock.midi.interchange.demos.launchpadPong.multiball.generateColourArray(that);
+
+        // Paint the "colour bar".
+        var cellIndex = 1;
+        fluid.each(that.options.colourSchemes, function (colourScheme, colourSchemeName) {
+            var intensity = (colourSchemeName === that.model.colourSchemeName) ? 0x6F : 0x0f;
+            // allCellColours.push([3, cellIndex, 127, 127, 0]);
+            allCellColours.push([3, cellIndex, colourScheme.r * intensity, colourScheme.g * intensity, colourScheme.b * intensity]);
+            cellIndex++;
+        });
+
+        return  allCellColours;
+    };
+
+    // TODO: Extract this as a reusable pattern for all pro/pro3 instruments.
+    flock.midi.interchange.demos.launchpadPong.multiball3.sendValueArrayToDevice = function (that, colourArray) {
+        //  F0h 00h 20h 29h 02h 0Eh 03h <Colour Spec> [ <Colour Spec> [_] ] F7h
+        var header = [
+            // common header
+            0, 0x20, 0x29, 0x02, 0xe,
+            // "RGB Grid Sysex" command
+            0x3
+        ];
+        var data = header.concat(colourArray);
+
+        try {
+            that.sendToUi({
+                type: "sysex",
+                data: data
+            });
+        }
+        catch (error) {
+            debugger;
+            console.error(error);
+        }
+    };
 })(flock, fluid);

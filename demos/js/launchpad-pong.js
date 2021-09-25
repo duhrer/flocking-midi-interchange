@@ -19,7 +19,7 @@
             { type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 44, 3]}
         ],
         model: {
-            colourScheme: "{that}.options.colourSchemes.white"
+            colourSchemeName: "white"
         },
         colourSchemes: {
             // TODO: Add "inverse" colour options if needed.
@@ -224,7 +224,8 @@
 
         // Paint the "side velocity" (0x63) a colour that matches the colour scheme.
         // F0h 00h 20h 29h 02h 10h 0Ah <velocity> <Colour> F7h
-        that.sendToUi({ type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 0xA, 0x63, that.model.colourScheme.velocity]});
+        var colourScheme = that.options.colourSchemes[that.model.colourSchemeName];
+        that.sendToUi({ type: "sysex", data: [0, 0x20, 0x29, 0x02, 0x10, 0xA, 0x63, colourScheme.velocity]});
 
         // Paint each of the colour controls.
         fluid.each(that.options.colourSchemes, function (colourScheme) {
@@ -292,9 +293,10 @@
      *
      */
     flock.midi.interchange.demos.launchpadPong.generateSingleCellColours = function (that, cellOpacity) {
+        var colourScheme = that.options.colourSchemes[that.model.colourSchemeName];
         var cellValues = [];
         fluid.each(["r", "g", "b"], function (colourKey, index) {
-            var maxLevel        = that.model.colourScheme[colourKey] * 0x3F;
+            var maxLevel        = colourScheme[colourKey] * 0x3F;
             var calculatedLevel = maxLevel * cellOpacity;
 
             cellValues[index] = calculatedLevel;
@@ -307,12 +309,12 @@
         if (midiMessage.value) {
             if (midiMessage.number >=1 && midiMessage.number <=8) {
                 // CCs one through eight control the colour
-                var colourScheme = fluid.find(that.options.colourSchemes, function (candidateColourScheme) {
-                    return candidateColourScheme.control === midiMessage.number ? candidateColourScheme : undefined;
+                var colourSchemeName = fluid.find(that.options.colourSchemes, function (candidateColourScheme, key) {
+                    return candidateColourScheme.control === midiMessage.number ? key : undefined;
                 });
                 // TODO: Toggle between positive and negative variations on the same colour theme if they hit the color twice.
-                if (colourScheme) {
-                    that.applier.change("colourScheme", colourScheme);
+                if (colourSchemeName) {
+                    that.applier.change("colourSchemeName", colourSchemeName);
                 }
             }
             // TODO: We can only implement this if we figure out how to handle the notes that are already playing.  Silence all?
@@ -495,13 +497,15 @@
                 that.ball.vy = Math.round(Math.sin(newRadians));
             }
 
+            var colourScheme = that.options.colourSchemes[that.model.colourSchemeName];
+
             // Play a note for the ball.
             var ballNote = flock.midi.interchange.demos.launchpadPong.noteFromPosition(that.ball.row, that.ball.col);
             var impactLaunchpadRelativeMessage = {
                 channel: 0,
                 type: "noteOn",
                 note: ballNote,
-                velocity: that.model.colourScheme.velocity
+                velocity: colourScheme.velocity
             };
 
             // TODO: This seems wrong, and is clobbered by paintUI anyway.  Try removing.
