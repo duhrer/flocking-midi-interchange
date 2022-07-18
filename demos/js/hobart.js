@@ -60,16 +60,17 @@
         if (connection) {
             // song pointer only required for "Hobart phase" (I think).
             if (that.hobartPhase) {
-                that.songPointerBeat--;
+                // that.songPointerBeat--;
+                that.songPointerBeat-=16;
+                connection.send({
+                    type: "songPointer",
+                    value: that.songPointerBeat
+                });
             }
             else {
                 that.songPointerBeat++;
             }
 
-            connection.send({
-                type: "songPointer",
-                value: that.songPointerBeat
-            });
 
             connection.send({
                 type: "clock"
@@ -81,7 +82,7 @@
         gradeNames: ["fluid.viewComponent"],
         preferredInputDevice:    "QUNEO",
         preferredOutputDevice: "Scarlett 8i6 USB",
-        phaseTransition: 120,
+        phaseTransition: 32,
         maxBeat: 16384, // TODO: copied from eye-of-agamidi, haven't tried other values yet!
         members: {
             hobartPhase: false,
