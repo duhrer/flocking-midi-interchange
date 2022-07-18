@@ -2,10 +2,21 @@ h1 {
     font-size: 100pt;
     color: #ffffff99;
 }
-body {
-    background: black;
-    color: white;
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: black;
+        color: white;
+    }
 }
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: white;
+        color: black;
+    }
+}
+
 .oda-container {
     margin-top: 5em;
     margin-bottom: 15em;
